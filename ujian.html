@@ -5,10 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Ujian CBT</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
-        .soal-box { background: #f9f9f9; padding: 15px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ddd; }
-        .opsi { margin-bottom: 10px; }
-        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        /* Reset Dasar dan Mobile Friendly */
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 15px; 
+            max-width: 800px; 
+            margin: auto; 
+            background-color: #f0f2f5;
+            color: #333;
+            font-size: 16px; /* Ukuran pas untuk HP */
+            line-height: 1.6;
+        }
+        h1 { font-size: 20px; text-align: center; margin-bottom: 20px; }
+        hr { border: 0; border-top: 2px solid #ddd; margin-bottom: 20px; }
+
+        /* Kotak Soal Keseluruhan */
+        .soal-box { 
+            background: #fff; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+        }
+
+        /* 2. KOTAK BACAAN / INSTRUKSI (Terpisah dari soal) */
+        .bacaan {
+            background: #fdfae3; /* Warna krem lembut */
+            padding: 15px;
+            border-left: 4px solid #f1c40f; /* Garis kuning di kiri */
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            white-space: pre-wrap; /* Mempertahankan baris baru / enter */
+        }
+
+        /* 3. PERTANYAAN (Tidak tebal) */
+        .pertanyaan {
+            font-weight: normal; /* Tulisan tidak tebal */
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 8px; /* Jarak antara nomor dan teks soal */
+        }
+
+        /* 1. PILIHAN JAWABAN (Rata kiri seperti auto-numbering) */
+        .opsi-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Jarak antar pilihan A, B, C, D */
+        }
+        .opsi label {
+            display: flex;
+            align-items: flex-start; /* Membuat bulatan radio selalu di atas sejajar dengan teks pertama */
+            gap: 10px;
+            cursor: pointer;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid #eee; /* Garis bingkai tipis untuk tiap opsi */
+            transition: background 0.2s;
+        }
+        .opsi label:hover { background: #f8f9fa; }
+        .opsi input[type="radio"] {
+            margin-top: 4px; /* Bulatan turun sedikit agar sejajar dengan teks */
+            flex-shrink: 0; /* Mencegah bulatan gepeng jika teks panjang */
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Tombol Kumpulkan */
+        button { 
+            width: 100%; /* Tombol melebar penuh di layar HP */
+            padding: 15px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer; 
+            margin-bottom: 30px;
+        }
         button:hover { background: #0056b3; }
     </style>
 </head>
@@ -21,12 +98,13 @@
     <button onclick="selesaiUjian()">Kumpulkan Jawaban</button>
 
     <script>
-        // Link JSON Anda
-        const urlJSON = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/inggris-usbn.json";
+        // Link JSON Anda dengan Trik Cache-Buster
+        const urlAsli = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/inggris-usbn.json";
+        const urlJSON = urlAsli + "?t=" + new Date().getTime();
 
         fetch(urlJSON)
             .then(response => {
-                if (!response.ok) throw new Error("Gagal mengambil data dari GitHub");
+                if (!response.ok) throw new Error("Gagal mengambil data");
                 return response.json();
             })
             .then(data => {
@@ -35,23 +113,56 @@
                 let htmlSoal = "";
                 data.bank_soal.forEach((soal, index) => {
                     htmlSoal += `<div class="soal-box">`;
-                    htmlSoal += `<h3>${index + 1}. ${soal.teks_pertanyaan}</h3>`;
                     
+                    // MEMISAHKAN BACAAN DAN SOAL BERDASARKAN \n\n
+                    let bagianTeks = soal.teks_pertanyaan.split('\n\n');
+                    let teksPertanyaanBersih = "";
+
+                    if (bagianTeks.length > 1) {
+                        // Jika ada \n\n, teks awal adalah bacaan, teks akhir adalah pertanyaan
+                        let bacaan = bagianTeks[0];
+                        
+                        // 4. MEMPERBAIKI FORMAT TEKS MENYAMBUNG (Khusus agar rapi)
+                        bacaan = bacaan.replace(/ • /g, "\n• "); // Memecah bullet point
+                        bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); // Memecah angka 1. 2. 3.
+                        bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
+                        bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
+
+                        // Menampilkan kotak bacaan
+                        htmlSoal += `<div class="bacaan">${bacaan.trim()}</div>`;
+                        teksPertanyaanBersih = bagianTeks[1];
+                    } else {
+                        // Jika tidak ada \n\n, berarti ini soal biasa
+                        teksPertanyaanBersih = soal.teks_pertanyaan;
+                    }
+
+                    // Membersihkan sisa nomor urut di awal pertanyaan (misal "37. What is..." menjadi "What is...")
+                    teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
+
+                    // Menampilkan Teks Pertanyaan (Tidak tebal)
+                    htmlSoal += `
+                        <div class="pertanyaan">
+                            <span>${index + 1}.</span>
+                            <span>${teksPertanyaanBersih}</span>
+                        </div>`;
+                    
+                    // Menampilkan Pilihan Jawaban
+                    htmlSoal += `<div class="opsi-container">`;
                     soal.pilihan_jawaban.forEach((opsi, i) => {
                         htmlSoal += `
                             <div class="opsi">
                                 <label>
                                     <input type="radio" name="soal_${soal.id_soal}" value="${opsi.charAt(0)}"> 
-                                    ${opsi}
+                                    <span>${opsi}</span>
                                 </label>
                             </div>`;
                     });
-                    htmlSoal += `</div>`;
+                    htmlSoal += `</div></div>`; // Tutup opsi-container & soal-box
                 });
                 document.getElementById('lembar-soal').innerHTML = htmlSoal;
             })
             .catch(error => {
-                document.getElementById('lembar-soal').innerHTML = "<p style='color:red;'><b>Gagal memuat soal!</b> Pastikan Repository GitHub Anda diset ke <b>Public</b>.</p>";
+                document.getElementById('lembar-soal').innerHTML = "<p style='color:red;'><b>Gagal memuat soal!</b></p>";
                 console.error("Error:", error);
             });
 
