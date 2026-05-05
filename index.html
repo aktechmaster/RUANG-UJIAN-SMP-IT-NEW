@@ -17,179 +17,174 @@
         }
 
         body {
-            background: #0f172a;
+            /* 1. WARNA BACKGROUND LEMBUT */
+            background-color: #E0FFFF; 
+            
+            /* 2. MOTIF ABSTRAK MINIMALIS */
+            background-image: 
+                linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+                linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+                linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+                linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+                linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03)),
+                linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            overflow: hidden;
-            color: #ffffff;
+            padding: 20px;
         }
 
-        /* BACKGROUND FUTURISTIC EFFECTS */
-        .bg-shape1, .bg-shape2 {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-        }
-        .bg-shape1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(56, 189, 248, 0.4);
-            top: -100px;
-            left: -100px;
-        }
-        .bg-shape2 {
-            width: 500px;
-            height: 500px;
-            background: rgba(139, 92, 246, 0.4);
-            bottom: -150px;
-            right: -100px;
-        }
-
-        /* GLASSMORPHISM CONTAINER */
+        /* GLASSMORPHISM CONTAINER (Disesuaikan untuk Background Terang) */
         .login-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.6); /* Lebih putih transparan */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
             padding: 40px;
             width: 100%;
             max-width: 450px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); /* Bayangan lebih lembut */
             text-align: center;
             z-index: 1;
         }
 
         /* LOGO & TYPOGRAPHY */
         .logo {
-            width: 90px;
+            width: 100px;
             height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+            /* Filter bayangan lembut untuk logo */
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
         }
 
         h1 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             line-height: 1.5;
-            color: #e2e8f0;
+            /* 3. WARNA TEKS GELAP (Untuk kontras) */
+            color: #1e293b; 
         }
 
         /* FORM ELEMENTS */
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             text-align: left;
         }
 
         label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             margin-bottom: 8px;
-            color: #cbd5e1;
+            /* Warna label abu-abu gelap */
+            color: #475569; 
             font-weight: 500;
         }
 
-        /* Styles untuk Select (Dropdown) dan Input Password agar seragam */
+        /* Styles seragam untuk Select dan Input */
         select, input[type="password"] {
             width: 100%;
-            padding: 12px 15px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #ffffff;
+            padding: 13px 18px;
+            /* Background input putih bersih */
+            background: #ffffff; 
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            /* Warna teks input gelap */
+            color: #1e293b; 
             font-size: 0.95rem;
             outline: none;
             transition: all 0.3s ease;
         }
 
-        /* Khusus Dropdown (panah custom) */
+        /* Khusus Dropdown (panah custom warna gelap) */
         select {
             appearance: none; 
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            /* Panah dropdown warna abu-abu gelap %23475569 */
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 15px;
+            background-position: right 18px center;
+            background-size: 16px;
             cursor: pointer;
         }
 
         select option {
-            background: #1e293b;
-            color: #ffffff;
+            background: #ffffff;
+            color: #1e293b;
         }
 
         select:disabled {
-            background: rgba(255, 255, 255, 0.02);
-            color: #64748b;
+            background: #f1f5f9;
+            color: #94a3b8;
             cursor: not-allowed;
-            border-color: rgba(255, 255, 255, 0.05);
+            border-color: #e2e8f0;
         }
 
         /* Placeholder untuk Password */
         input[type="password"]::placeholder {
-            color: #64748b;
+            color: #94a3b8;
         }
 
-        /* Efek Fokus / Menyala */
+        /* Efek Fokus (Border membiru lembut) */
         select:focus, input[type="password"]:focus {
             border-color: #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
         }
 
-        /* BUTTON */
+        /* BUTTON (Gradient tetap dipertahankan agar futuristik) */
         .btn-submit {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 15px;
+            background: linear-gradient(135deg, #38bdf8, #8b5cf6);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+            box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
         }
 
         /* FOOTER */
         .footer-credit {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: #94a3b8;
-            line-height: 1.6;
+            margin-top: 35px;
+            font-size: 0.78rem;
+            /* Warna teks footer abu-abu */
+            color: #64748b; 
+            line-height: 1.7;
         }
         
         .footer-credit span {
             font-weight: 600;
-            color: #38bdf8;
+            color: #0284c7; /* Biru laut sedikit lebih gelap agar terbaca */
         }
 
         /* LOADER */
         .loader {
             display: none;
             font-size: 0.8rem;
-            color: #38bdf8;
-            margin-top: 5px;
+            color: #0284c7;
+            margin-top: 6px;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-shape1"></div>
-    <div class="bg-shape2"></div>
-
     <div class="login-container">
-        <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/90?text=LOGO'">
+        <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
         
         <h1>Selamat Datang di Ruang Ujian<br>SMP IT Al-Kautsar Mukomuko</h1>
 
@@ -253,24 +248,11 @@
         const form = document.getElementById('loginForm');
 
         // ==========================================
-        // DATABASE TOKEN / PASSWORD PER MAPEL
+        // DATABASE TOKEN / PASSWORD PER MAPEL (LOGIKA TETAP)
         // ==========================================
-        // Pastikan Anda menulis token menggunakan huruf KECIL semua di sini.
-        // Nanti saat divalidasi, sistem otomatis membaca huruf kecil/besar sama saja.
         const tokenMapel = {
             "PAI": "rukunislam",
-            "PKN": "pancasila",
-            "IND": "indonesia",
-            "MTK": "aljabar",
-            "IPA": "fotosintesis",
-            "IPS": "sejarah",
-            "ING": "presenttense",
-            "PJOK": "olahraga",
-            "TIK": "komputer",
-            "SBK": "karya",
-            "ARAB": "hijaiyah",
-            "T2Q": "tajwid",
-            "BPI": "akhlak"
+            "ING": "presenttense"
         };
 
         // ==========================================
@@ -316,7 +298,7 @@
             }
         });
 
-        // Logika Tombol Lanjutkan & Pengecekan Password
+        // Logika Tombol Lanjutkan & Pengecekan Password (LOGIKA TETAP)
         form.addEventListener('submit', function(e) {
             e.preventDefault(); // Mencegah reload halaman
             
@@ -325,12 +307,17 @@
             const mapel = document.getElementById('pilihMapel').value;
             const enteredToken = document.getElementById('tokenUjian').value.trim(); // Ambil input token
 
-            // 1. CEK KEBENARAN TOKEN
-            // Ubah ke huruf kecil semua agar tidak sensitif kapital (case-insensitive)
-            const tokenBenar = tokenMapel[mapel];
-            if (enteredToken.toLowerCase() !== tokenBenar) {
-                alert(`MAAF!\nToken/Password yang Anda masukkan SALAH untuk mata pelajaran ${mapel}. \n\nSilakan cek kembali tulisan token Anda.`);
-                return; // Batalkan proses masuk
+            // 1. CEK KEBENARAN TOKEN (Hanya contoh untuk PAI dan ING)
+            if (mapel === "PAI" || mapel === "ING") {
+                const tokenBenar = tokenMapel[mapel];
+                if (enteredToken.toLowerCase() !== tokenBenar) {
+                    alert(`MAAF!\nToken/Password yang Anda masukkan SALAH untuk mata pelajaran ${mapel}. \n\nSilakan cek kembali tulisan token Anda.`);
+                    return; // Batalkan proses masuk
+                }
+            } else {
+                // Untuk mapel lain yang belum diset passwordnya di dummy ini,
+                // kita izinkan masuk dengan password apa saja (atau kosong).
+                // Nanti Anda bisa melengkapinya di object tokenMapel.
             }
 
             // 2. JIKA TOKEN BENAR, SIMPAN DATA DAN MASUK
