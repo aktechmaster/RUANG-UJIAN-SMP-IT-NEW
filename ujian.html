@@ -21,12 +21,11 @@
     <button onclick="selesaiUjian()">Kumpulkan Jawaban</button>
 
     <script>
-        // MASUKKAN LINK RAW JSON ANDA DI BAWAH INI
+        // Link JSON Anda sudah terpasang dengan benar di sini
         const urlJSON = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/inggris-usbn.json";
 
-        // FUNGSI BARU: Untuk membersihkan teks dari atau 
+        // Fungsi pembersih dengan Regex yang sudah utuh
         function bersihkanTeks(teks) {
-            // Ini namanya Regex (Regular Expression), senjata andalan programmer untuk mencari pola teks
             return teks.replace(/\/g, '').replace(/\/g, '').trim();
         }
 
@@ -39,12 +38,12 @@
                 data.bank_soal.forEach((soal, index) => {
                     htmlSoal += `<div class="soal-box">`;
                     
-                    // Terapkan pembersih pada teks pertanyaan
+                    // Membersihkan pertanyaan
                     let pertanyaanBersih = bersihkanTeks(soal.teks_pertanyaan);
                     htmlSoal += `<h3>${index + 1}. ${pertanyaanBersih}</h3>`;
                     
                     soal.pilihan_jawaban.forEach((opsi, i) => {
-                        // Terapkan pembersih pada pilihan jawaban
+                        // Membersihkan jawaban
                         let opsiBersih = bersihkanTeks(opsi);
                         htmlSoal += `
                             <div class="opsi">
@@ -59,7 +58,8 @@
                 document.getElementById('lembar-soal').innerHTML = htmlSoal;
             })
             .catch(error => {
-                document.getElementById('lembar-soal').innerHTML = "<p>Gagal memuat soal. Periksa koneksi internet.</p>";
+                document.getElementById('lembar-soal').innerHTML = "<p>Gagal memuat soal. Pastikan Link JSON benar dan periksa koneksi internet.</p>";
+                console.error("Error memuat JSON:", error);
             });
 
         function selesaiUjian() {
