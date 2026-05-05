@@ -407,6 +407,23 @@
             console.error("Gagal mengirim data", err);
         });
     }
+
+        function tutupModal() {
+        // Menyembunyikan modal kembali
+        document.getElementById('popupModal').style.display = 'none';
+        
+        // Opsional: Arahkan ke halaman utama/login setelah ujian selesai
+        // window.location.href = 'index.html'; 
+    }
+
+        function keluarKeLogin() {
+    // 1. Hapus data ujian dari session storage agar bersih untuk sesi berikutnya
+    sessionStorage.clear();
+    
+    // 2. Arahkan kembali ke halaman utama (login/scan barcode)
+    // Sesuaikan nama file utama Anda jika bukan 'index.html'
+    window.location.href = 'index.html';
+}
 </script>
 </body>
 </html>
