@@ -241,44 +241,36 @@
         </div>
     </div>
 
-    <script>
+  <script>
         const kelasSelect = document.getElementById('pilihKelas');
         const siswaSelect = document.getElementById('pilihSiswa');
         const loadingText = document.getElementById('loadingSiswa');
         const form = document.getElementById('loginForm');
 
-        // ==========================================
-        // DATABASE TOKEN / PASSWORD PER MAPEL (LOGIKA TETAP)
-        // ==========================================
-        const tokenMapel = {
-            "PAI": "rukunislam",
-            "ING": "presenttense"
-        };
+        // =========================================================
+        // MASUKKAN LINK URL WEB APP GOOGLE SCRIPT ANDA DI BAWAH INI
+        // =========================================================
+        const SPREADSHEET_API_URL = "https://script.google.com/macros/s/AKfycbxF3g7LSwr61mNuVqOApDXnmjZsY5putWlumzL_GnJJN8hOPqhTk0MR9aPRnmbFJX1x/exec";
 
-        // ==========================================
-        // DUMMY DATA SEMENTARA (Simulasi Database Siswa)
-        // ==========================================
-        const dummyDatabase = {
-            "9 Al-Quran": ["Ahmad Fulan", "Budi Santoso", "Citra Kirana", "Deni Saputra"],
-            "9 As-Sunnah": ["Eka Prasetya", "Faisal Rahman", "Gita Gutawa"],
-            "9 Al-Hadits": ["Hadi Pratama", "Intan Permata", "Joko Susilo"]
-        };
-
-        // Logika ketika Kelas dipilih
+        // Logika ketika Kelas dipilih (Mengambil Nama Siswa dari Spreadsheet)
         kelasSelect.addEventListener('change', async function() {
             const selectedKelas = this.value;
             
-            // Reset dropdown siswa
-            siswaSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Nama Anda --</option>';
+            // Tampilkan animasi loading
+            siswaSelect.innerHTML = '<option value="" disabled selected>-- Memuat data siswa dari server... --</option>';
             siswaSelect.disabled = true;
             loadingText.style.display = 'block';
 
             try {
-                // Simulasi memanggil data dengan jeda waktu biar futuristik
-                await new Promise(resolve => setTimeout(resolve, 800)); 
-                const daftarSiswa = dummyDatabase[selectedKelas] || [];
+                // Memanggil API Google Apps Script untuk mengambil data siswa
+                const response = await fetch(`${SPREADSHEET_API_URL}?action=getSiswa&kelas=${encodeURIComponent(selectedKelas)}`);
+                const data = await response.json();
+                const daftarSiswa = data.siswa;
 
-                if (daftarSiswa.length > 0) {
+                // Memasukkan data siswa ke dropdown
+                siswaSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Nama Anda --</option>';
+                
+                if (daftarSiswa && daftarSiswa.length > 0) {
                     daftarSiswa.forEach(siswa => {
                         const option = document.createElement('option');
                         option.value = siswa;
@@ -287,49 +279,67 @@
                     });
                     siswaSelect.disabled = false;
                 } else {
-                    siswaSelect.innerHTML = '<option value="" disabled selected>Data siswa tidak ditemukan</option>';
+                    siswaSelect.innerHTML = '<option value="" disabled selected>Data siswa kosong / tidak ditemukan</option>';
                 }
-
             } catch (error) {
                 console.error("Gagal mengambil data:", error);
-                siswaSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data. Cek koneksi.</option>';
+                siswaSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data. Cek koneksi internet.</option>';
             } finally {
                 loadingText.style.display = 'none';
             }
         });
 
-        // Logika Tombol Lanjutkan & Pengecekan Password (LOGIKA TETAP)
-        form.addEventListener('submit', function(e) {
+        // Logika Tombol Lanjutkan & Pengecekan Password dari Spreadsheet
+        form.addEventListener('submit', async function(e) {
             e.preventDefault(); // Mencegah reload halaman
             
             const kelas = document.getElementById('pilihKelas').value;
             const siswa = document.getElementById('pilihSiswa').value;
             const mapel = document.getElementById('pilihMapel').value;
-            const enteredToken = document.getElementById('tokenUjian').value.trim(); // Ambil input token
+            const enteredToken = document.getElementById('tokenUjian').value.trim(); 
+            const submitBtn = document.querySelector('.btn-submit');
 
-            // 1. CEK KEBENARAN TOKEN (Hanya contoh untuk PAI dan ING)
-            if (mapel === "PAI" || mapel === "ING") {
-                const tokenBenar = tokenMapel[mapel];
-                if (enteredToken.toLowerCase() !== tokenBenar) {
-                    alert(`MAAF!\nToken/Password yang Anda masukkan SALAH untuk mata pelajaran ${mapel}. \n\nSilakan cek kembali tulisan token Anda.`);
-                    return; // Batalkan proses masuk
+            // Ubah teks tombol saat memvalidasi ke server
+            submitBtn.textContent = "Memeriksa Token...";
+            submitBtn.disabled = true;
+
+            try {
+                // Memanggil API Google Apps Script untuk mencocokkan Token/Password
+                const response = await fetch(`${SPREADSHEET_API_URL}?action=getToken&mapel=${encodeURIComponent(mapel)}`);
+                const data = await response.json();
+                const tokenBenar = data.password;
+
+                if (tokenBenar) {
+                    // Pengecekan tidak sensitif huruf besar/kecil
+                    if (enteredToken.toLowerCase() !== tokenBenar.toString().toLowerCase()) {
+                        alert(`MAAF!\nToken/Password yang Anda masukkan SALAH untuk mata pelajaran ${mapel}. \n\nSilakan cek kembali tulisan token Anda.`);
+                        submitBtn.textContent = "Lanjutkan Ujian";
+                        submitBtn.disabled = false;
+                        return; // Batalkan proses masuk
+                    }
+                } else {
+                    alert(`Sistem Error: Token untuk mapel ${mapel} belum diatur oleh admin di Spreadsheet.`);
+                    submitBtn.textContent = "Lanjutkan Ujian";
+                    submitBtn.disabled = false;
+                    return;
                 }
-            } else {
-                // Untuk mapel lain yang belum diset passwordnya di dummy ini,
-                // kita izinkan masuk dengan password apa saja (atau kosong).
-                // Nanti Anda bisa melengkapinya di object tokenMapel.
+
+                // JIKA TOKEN BENAR, SIMPAN DATA DAN MASUK KE UJIAN
+                sessionStorage.setItem('cbt_kelas', kelas);
+                sessionStorage.setItem('cbt_siswa', siswa);
+                sessionStorage.setItem('cbt_mapel', mapel);
+
+                alert(`Login Berhasil!\n\nSelamat Mengerjakan:\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nBerdoalah sebelum memulai ujian!`);
+                
+                // Arahkan ke halaman ujian
+                window.location.href = "ujian.html"; 
+
+            } catch (error) {
+                console.error("Error validasi token:", error);
+                alert("Terjadi kesalahan saat memvalidasi token. Pastikan link URL sudah benar dan koneksi internet lancar.");
+                submitBtn.textContent = "Lanjutkan Ujian";
+                submitBtn.disabled = false;
             }
-
-            // 2. JIKA TOKEN BENAR, SIMPAN DATA DAN MASUK
-            // Simpan data login ke Session Storage agar bisa dibaca di halaman ujian
-            sessionStorage.setItem('cbt_kelas', kelas);
-            sessionStorage.setItem('cbt_siswa', siswa);
-            sessionStorage.setItem('cbt_mapel', mapel);
-
-            alert(`Login Berhasil!\n\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nMengalihkan ke lembar soal ujian...`);
-            
-            // Arahkan ke halaman ujian
-            window.location.href = "ujian.html"; 
         });
     </script>
 </body>
