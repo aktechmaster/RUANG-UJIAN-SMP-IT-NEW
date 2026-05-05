@@ -200,7 +200,7 @@
                 <label for="pilihKelas">Pilih Kelas</label>
                 <select id="pilihKelas" required disabled>
                     <option value="" disabled selected>-- Memuat Kelas dari Server... --</option>
-                    </select>
+                </select>
             </div>
 
             <div class="input-group">
@@ -215,9 +215,13 @@
                 <label for="pilihMapel">Pilih Mata Pelajaran</label>
                 <select id="pilihMapel" required disabled>
                     <option value="" disabled selected>-- Memuat Mapel dari Server... --</option>
-                    </select>
+                </select>
             </div>
 
+            <div class="input-group">
+                <label for="emailSiswa">Email Anda</label>
+                <input type="email" id="emailSiswa" placeholder="contoh: siswa@email.com" required>
+            </div>
             <div class="input-group">
                 <label for="tokenUjian">Token / Password Ujian</label>
                 <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
@@ -366,9 +370,13 @@
                 }
 
                 // JIKA TOKEN BENAR, SIMPAN DATA DAN MASUK KE UJIAN
+                // Mengambil nilai input email siswa
+                const emailInput = document.getElementById('emailSiswa').value;
+                
                 sessionStorage.setItem('cbt_kelas', kelas);
                 sessionStorage.setItem('cbt_siswa', siswa);
                 sessionStorage.setItem('cbt_mapel', mapel);
+                sessionStorage.setItem('cbt_email', emailInput); // Menyimpan data email ke session
 
                 alert(`Login Berhasil!\n\nSelamat Mengerjakan:\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nBerdoalah sebelum memulai ujian!`);
                 
