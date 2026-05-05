@@ -27,7 +27,7 @@
     },
     {
       "id_soal": 3,
-      "teks_pertanyaan": "My sister (......) a nurse. She (......) very kind. Her patients (......) always happy with her. They (......) comfortable around her. The suitable answers to fill the blanks are.....",
+      "teks_pertanyaan": "My sister (......) a nurse. She (......) very kind. Her patients (......) always happy with her. They (......) comfortable around her.\n\nThe suitable answers to fill the blanks are.....",
       "pilihan_jawaban": [
         "A. are-is-am-are",
         "B. is-are-is-am",
@@ -37,7 +37,7 @@
     },
     {
       "id_soal": 4,
-      "teks_pertanyaan": "Mrs. Ani is my favorite neighbor. (......) always cooks delicious food. I often help (......) in the kitchen. Sometimes, my sister and I visit her house. (......) love her cooking, and she always gives some food to (......). The suitable answers to fill the blanks are....",
+      "teks_pertanyaan": "Mrs. Ani is my favorite neighbor. (......) always cooks delicious food. I often help (......) in the kitchen. Sometimes, my sister and I visit her house. (......) love her cooking, and she always gives some food to (......).\n\nThe suitable answers to fill the blanks are....",
       "pilihan_jawaban": [
         "A. She-her-We-us",
         "B. Her-she-We-our",
@@ -47,7 +47,7 @@
     },
     {
       "id_soal": 5,
-      "teks_pertanyaan": "<b>Read the dialogue below and answer the question!</b><br><br>Reno: (......) your father work in a hospital, Sinta? <br>Sinta: Yes, he does. He (......) as a doctor. But he (......) on weekends because he spends time with his family. The suitable answers to fill the blanks are.....",
+      "teks_pertanyaan": "<b>Read the dialogue below and answer the question!</b><br><br><b>Reno:</b> (......) your father work in a hospital, Sinta?<br><b>Sinta:</b> Yes, he does. He (......) as a doctor. But he (......) on weekends because he spends time with his family.\n\nThe suitable answers to fill the blanks are.....",
       "pilihan_jawaban": [
         "A. Do-work-don't work",
         "B. Does-works-doesn't work",
@@ -77,7 +77,7 @@
     },
     {
       "id_soal": 8,
-      "teks_pertanyaan": "Complete the sentences below! \"In my garden, (......) a beautiful mango tree. Also, (......) many colorful flowers blooming.\" The suitable words to fill the blanks are....",
+      "teks_pertanyaan": "Complete the sentences below!<br><br><i>\"In my garden, (......) a beautiful mango tree. Also, (......) many colorful flowers blooming.\"</i>\n\nThe suitable words to fill the blanks are....",
       "pilihan_jawaban": [
         "A. there is there is",
         "B. there are - there is",
@@ -87,7 +87,7 @@
     },
     {
       "id_soal": 9,
-      "teks_pertanyaan": "Read the dialogue and choose the correct answer! Sari: \"I have trouble with this math problem. (......) help me, Tono?\" Tono: \"I'm sorry, I (......). I am really bad at math.\" The suitable words to fill the blanks are....",
+      "teks_pertanyaan": "<b>Read the dialogue and choose the correct answer!</b><br><br><b>Sari:</b> \"I have trouble with this math problem. (......) help me, Tono?\"<br><b>Tono:</b> \"I'm sorry, I (......). I am really bad at math.\"\n\nThe suitable words to fill the blanks are....",
       "pilihan_jawaban": [
         "A. Do you don't",
         "B. Can you cannot",
@@ -97,7 +97,7 @@
     },
     {
       "id_soal": 10,
-      "teks_pertanyaan": "State whether the following sentence is True or False! \"My brother usually play football on Saturday.\"",
+      "teks_pertanyaan": "State whether the following sentence is True or False!<br><br><b>\"My brother usually play football on Saturday.\"</b>",
       "pilihan_jawaban": [
         "A. True",
         "B. False"
@@ -105,7 +105,7 @@
     },
     {
       "id_soal": 11,
-      "teks_pertanyaan": "State whether the following sentence is True or False! \"She does not eat spicy food.",
+      "teks_pertanyaan": "State whether the following sentence is True or False!<br><br><b>\"She does not eat spicy food.\"</b>",
       "pilihan_jawaban": [
         "A. True",
         "B. False"
@@ -123,7 +123,7 @@
     },
     {
       "id_soal": 13,
-      "teks_pertanyaan": "Read the dialogue and answer the question! Tia: \"Where is Budi? Is he in the kitchen?\" Nia: \"Yes, he (......) dinner for us right now.\" The suitable words to fill the blank are....",
+      "teks_pertanyaan": "<b>Read the dialogue and answer the question!</b><br><br><b>Tia:</b> \"Where is Budi? Is he in the kitchen?\"<br><b>Nia:</b> \"Yes, he (......) dinner for us right now.\"\n\nThe suitable words to fill the blank are....",
       "pilihan_jawaban": [
         "A. cooks",
         "B. cooked",
@@ -133,7 +133,7 @@
     },
     {
       "id_soal": 14,
-      "teks_pertanyaan": "State whether the following sentence is True or False! \"We visited our grandparents last week, but we didn't stay overnight.\"",
+      "teks_pertanyaan": "State whether the following sentence is True or False!<br><br><b>\"We visited our grandparents last week, but we didn't stay overnight.\"</b>",
       "pilihan_jawaban": [
         "A. True",
         "B. False"
@@ -141,7 +141,7 @@
     },
     {
       "id_soal": 15,
-      "teks_pertanyaan": "State whether the following sentence is True or False! \"I see a great movie yesterday, but I forgot the title.\"",
+      "teks_pertanyaan": "State whether the following sentence is True or False!<br><br><b>\"I see a great movie yesterday, but I forgot the title.\"</b>",
       "pilihan_jawaban": [
         "A. True",
         "B. False"
@@ -149,7 +149,7 @@
     },
     {
       "id_soal": 16,
-      "teks_pertanyaan": "The following text is for questions number 16 and 17.<br><br> <b>A Trip to Mount Batur</b><br> Last holiday, my family and I went to Bali. We planned to see the sunrise at Mount Batur. We woke up at 3:00 AM because we had to hike to the peak before dawn. It took about two hours to reach the top. At 5:30 AM, we finally witnessed a breathtaking sunrise. If we had started hiking at 7:00 AM, we would have missed the beautiful view and the weather would have been too hot for climbing.\n\n16. Why did the writer and their family wake up at 3:00 AM?",
+      "teks_pertanyaan": "<b>The following text is for questions number 16 and 17.</b><br><br><b>A Trip to Mount Batur</b><br>Last holiday, my family and I went to Bali. We planned to see the sunrise at Mount Batur. We woke up at 3:00 AM because we had to hike to the peak before dawn. It took about two hours to reach the top.<br><br>At 5:30 AM, we finally witnessed a breathtaking sunrise. If we had started hiking at 7:00 AM, we would have missed the beautiful view and the weather would have been too hot for climbing.\n\nWhy did the writer and their family wake up at 3:00 AM?",
       "pilihan_jawaban": [
         "A. To rent a car to go to the mountain",
         "B. To buy some food before the hike",
@@ -169,7 +169,7 @@
     },
     {
       "id_soal": 18,
-      "teks_pertanyaan": "Read the dialog and fill in the blank! Lina: \"I knocked on your door several times last evening, but no one opened it. What (......) at 7 PM?\" Doni: \"I'm so sorry. I didn't hear it because I (......) to music using my headset.\"",
+      "teks_pertanyaan": "<b>Read the dialog and fill in the blank!</b><br><br><b>Lina:</b> \"I knocked on your door several times last evening, but no one opened it. What (......) at 7 PM?\"<br><b>Doni:</b> \"I'm so sorry. I didn't hear it because I (......) to music using my headset.\"",
       "pilihan_jawaban": [
         "A. do you do - am listening",
         "B. did you do - listened",
@@ -189,7 +189,7 @@
     },
     {
       "id_soal": 20,
-      "teks_pertanyaan": "I want to buy a pair of shoes. Brand A is Rp300.000, Brand B is Rp450.000, and Brand C is Rp600.000. Brand C is the (......) shoes of all.",
+      "teks_pertanyaan": "I want to buy a pair of shoes. Brand A is Rp300.000, Brand B is Rp450.000, and Brand C is Rp600.000.<br><br>Brand C is the (......) shoes of all.",
       "pilihan_jawaban": [
         "A. expensive",
         "B. more expensive",
@@ -199,7 +199,7 @@
     },
     {
       "id_soal": 21,
-      "teks_pertanyaan": "The following text is for questions number 21 to 25. The Greedy Dog One day, a hungry dog found a large, juicy bone. He was very happy and carried it in his mouth to eat it in a quiet place. On his way home, he had to cross a wooden bridge over a clear river. As he was crossing, he looked down and saw his own reflection in the water. Thinking it was another dog with a bigger bone, he became greedy. He wanted that bone too. He fiercely opened his mouth to bark at the \"other dog\" and snatch the bone. But the moment he opened his mouth, his own bone fell into the river and was swept away by the current. The dog was left with nothing but a hungry stomach.\n\n21. What made the dog stop on the bridge?",
+      "teks_pertanyaan": "<b>The following text is for questions number 21 to 25.</b><br><br><b>The Greedy Dog</b><br>One day, a hungry dog found a large, juicy bone. He was very happy and carried it in his mouth to eat it in a quiet place. On his way home, he had to cross a wooden bridge over a clear river.<br><br>As he was crossing, he looked down and saw his own reflection in the water. Thinking it was another dog with a bigger bone, he became greedy. He wanted that bone too. He fiercely opened his mouth to bark at the \"other dog\" and snatch the bone.<br><br>But the moment he opened his mouth, his own bone fell into the river and was swept away by the current. The dog was left with nothing but a hungry stomach.\n\nWhat made the dog stop on the bridge?",
       "pilihan_jawaban": [
         "A. He was too tired to carry the large bone.",
         "B. He saw his own reflection in the water.",
@@ -249,7 +249,7 @@
     },
     {
       "id_soal": 26,
-      "teks_pertanyaan": "The following text is for questions number 26 to 29. Honeybees Honeybees are flying insects known for their ability to make honey. A bee colony consists of three types of bees: the queen, workers, and drones. The worker bees are all females and they do all the work for the hive. They fly around to gather nectar from flowers and store it in a special part of their body called the \"honey stomach.\" Drones are male bees, and their only job is to mate with the queen; they do not collect nectar. The queen bee's main task is laying eggs to grow the colony. While worker bees only live for a few weeks during the busy season, a queen bee can live for up to five years.\n\n26. Where do the worker bees keep the nectar after gathering it from flowers?",
+      "teks_pertanyaan": "<b>The following text is for questions number 26 to 29.</b><br><br><b>Honeybees</b><br>Honeybees are flying insects known for their ability to make honey. A bee colony consists of three types of bees: the queen, workers, and drones.<br><br>The worker bees are all females and they do all the work for the hive. They fly around to gather nectar from flowers and store it in a special part of their body called the \"honey stomach.\" Drones are male bees, and their only job is to mate with the queen; they do not collect nectar. The queen bee's main task is laying eggs to grow the colony.<br><br>While worker bees only live for a few weeks during the busy season, a queen bee can live for up to five years.\n\nWhere do the worker bees keep the nectar after gathering it from flowers?",
       "pilihan_jawaban": [
         "A. In the hive",
         "B. In their honey stomach",
@@ -289,7 +289,7 @@
     },
     {
       "id_soal": 30,
-      "teks_pertanyaan": "Change the direct speech below into indirect speech! Budi said, \"I am not doing my homework today.\"",
+      "teks_pertanyaan": "Change the direct speech below into indirect speech!<br><br><b>Budi said, \"I am not doing my homework today.\"</b>",
       "pilihan_jawaban": [
         "A. Budi said that he is not doing his homework today.",
         "B. Budi said that he was not doing his homework that day.",
@@ -299,7 +299,7 @@
     },
     {
       "id_soal": 31,
-      "teks_pertanyaan": "Choose the correct indirect speech! Anna asked me, \"Do you like the movie?\"",
+      "teks_pertanyaan": "Choose the correct indirect speech!<br><br><b>Anna asked me, \"Do you like the movie?\"</b>",
       "pilihan_jawaban": [
         "A. Anna asked me if I liked the movie.",
         "B. Anna asked me did I like the movie.",
@@ -309,7 +309,7 @@
     },
     {
       "id_soal": 32,
-      "teks_pertanyaan": "Choose the correct indirect speech! The manager asked her, \"Why did you come late yesterday?\"",
+      "teks_pertanyaan": "Choose the correct indirect speech!<br><br><b>The manager asked her, \"Why did you come late yesterday?\"</b>",
       "pilihan_jawaban": [
         "A. The manager asked her why did she come late yesterday.",
         "B. The manager asked her why she came late the day before.",
@@ -319,7 +319,7 @@
     },
     {
       "id_soal": 33,
-      "teks_pertanyaan": "Choose the correct indirect speech! The librarian said to the students, \"Don't make any noise here!\"",
+      "teks_pertanyaan": "Choose the correct indirect speech!<br><br><b>The librarian said to the students, \"Don't make any noise here!\"</b>",
       "pilihan_jawaban": [
         "A. The librarian told the students don't make any noise there.",
         "B. The librarian told the students didn't make any noise here.",
@@ -359,7 +359,7 @@
     },
     {
       "id_soal": 37,
-      "teks_pertanyaan": "The following text is for questions number 37 to 40. Do-It-Yourself: Tie-Dye T-shirt Making your own tie-dye T-shirt is a fun activity that allows you to be creative with colors. Materials: • A plain white cotton T-shirt • Fabric dyes • Rubber bands • A plastic bag • Rubber gloves Steps: 1. Wash the T-shirt but do not dry it. It must be damp before you start. 2. Pinch the center of the shirt and twist it until it forms a flat, circular shape. 3. Wrap rubber bands tightly around the folded shirt to hold its shape. 4. Put on rubber gloves to protect your hands. 5. Squeeze different colors of fabric dye onto different sections of the shirt. 6. Place the dyed shirt into a plastic bag to keep it damp. Let it sit for 24 hours. Do not leave the plastic bag in direct sunlight because it will dry out the shirt too fast. 7. After 24 hours, take the shirt out and remove the rubber bands. 8. Rinse the shirt under cold water until the water runs clear. 9. Dry the T-shirt and it is ready to wear.\n\n37. What is the main purpose of Step 3 (using rubber bands)?",
+      "teks_pertanyaan": "<b>The following text is for questions number 37 to 40.</b><br><br><b>Do-It-Yourself: Tie-Dye T-shirt</b><br>Making your own tie-dye T-shirt is a fun activity that allows you to be creative with colors.<br><br><b>Materials:</b><br>• A plain white cotton T-shirt<br>• Fabric dyes<br>• Rubber bands<br>• A plastic bag<br>• Rubber gloves<br><br><b>Steps:</b><br>1. Wash the T-shirt but do not dry it. It must be damp before you start.<br>2. Pinch the center of the shirt and twist it until it forms a flat, circular shape.<br>3. Wrap rubber bands tightly around the folded shirt to hold its shape.<br>4. Put on rubber gloves to protect your hands.<br>5. Squeeze different colors of fabric dye onto different sections of the shirt.<br>6. Place the dyed shirt into a plastic bag to keep it damp. Let it sit for 24 hours. Do not leave the plastic bag in direct sunlight because it will dry out the shirt too fast.<br>7. After 24 hours, take the shirt out and remove the rubber bands.<br>8. Rinse the shirt under cold water until the water runs clear.<br>9. Dry the T-shirt and it is ready to wear.\n\nWhat is the main purpose of Step 3 (using rubber bands)?",
       "pilihan_jawaban": [
         "A. To make the T-shirt look more colorful.",
         "B. To measure how much dye should be added.",
