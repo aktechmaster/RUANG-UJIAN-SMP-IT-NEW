@@ -94,7 +94,8 @@
             font-weight: 500;
         }
 
-        select {
+        /* Styles untuk Select (Dropdown) dan Input Password agar seragam */
+        select, input[type="password"] {
             width: 100%;
             padding: 12px 15px;
             background: rgba(15, 23, 42, 0.6);
@@ -104,7 +105,11 @@
             font-size: 0.95rem;
             outline: none;
             transition: all 0.3s ease;
-            appearance: none; /* Removes default dropdown arrow */
+        }
+
+        /* Khusus Dropdown (panah custom) */
+        select {
+            appearance: none; 
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 15px center;
@@ -112,9 +117,9 @@
             cursor: pointer;
         }
 
-        select:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        select option {
+            background: #1e293b;
+            color: #ffffff;
         }
 
         select:disabled {
@@ -124,9 +129,15 @@
             border-color: rgba(255, 255, 255, 0.05);
         }
 
-        select option {
-            background: #1e293b;
-            color: #ffffff;
+        /* Placeholder untuk Password */
+        input[type="password"]::placeholder {
+            color: #64748b;
+        }
+
+        /* Efek Fokus / Menyala */
+        select:focus, input[type="password"]:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
         }
 
         /* BUTTON */
@@ -190,7 +201,7 @@
                     <option value="9 Al-Quran">9 Al-Quran</option>
                     <option value="9 As-Sunnah">9 As-Sunnah</option>
                     <option value="9 Al-Hadits">9 Al-Hadits</option>
-                    </select>
+                </select>
             </div>
 
             <div class="input-group">
@@ -221,6 +232,11 @@
                 </select>
             </div>
 
+            <div class="input-group">
+                <label for="tokenUjian">Token / Password Ujian</label>
+                <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
+            </div>
+
             <button type="submit" class="btn-submit">Lanjutkan Ujian</button>
         </form>
 
@@ -236,12 +252,29 @@
         const loadingText = document.getElementById('loadingSiswa');
         const form = document.getElementById('loginForm');
 
-        // URL Google Apps Script Anda (Ganti dengan Web App URL dari Spreadsheet Anda nantinya)
-        // const SPREADSHEET_API_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+        // ==========================================
+        // DATABASE TOKEN / PASSWORD PER MAPEL
+        // ==========================================
+        // Pastikan Anda menulis token menggunakan huruf KECIL semua di sini.
+        // Nanti saat divalidasi, sistem otomatis membaca huruf kecil/besar sama saja.
+        const tokenMapel = {
+            "PAI": "rukunislam",
+            "PKN": "pancasila",
+            "IND": "indonesia",
+            "MTK": "aljabar",
+            "IPA": "fotosintesis",
+            "IPS": "sejarah",
+            "ING": "presenttense",
+            "PJOK": "olahraga",
+            "TIK": "komputer",
+            "SBK": "karya",
+            "ARAB": "hijaiyah",
+            "T2Q": "tajwid",
+            "BPI": "akhlak"
+        };
 
         // ==========================================
-        // DUMMY DATA SEMENTARA (Simulasi Database)
-        // Hapus ini jika Anda sudah menyambungkan Google Sheets
+        // DUMMY DATA SEMENTARA (Simulasi Database Siswa)
         // ==========================================
         const dummyDatabase = {
             "9 Al-Quran": ["Ahmad Fulan", "Budi Santoso", "Citra Kirana", "Deni Saputra"],
@@ -259,21 +292,10 @@
             loadingText.style.display = 'block';
 
             try {
-                // ========================================================
-                // CARA ASLI (FETCH DARI GOOGLE SHEETS):
-                // Jika ingin pakai data asli, uncomment kode di bawah ini:
-                // ========================================================
-                // const response = await fetch(`${SPREADSHEET_API_URL}?kelas=${selectedKelas}`);
-                // const data = await response.json();
-                // const daftarSiswa = data.siswa; // Asumsi response JSON memiliki array 'siswa'
-                
-                // ========================================================
-                // CARA SIMULASI (Pakai delay agar terlihat futuristik):
-                // ========================================================
-                await new Promise(resolve => setTimeout(resolve, 800)); // Delay 0.8 detik
+                // Simulasi memanggil data dengan jeda waktu biar futuristik
+                await new Promise(resolve => setTimeout(resolve, 800)); 
                 const daftarSiswa = dummyDatabase[selectedKelas] || [];
 
-                // Masukkan data ke dropdown siswa
                 if (daftarSiswa.length > 0) {
                     daftarSiswa.forEach(siswa => {
                         const option = document.createElement('option');
@@ -294,22 +316,32 @@
             }
         });
 
-        // Logika Tombol Lanjutkan
+        // Logika Tombol Lanjutkan & Pengecekan Password
         form.addEventListener('submit', function(e) {
             e.preventDefault(); // Mencegah reload halaman
             
             const kelas = document.getElementById('pilihKelas').value;
             const siswa = document.getElementById('pilihSiswa').value;
             const mapel = document.getElementById('pilihMapel').value;
+            const enteredToken = document.getElementById('tokenUjian').value.trim(); // Ambil input token
 
+            // 1. CEK KEBENARAN TOKEN
+            // Ubah ke huruf kecil semua agar tidak sensitif kapital (case-insensitive)
+            const tokenBenar = tokenMapel[mapel];
+            if (enteredToken.toLowerCase() !== tokenBenar) {
+                alert(`MAAF!\nToken/Password yang Anda masukkan SALAH untuk mata pelajaran ${mapel}. \n\nSilakan cek kembali tulisan token Anda.`);
+                return; // Batalkan proses masuk
+            }
+
+            // 2. JIKA TOKEN BENAR, SIMPAN DATA DAN MASUK
             // Simpan data login ke Session Storage agar bisa dibaca di halaman ujian
             sessionStorage.setItem('cbt_kelas', kelas);
             sessionStorage.setItem('cbt_siswa', siswa);
             sessionStorage.setItem('cbt_mapel', mapel);
 
+            alert(`Login Berhasil!\n\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nMengalihkan ke lembar soal ujian...`);
+            
             // Arahkan ke halaman ujian
-            // Ganti "ujian.html" dengan nama file halaman soal Anda
-            alert(`Berhasil Login!\n\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nSistem akan mengarahkan ke halaman ujian.`);
             window.location.href = "ujian.html"; 
         });
     </script>
