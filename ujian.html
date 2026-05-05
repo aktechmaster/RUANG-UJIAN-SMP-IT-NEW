@@ -89,55 +89,60 @@
         button:hover { background: #0056b3; }
 
         .header-ujian {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border-left: 5px solid #38bdf8;
-}
-.header-ujian h2 {
-    margin-bottom: 10px;
-    color: #1e293b;
-}
-.info-siswa p {
-    margin: 5px 0;
-    font-size: 0.95rem;
-    color: #475569;
-}
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid #38bdf8;
+        }
+        .header-ujian h2 {
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+        .info-siswa p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+            color: #475569;
+        }
     </style>
 </head>
 <body>
 
     <div class="header-ujian">
-    <h2 id="judulMapel">Memuat Mata Pelajaran...</h2>
-    <div class="info-siswa">
-        <p><strong>Nama:</strong> <span id="infoNama">-</span></p>
-        <p><strong>Kelas:</strong> <span id="infoKelas">-</span></p>
+        <h2 id="judulMapel">Memuat Mata Pelajaran...</h2>
+        <div class="info-siswa">
+            <p><strong>Nama:</strong> <span id="infoNama">-</span></p>
+            <p><strong>Kelas:</strong> <span id="infoKelas">-</span></p>
+        </div>
     </div>
-</div>
     
     <div id="lembar-soal"></div>
     <button onclick="selesaiUjian()">Kumpulkan Jawaban</button>
 
     <script>
         // 1. Ambil data siswa yang sudah login
-const kelasSiswa = sessionStorage.getItem('cbt_kelas'); // Contoh: "9 Al-Quran"
-const mapelUjian = sessionStorage.getItem('cbt_mapel'); // Contoh: "ING"
+        let kelasSiswa = sessionStorage.getItem('cbt_kelas');
+        let mapelUjian = sessionStorage.getItem('cbt_mapel');
 
-// 2. Ambil angka kelas depannya saja (misal ambil "9")
-const tingkatKelas = kelasSiswa.charAt(0); 
+        // Proteksi jika diakses langsung tanpa login (agar tidak error)
+        if (!kelasSiswa || !mapelUjian) {
+            kelasSiswa = "9 Al-Quran";
+            mapelUjian = "ING";
+        }
 
-// 3. Rakit nama file JSON-nya
-const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
-// Hasil otomatisnya: "soal_9_ING.json"
+        // 2. Ambil angka kelas depannya saja (misal ambil "9")
+        const tingkatKelas = kelasSiswa.charAt(0); 
 
-// 4. Gabungkan URL utama GitHub Anda dengan nama file yang baru dirakit
-const urlBaseGitHub = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/";
-const urlAsli = urlBaseGitHub + namaFile;
+        // 3. Rakit nama file JSON-nya
+        const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
 
-// 5. Trik Cache-Buster Anda tetap dipertahankan
-const urlJSON = urlAsli + "?t=" + new Date().getTime();
+        // 4. Gabungkan URL utama GitHub Anda dengan nama file yang baru dirakit
+        const urlBaseGitHub = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/";
+        const urlAsli = urlBaseGitHub + namaFile;
+
+        // 5. Trik Cache-Buster 
+        const urlJSON = urlAsli + "?t=" + new Date().getTime();
 
         fetch(urlJSON)
             .then(response => {
@@ -145,7 +150,12 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
                 return response.json();
             })
             .then(data => {
-                document.getElementById('judul-mapel').innerText = "Ujian: " + data.metadata.mata_pelajaran;
+                // Memperbaiki ID: Menggunakan judulMapel sesuai elemen HTML
+                document.getElementById('judulMapel').innerText = "Ujian: " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
+                
+                // Menampilkan nama & kelas di header
+                document.getElementById('infoNama').innerText = sessionStorage.getItem('cbt_siswa') || "Nama Siswa Contoh";
+                document.getElementById('infoKelas').innerText = kelasSiswa;
                 
                 let htmlSoal = "";
                 data.bank_soal.forEach((soal, index) => {
@@ -156,34 +166,27 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
                     let teksPertanyaanBersih = "";
 
                     if (bagianTeks.length > 1) {
-                        // Jika ada \n\n, teks awal adalah bacaan, teks akhir adalah pertanyaan
                         let bacaan = bagianTeks[0];
                         
-                        // 4. MEMPERBAIKI FORMAT TEKS MENYAMBUNG (Khusus agar rapi)
-                        bacaan = bacaan.replace(/ • /g, "\n• "); // Memecah bullet point
-                        bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); // Memecah angka 1. 2. 3.
+                        bacaan = bacaan.replace(/ • /g, "\n• "); 
+                        bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); 
                         bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
                         bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
 
-                        // Menampilkan kotak bacaan
                         htmlSoal += `<div class="bacaan">${bacaan.trim()}</div>`;
                         teksPertanyaanBersih = bagianTeks[1];
                     } else {
-                        // Jika tidak ada \n\n, berarti ini soal biasa
                         teksPertanyaanBersih = soal.teks_pertanyaan;
                     }
 
-                    // Membersihkan sisa nomor urut di awal pertanyaan (misal "37. What is..." menjadi "What is...")
                     teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
 
-                    // Menampilkan Teks Pertanyaan (Tidak tebal)
                     htmlSoal += `
                         <div class="pertanyaan">
                             <span>${index + 1}.</span>
                             <span>${teksPertanyaanBersih}</span>
                         </div>`;
                     
-                    // Menampilkan Pilihan Jawaban
                     htmlSoal += `<div class="opsi-container">`;
                     soal.pilihan_jawaban.forEach((opsi, i) => {
                         htmlSoal += `
@@ -194,36 +197,18 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
                                 </label>
                             </div>`;
                     });
-                    htmlSoal += `</div></div>`; // Tutup opsi-container & soal-box
+                    htmlSoal += `</div></div>`;
                 });
                 document.getElementById('lembar-soal').innerHTML = htmlSoal;
             })
             .catch(error => {
-                document.getElementById('lembar-soal').innerHTML = "<p style='color:red;'><b>Gagal memuat soal!</b></p>";
+                document.getElementById('lembar-soal').innerHTML = "<p style='color:red;'><b>Gagal memuat soal! Pastikan file '" + namaFile + "' sudah ada di GitHub Anda.</b></p>";
                 console.error("Error:", error);
             });
 
         function selesaiUjian() {
             alert("Jawaban disimpan!");
         }
-
-        document.addEventListener("DOMContentLoaded", function() {
-    // 1. Ambil data dari Session Storage (hasil login)
-    const namaSiswa = sessionStorage.getItem('cbt_siswa');
-    const kelasSiswa = sessionStorage.getItem('cbt_kelas');
-    const mapelUjian = sessionStorage.getItem('cbt_mapel');
-
-    // 2. Masukkan teks tersebut ke dalam HTML
-    if (mapelUjian) {
-        document.getElementById('judulMapel').textContent = "Ujian: " + mapelUjian;
-    }
-    if (namaSiswa) {
-        document.getElementById('infoNama').textContent = namaSiswa;
-    }
-    if (kelasSiswa) {
-        document.getElementById('infoKelas').textContent = kelasSiswa;
-    }
-});
     </script>
 </body>
 </html>
