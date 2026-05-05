@@ -115,8 +115,8 @@
     <div class="header-ujian">
         <h2 id="judulMapel">Memuat Mata Pelajaran...</h2>
         <div class="info-siswa">
-            <p><strong>Nama:</strong> <span id="infoNama">-</span></p>
-            <p><strong>Kelas:</strong> <span id="infoKelas">-</span></p>
+            <p><strong>Nama    :</strong> <span id="infoNama">-</span></p>
+            <p><strong>Kelas   :</strong> <span id="infoKelas">-</span></p>
         </div>
     </div>
     
@@ -154,7 +154,7 @@
             })
             .then(data => {
                 // Memperbaiki ID: Menggunakan judulMapel sesuai elemen HTML
-                document.getElementById('judulMapel').innerText = "Ujian: " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
+                document.getElementById('judulMapel').innerText = "Ujian Sekloah Berstandar Nasional<br><br>" + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
                 
                 // Menampilkan nama & kelas di header
                 document.getElementById('infoNama').innerText = sessionStorage.getItem('cbt_siswa') || "Nama Siswa Contoh";
