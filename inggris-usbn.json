@@ -47,7 +47,7 @@
     },
     {
       "id_soal": 5,
-      "teks_pertanyaan": "Read the dialogue below and answer the question! Reno: (......) your father work in a hospital, Sinta? Sinta: Yes, he does. He (......) as a doctor. But he (......) on weekends because he spends time with his family. The suitable answers to fill the blanks are.....",
+      "teks_pertanyaan": "<b>Read the dialogue below and answer the question!</b><br><br>Reno: (......) your father work in a hospital, Sinta? <br>Sinta: Yes, he does. He (......) as a doctor. But he (......) on weekends because he spends time with his family. The suitable answers to fill the blanks are.....",
       "pilihan_jawaban": [
         "A. Do-work-don't work",
         "B. Does-works-doesn't work",
