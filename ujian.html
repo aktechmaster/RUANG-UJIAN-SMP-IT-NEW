@@ -187,7 +187,6 @@
     </div>
 
     <script>
-        // ISI DENGAN WEB APP URL GOOGLE APPS SCRIPT ANDA
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec"; 
 
         let kelasSiswa = sessionStorage.getItem('cbt_kelas');
@@ -320,7 +319,6 @@
                 return;
             }
 
-            // Jika semua terisi, konfirmasi submit
             let konfirmasi = confirm("Apakah Anda yakin ingin mengumpulkan jawaban?");
             if (konfirmasi) {
                 selesaiUjian();
@@ -352,22 +350,15 @@
 
             let skorAkhir = ((jumlahBenar / totalSoal) * 100).toFixed(2);
 
-            // Tampilkan popup
             document.getElementById('popupSkor').innerText = skorAkhir;
             document.getElementById('popupBenar').innerText = jumlahBenar;
             document.getElementById('popupSalah').innerText = jumlahSalah;
             document.getElementById('popupModal').style.display = 'flex';
 
-            // Kirim ke Spreadsheet
             simpanKeSpreadsheet(namaSiswa, kelasSiswa, mapelUjian, skorAkhir, jumlahBenar, jumlahSalah);
         }
 
         function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah) {
-            if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec") {
-                console.log("URL Google App Script belum diisi, data tidak terkirim.");
-                return;
-            }
-            
             let dataSiswa = {
                 nama: nama,
                 kelas: kelas,
@@ -396,7 +387,6 @@
             sessionStorage.clear();
             
             document.getElementById('popupModal').style.display = 'none';
-            // Arahkan kembali ke halaman login/barcode siswa (silakan ganti "index.html" sesuai file login Anda)
             window.location.href = "index.html";
         }
     </script>
