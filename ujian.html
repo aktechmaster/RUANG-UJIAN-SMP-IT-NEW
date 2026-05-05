@@ -24,24 +24,33 @@
         // MASUKKAN LINK RAW JSON ANDA DI BAWAH INI
         const urlJSON = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/inggris-usbn.json";
 
+        // FUNGSI BARU: Untuk membersihkan teks dari atau 
+        function bersihkanTeks(teks) {
+            // Ini namanya Regex (Regular Expression), senjata andalan programmer untuk mencari pola teks
+            return teks.replace(/\/g, '').replace(/\/g, '').trim();
+        }
+
         fetch(urlJSON)
             .then(response => response.json())
             .then(data => {
-                // Menampilkan Judul
                 document.getElementById('judul-mapel').innerText = "Ujian: " + data.metadata.mata_pelajaran;
                 
-                // Menampilkan Soal
                 let htmlSoal = "";
                 data.bank_soal.forEach((soal, index) => {
                     htmlSoal += `<div class="soal-box">`;
-                    htmlSoal += `<h3>${index + 1}. ${soal.teks_pertanyaan}</h3>`;
+                    
+                    // Terapkan pembersih pada teks pertanyaan
+                    let pertanyaanBersih = bersihkanTeks(soal.teks_pertanyaan);
+                    htmlSoal += `<h3>${index + 1}. ${pertanyaanBersih}</h3>`;
                     
                     soal.pilihan_jawaban.forEach((opsi, i) => {
+                        // Terapkan pembersih pada pilihan jawaban
+                        let opsiBersih = bersihkanTeks(opsi);
                         htmlSoal += `
                             <div class="opsi">
                                 <label>
-                                    <input type="radio" name="soal_${soal.id_soal}" value="${opsi.charAt(0)}"> 
-                                    ${opsi}
+                                    <input type="radio" name="soal_${soal.id_soal}" value="${opsiBersih.charAt(0)}"> 
+                                    ${opsiBersih}
                                 </label>
                             </div>`;
                     });
