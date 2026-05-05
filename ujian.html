@@ -127,6 +127,9 @@
         // 1. Ambil data siswa yang sudah login
         let kelasSiswa = sessionStorage.getItem('cbt_kelas');
         let mapelUjian = sessionStorage.getItem('cbt_mapel');
+        
+        // VARIABEL GLOBAL BARU: Menyimpan data soal agar bisa diakses saat penghitungan skor
+        let bankSoalData = null;
 
         // Proteksi jika diakses langsung tanpa login (agar tidak error)
         if (!kelasSiswa || !mapelUjian) {
@@ -153,8 +156,11 @@
                 return response.json();
             })
             .then(data => {
+                // SIMPAN DATA KE VARIABEL GLOBAL
+                bankSoalData = data;
+
                 // Memperbaiki ID: Menggunakan judulMapel sesuai elemen HTML
-                document.getElementById('judulMapel').innerText = "Ujian Sekloah Berstandar Nasional " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
+                document.getElementById('judulMapel').innerText = "Ujian Sekolah Berstandar Nasional " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
                 
                 // Menampilkan nama & kelas di header
                 document.getElementById('infoNama').innerText = sessionStorage.getItem('cbt_siswa') || "Nama Siswa Contoh";
@@ -209,8 +215,49 @@
                 console.error("Error:", error);
             });
 
+        // FUNGSI BARU: Pemeriksaan dan Penghitungan Skor
         function selesaiUjian() {
-            alert("Jawaban disimpan!");
+            if (!bankSoalData) {
+                alert("Data soal belum selesai dimuat, harap tunggu beberapa saat.");
+                return;
+            }
+
+            let totalSoal = bankSoalData.bank_soal.length;
+            let jumlahBenar = 0;
+            let jumlahSalah = 0;
+
+            // Lakukan perulangan dan pencocokan jawaban
+            bankSoalData.bank_soal.forEach((soal) => {
+                let opsiDipilih = document.querySelector(`input[name="soal_${soal.id_soal}"]:checked`);
+
+                if (opsiDipilih) {
+                    let jawabanSiswa = opsiDipilih.value;
+                    // Mengambil kunci jawaban entah itu key 'kunci_jawaban' atau 'jawaban_benar' di JSON
+                    let kunci = soal.kunci_jawaban || soal.jawaban_benar;
+
+                    if (jawabanSiswa === kunci) {
+                        jumlahBenar++;
+                    } else {
+                        jumlahSalah++;
+                    }
+                } else {
+                    jumlahSalah++; // Apabila siswa belum menjawab atau melewati soal
+                }
+            });
+
+            // Hitung persentase skor
+            let skorAkhir = (jumlahBenar / totalSoal) * 100;
+
+            // Tampilkan hasil ke layar
+            alert("Ujian Berhasil Dikumpulkan!\n\n" +
+                  "Jumlah Soal : " + totalSoal + "\n" +
+                  "Jawaban Benar : " + jumlahBenar + "\n" +
+                  "Jawaban Salah : " + jumlahSalah + "\n\n" +
+                  "Skor Akhir  : " + skorAkhir.toFixed(2) + " / 100");
+
+            // Kunci semua tombol agar soal tidak bisa diubah lagi setelah pengumpulan
+            const semuaInput = document.querySelectorAll('input[type="radio"]');
+            semuaInput.forEach(input => input.disabled = true);
         }
     </script>
 </body>
