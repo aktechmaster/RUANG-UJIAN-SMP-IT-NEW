@@ -154,7 +154,7 @@
             })
             .then(data => {
                 // Memperbaiki ID: Menggunakan judulMapel sesuai elemen HTML
-                document.getElementById('judulMapel').innerText = "Ujian Sekloah Berstandar Nasional<br><br>" + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
+                document.getElementById('judulMapel').innerText = "Ujian Sekloah Berstandar Nasional"<br><br> + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
                 
                 // Menampilkan nama & kelas di header
                 document.getElementById('infoNama').innerText = sessionStorage.getItem('cbt_siswa') || "Nama Siswa Contoh";
