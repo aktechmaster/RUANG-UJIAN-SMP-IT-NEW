@@ -21,12 +21,17 @@
     <button onclick="selesaiUjian()">Kumpulkan Jawaban</button>
 
     <script>
-        // Link JSON Anda sudah terpasang dengan benar di sini
+        // Link JSON Anda
         const urlJSON = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/inggris-usbn.json";
 
-        // Fungsi pembersih dengan Regex yang sudah utuh
+        // FUNGSI PEMBERSIH (Versi Kebal Copy-Paste)
         function bersihkanTeks(teks) {
-            return teks.replace(/\/g, '').replace(/\/g, '').trim();
+            if (!teks) return "";
+            // Menggunakan RegExp string agar simbol tidak hilang saat disalin
+            var hapusCite = new RegExp("\\", "g");
+            var hapusSource = new RegExp("\\", "g");
+            
+            return teks.replace(hapusCite, "").replace(hapusSource, "").trim();
         }
 
         fetch(urlJSON)
@@ -38,12 +43,12 @@
                 data.bank_soal.forEach((soal, index) => {
                     htmlSoal += `<div class="soal-box">`;
                     
-                    // Membersihkan pertanyaan
+                    // Membersihkan teks pertanyaan
                     let pertanyaanBersih = bersihkanTeks(soal.teks_pertanyaan);
                     htmlSoal += `<h3>${index + 1}. ${pertanyaanBersih}</h3>`;
                     
                     soal.pilihan_jawaban.forEach((opsi, i) => {
-                        // Membersihkan jawaban
+                        // Membersihkan teks pilihan jawaban
                         let opsiBersih = bersihkanTeks(opsi);
                         htmlSoal += `
                             <div class="opsi">
@@ -58,7 +63,7 @@
                 document.getElementById('lembar-soal').innerHTML = htmlSoal;
             })
             .catch(error => {
-                document.getElementById('lembar-soal').innerHTML = "<p>Gagal memuat soal. Pastikan Link JSON benar dan periksa koneksi internet.</p>";
+                document.getElementById('lembar-soal').innerHTML = "<p>Gagal memuat soal. Periksa koneksi internet atau link JSON.</p>";
                 console.error("Error memuat JSON:", error);
             });
 
