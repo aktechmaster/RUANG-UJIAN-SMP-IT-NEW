@@ -87,12 +87,35 @@
             margin-bottom: 30px;
         }
         button:hover { background: #0056b3; }
+
+        .header-ujian {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-left: 5px solid #38bdf8;
+}
+.header-ujian h2 {
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+.info-siswa p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #475569;
+}
     </style>
 </head>
 <body>
 
-    <h1 id="judul-mapel">Memuat Soal...</h1>
-    <hr>
+    <div class="header-ujian">
+    <h2 id="judulMapel">Memuat Mata Pelajaran...</h2>
+    <div class="info-siswa">
+        <p><strong>Nama:</strong> <span id="infoNama">-</span></p>
+        <p><strong>Kelas:</strong> <span id="infoKelas">-</span></p>
+    </div>
+</div>
     
     <div id="lembar-soal"></div>
     <button onclick="selesaiUjian()">Kumpulkan Jawaban</button>
@@ -183,6 +206,24 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
         function selesaiUjian() {
             alert("Jawaban disimpan!");
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+    // 1. Ambil data dari Session Storage (hasil login)
+    const namaSiswa = sessionStorage.getItem('cbt_siswa');
+    const kelasSiswa = sessionStorage.getItem('cbt_kelas');
+    const mapelUjian = sessionStorage.getItem('cbt_mapel');
+
+    // 2. Masukkan teks tersebut ke dalam HTML
+    if (mapelUjian) {
+        document.getElementById('judulMapel').textContent = "Ujian: " + mapelUjian;
+    }
+    if (namaSiswa) {
+        document.getElementById('infoNama').textContent = namaSiswa;
+    }
+    if (kelasSiswa) {
+        document.getElementById('infoKelas').textContent = kelasSiswa;
+    }
+});
     </script>
 </body>
 </html>
