@@ -359,6 +359,11 @@
         }
 
         function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah) {
+            // Hitung durasi pengerjaan
+            let sisaWaktu = parseInt(sessionStorage.getItem('exam_time_left')) || totalWaktu;
+            let waktuTerpakaiDetik = totalWaktu - sisaWaktu;
+            let waktuTerpakaiMenit = Math.round(waktuTerpakaiDetik / 60); // Dibulatkan ke menit terdekat
+
             let dataSiswa = {
                 nama: nama,
                 kelas: kelas,
@@ -366,7 +371,7 @@
                 skor: skor,
                 benar: benar,
                 salah: salah,
-                waktu: new Date().toLocaleString()
+                waktu: waktuTerpakaiMenit + " Menit" // Mengubah data waktu menjadi durasi dalam menit
             };
 
             fetch(GOOGLE_SCRIPT_URL, {
