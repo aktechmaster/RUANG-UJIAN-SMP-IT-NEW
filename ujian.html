@@ -287,15 +287,15 @@
 
             document.getElementById('lembar-soal').innerHTML = htmlSoal;
 
-            // Ambil jawaban dari localStorage agar tidak hilang saat direfresh
+            // Ambil jawaban dari sessionStorage agar otomatis terhapus saat sesi selesai/keluar
             document.querySelectorAll('input[type="radio"]').forEach(input => {
-                let savedValue = localStorage.getItem(input.name);
+                let savedValue = sessionStorage.getItem(input.name);
                 if (savedValue && input.value === savedValue) {
                     input.checked = true;
                 }
 
                 input.addEventListener('change', function() {
-                    localStorage.setItem(this.name, this.value);
+                    sessionStorage.setItem(this.name, this.value);
                 });
             });
         })
