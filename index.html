@@ -157,6 +157,13 @@
             box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
         }
 
+        .btn-submit:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
         /* FOOTER */
         .footer-credit {
             margin-top: 35px;
@@ -191,12 +198,9 @@
         <form id="loginForm">
             <div class="input-group">
                 <label for="pilihKelas">Pilih Kelas</label>
-                <select id="pilihKelas" required>
-                    <option value="" disabled selected>-- Silakan Pilih Kelas --</option>
-                    <option value="9 Al-Quran">9 Al-Quran</option>
-                    <option value="9 As-Sunnah">9 As-Sunnah</option>
-                    <option value="9 Al-Hadits">9 Al-Hadits</option>
-                </select>
+                <select id="pilihKelas" required disabled>
+                    <option value="" disabled selected>-- Memuat Kelas dari Server... --</option>
+                    </select>
             </div>
 
             <div class="input-group">
@@ -209,22 +213,9 @@
 
             <div class="input-group">
                 <label for="pilihMapel">Pilih Mata Pelajaran</label>
-                <select id="pilihMapel" required>
-                    <option value="" disabled selected>-- Silakan Pilih Mapel --</option>
-                    <option value="PAI">PAI</option>
-                    <option value="PKN">PKN</option>
-                    <option value="IND">Bahasa Indonesia (IND)</option>
-                    <option value="MTK">Matematika (MTK)</option>
-                    <option value="IPA">Ilmu Pengetahuan Alam (IPA)</option>
-                    <option value="IPS">Ilmu Pengetahuan Sosial (IPS)</option>
-                    <option value="ING">Bahasa Inggris (ING)</option>
-                    <option value="PJOK">PJOK</option>
-                    <option value="TIK">TIK</option>
-                    <option value="SBK">SBK</option>
-                    <option value="ARAB">Bahasa Arab</option>
-                    <option value="T2Q">Tahsin Tahfidz Qur'an (T2Q)</option>
-                    <option value="BPI">Bina Pribadi Islami (BPI)</option>
-                </select>
+                <select id="pilihMapel" required disabled>
+                    <option value="" disabled selected>-- Memuat Mapel dari Server... --</option>
+                    </select>
             </div>
 
             <div class="input-group">
@@ -232,7 +223,7 @@
                 <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
             </div>
 
-            <button type="submit" class="btn-submit">Lanjutkan Ujian</button>
+            <button type="submit" class="btn-submit" id="btnSubmit" disabled>Memuat Sistem...</button>
         </form>
 
         <div class="footer-credit">
@@ -244,15 +235,64 @@
   <script>
         const kelasSelect = document.getElementById('pilihKelas');
         const siswaSelect = document.getElementById('pilihSiswa');
+        const mapelSelect = document.getElementById('pilihMapel');
         const loadingText = document.getElementById('loadingSiswa');
         const form = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('btnSubmit');
 
         // =========================================================
-        // MASUKKAN LINK URL WEB APP GOOGLE SCRIPT ANDA DI BAWAH INI
+        // LINK URL WEB APP GOOGLE SCRIPT ANDA
         // =========================================================
         const SPREADSHEET_API_URL = "https://script.google.com/macros/s/AKfycbxF3g7LSwr61mNuVqOApDXnmjZsY5putWlumzL_GnJJN8hOPqhTk0MR9aPRnmbFJX1x/exec";
 
-        // Logika ketika Kelas dipilih (Mengambil Nama Siswa dari Spreadsheet)
+        // ========================================================
+        // 1. KETIKA HALAMAN DIBUKA (AMBIL DATA KELAS & MAPEL)
+        // ========================================================
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                // Memanggil API Google Apps Script
+                const response = await fetch(`${SPREADSHEET_API_URL}?action=getInitialData`);
+                const data = await response.json();
+
+                // Memasukkan data Kelas ke dropdown
+                kelasSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Kelas --</option>';
+                if (data.kelas && data.kelas.length > 0) {
+                    data.kelas.forEach(kelas => {
+                        const option = document.createElement('option');
+                        option.value = kelas;
+                        option.textContent = kelas;
+                        kelasSelect.appendChild(option);
+                    });
+                    kelasSelect.disabled = false;
+                }
+
+                // Memasukkan data Mapel ke dropdown
+                mapelSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Mapel --</option>';
+                if (data.mapel && data.mapel.length > 0) {
+                    data.mapel.forEach(mapel => {
+                        const option = document.createElement('option');
+                        option.value = mapel;
+                        option.textContent = mapel;
+                        mapelSelect.appendChild(option);
+                    });
+                    mapelSelect.disabled = false;
+                }
+
+                // Mengaktifkan kembali tombol Lanjutkan
+                submitBtn.textContent = "Lanjutkan Ujian";
+                submitBtn.disabled = false;
+
+            } catch (error) {
+                console.error("Gagal mengambil data awal:", error);
+                kelasSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data kelas</option>';
+                mapelSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data mapel</option>';
+                submitBtn.textContent = "Error Jaringan";
+            }
+        });
+
+        // ========================================================
+        // 2. KETIKA KELAS DIPILIH (AMBIL NAMA SISWA)
+        // ========================================================
         kelasSelect.addEventListener('change', async function() {
             const selectedKelas = this.value;
             
@@ -289,7 +329,9 @@
             }
         });
 
-        // Logika Tombol Lanjutkan & Pengecekan Password dari Spreadsheet
+        // ========================================================
+        // 3. LOGIKA TOMBOL SUBMIT & PENGECEKAN PASSWORD
+        // ========================================================
         form.addEventListener('submit', async function(e) {
             e.preventDefault(); // Mencegah reload halaman
             
@@ -297,7 +339,6 @@
             const siswa = document.getElementById('pilihSiswa').value;
             const mapel = document.getElementById('pilihMapel').value;
             const enteredToken = document.getElementById('tokenUjian').value.trim(); 
-            const submitBtn = document.querySelector('.btn-submit');
 
             // Ubah teks tombol saat memvalidasi ke server
             submitBtn.textContent = "Memeriksa Token...";
