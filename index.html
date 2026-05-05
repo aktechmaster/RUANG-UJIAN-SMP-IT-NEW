@@ -87,8 +87,8 @@
             font-weight: 500;
         }
 
-        /* Styles seragam untuk Select dan Input */
-        select, input[type="password"] {
+        /* Styles seragam untuk Select, Input Password, dan Input Email */
+        select, input[type="password"], input[type="email"] {
             width: 100%;
             padding: 13px 18px;
             /* Background input putih bersih */
@@ -125,13 +125,13 @@
             border-color: #e2e8f0;
         }
 
-        /* Placeholder untuk Password */
-        input[type="password"]::placeholder {
+        /* Placeholder untuk Password & Email */
+        input[type="password"]::placeholder, input[type="email"]::placeholder {
             color: #94a3b8;
         }
 
         /* Efek Fokus (Border membiru lembut) */
-        select:focus, input[type="password"]:focus {
+        select:focus, input[type="password"]:focus, input[type="email"]:focus {
             border-color: #38bdf8;
             box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
         }
