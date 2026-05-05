@@ -24,37 +24,25 @@
         // Link JSON Anda
         const urlJSON = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/inggris-usbn.json";
 
-        // FUNGSI PEMBERSIH (Versi Kebal Copy-Paste)
-        function bersihkanTeks(teks) {
-            if (!teks) return "";
-            // Menggunakan RegExp string agar simbol tidak hilang saat disalin
-            var hapusCite = new RegExp("\\", "g");
-            var hapusSource = new RegExp("\\", "g");
-            
-            return teks.replace(hapusCite, "").replace(hapusSource, "").trim();
-        }
-
         fetch(urlJSON)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) throw new Error("Gagal mengambil data dari GitHub");
+                return response.json();
+            })
             .then(data => {
                 document.getElementById('judul-mapel').innerText = "Ujian: " + data.metadata.mata_pelajaran;
                 
                 let htmlSoal = "";
                 data.bank_soal.forEach((soal, index) => {
                     htmlSoal += `<div class="soal-box">`;
-                    
-                    // Membersihkan teks pertanyaan
-                    let pertanyaanBersih = bersihkanTeks(soal.teks_pertanyaan);
-                    htmlSoal += `<h3>${index + 1}. ${pertanyaanBersih}</h3>`;
+                    htmlSoal += `<h3>${index + 1}. ${soal.teks_pertanyaan}</h3>`;
                     
                     soal.pilihan_jawaban.forEach((opsi, i) => {
-                        // Membersihkan teks pilihan jawaban
-                        let opsiBersih = bersihkanTeks(opsi);
                         htmlSoal += `
                             <div class="opsi">
                                 <label>
-                                    <input type="radio" name="soal_${soal.id_soal}" value="${opsiBersih.charAt(0)}"> 
-                                    ${opsiBersih}
+                                    <input type="radio" name="soal_${soal.id_soal}" value="${opsi.charAt(0)}"> 
+                                    ${opsi}
                                 </label>
                             </div>`;
                     });
@@ -63,12 +51,12 @@
                 document.getElementById('lembar-soal').innerHTML = htmlSoal;
             })
             .catch(error => {
-                document.getElementById('lembar-soal').innerHTML = "<p>Gagal memuat soal. Periksa koneksi internet atau link JSON.</p>";
-                console.error("Error memuat JSON:", error);
+                document.getElementById('lembar-soal').innerHTML = "<p style='color:red;'><b>Gagal memuat soal!</b> Pastikan Repository GitHub Anda diset ke <b>Public</b>.</p>";
+                console.error("Error:", error);
             });
 
         function selesaiUjian() {
-            alert("Jawaban disimpan! (Fitur penilaian akan dikembangkan selanjutnya)");
+            alert("Jawaban disimpan!");
         }
     </script>
 </body>
