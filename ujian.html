@@ -98,9 +98,23 @@
     <button onclick="selesaiUjian()">Kumpulkan Jawaban</button>
 
     <script>
-        // Link JSON Anda dengan Trik Cache-Buster
-        const urlAsli = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/inggris-usbn.json";
-        const urlJSON = urlAsli + "?t=" + new Date().getTime();
+        // 1. Ambil data siswa yang sudah login
+const kelasSiswa = sessionStorage.getItem('cbt_kelas'); // Contoh: "9 Al-Quran"
+const mapelUjian = sessionStorage.getItem('cbt_mapel'); // Contoh: "ING"
+
+// 2. Ambil angka kelas depannya saja (misal ambil "9")
+const tingkatKelas = kelasSiswa.charAt(0); 
+
+// 3. Rakit nama file JSON-nya
+const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
+// Hasil otomatisnya: "soal_9_ING.json"
+
+// 4. Gabungkan URL utama GitHub Anda dengan nama file yang baru dirakit
+const urlBaseGitHub = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/";
+const urlAsli = urlBaseGitHub + namaFile;
+
+// 5. Trik Cache-Buster Anda tetap dipertahankan
+const urlJSON = urlAsli + "?t=" + new Date().getTime();
 
         fetch(urlJSON)
             .then(response => {
