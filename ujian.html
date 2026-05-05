@@ -145,12 +145,6 @@
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        .modal-score {
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
         .modal-content h3 {
             color: #10b981;
             margin-bottom: 15px;
@@ -178,11 +172,7 @@
         <div class="modal-content">
             <h3>Selamat, Jawaban Anda Telah Direkam!</h3>
             <p>Terima kasih telah menyelesaikan ujian.</p>
-            <div class="modal-score">
-                <p>Skor Akhir: <strong id="popupSkor">0</strong> / 100</p>
-                <p>Benar: <span id="popupBenar">0</span> | Salah: <span id="popupSalah">0</span></p>
-            </div>
-            <button onclick="keluarKeLogin()" style="margin-bottom:0;">Kembali ke Halaman Utama / Scan Barcode</button>
+            <button onclick="keluarKeLogin()" style="margin-top: 20px; margin-bottom: 0;">Kembali ke Halaman Utama / Scan Barcode</button>
         </div>
     </div>
 
@@ -192,16 +182,17 @@
         let kelasSiswa = sessionStorage.getItem('cbt_kelas');
         let mapelUjian = sessionStorage.getItem('cbt_mapel');
         let namaSiswa = sessionStorage.getItem('cbt_siswa') || "Siswa Contoh";
-        // Simpan waktu awal saat siswa pertama kali membuka halaman
-        if (!sessionStorage.getItem('exam_start_time')) {
-            sessionStorage.setItem('exam_start_time', Date.now());
-        }
         
         let bankSoalData = null; 
 
         if (!kelasSiswa || !mapelUjian) {
             kelasSiswa = "9 Al-Quran";
             mapelUjian = "ING";
+        }
+
+        // Simpan waktu awal saat siswa pertama kali membuka halaman
+        if (!sessionStorage.getItem('exam_start_time')) {
+            sessionStorage.setItem('exam_start_time', Date.now());
         }
 
         const tingkatKelas = kelasSiswa.charAt(0); 
@@ -354,23 +345,19 @@
 
             let skorAkhir = ((jumlahBenar / totalSoal) * 100).toFixed(2);
 
-            document.getElementById('popupSkor').innerText = skorAkhir;
-            document.getElementById('popupBenar').innerText = jumlahBenar;
-            document.getElementById('popupSalah').innerText = jumlahSalah;
+            // Tampilkan popup tanpa menampilkan skor pada siswa
             document.getElementById('popupModal').style.display = 'flex';
 
+            // Kirim data ke Spreadsheet
             simpanKeSpreadsheet(namaSiswa, kelasSiswa, mapelUjian, skorAkhir, jumlahBenar, jumlahSalah);
         }
 
         function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah) {
-            // Ambil waktu mulai dari sessionStorage, jika tidak ada gunakan waktu saat ini
             let startTime = parseInt(sessionStorage.getItem('exam_start_time')) || Date.now();
             
             // Hitung durasi dalam milidetik lalu ubah ke menit
             let durasiMs = Date.now() - startTime;
-            let durasiMenit = Math.round(durasiMs / 60000); // 1 Menit = 60.000 ms
-
-            // Pastikan durasi minimal 1 menit
+            let durasiMenit = Math.round(durasiMs / 60000);
             let durasiFinal = durasiMenit <= 0 ? 1 : durasiMenit;
 
             let dataSiswa = {
