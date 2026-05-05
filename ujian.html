@@ -162,6 +162,7 @@
         <div class="info-siswa">
             <p><strong>Nama    :</strong> <span id="infoNama">-</span></p>
             <p><strong>Kelas   :</strong> <span id="infoKelas">-</span></p>
+            <p><strong>Email   :</strong> <span id="infoEmail">-</span></p>
         </div>
     </div>
     
@@ -182,6 +183,10 @@
         let kelasSiswa = sessionStorage.getItem('cbt_kelas');
         let mapelUjian = sessionStorage.getItem('cbt_mapel');
         let namaSiswa = sessionStorage.getItem('cbt_siswa') || "Siswa Contoh";
+        let emailSiswa = sessionStorage.getItem('cbt_email') || "Tidak ada email"; // Tambahan
+
+        // Tampilkan email ke layar
+        document.getElementById('infoEmail').innerText = emailSiswa;;
         
         let bankSoalData = null; 
 
@@ -353,6 +358,7 @@
         }
 
         function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah) {
+            let email = sessionStorage.getItem('cbt_email') || "-"; // Ambil email dari penyimpanan
             let startTime = parseInt(sessionStorage.getItem('exam_start_time')) || Date.now();
             
             // Hitung durasi dalam milidetik lalu ubah ke menit
@@ -367,7 +373,8 @@
                 skor: skor,
                 benar: benar,
                 salah: salah,
-                waktu: durasiFinal + " Menit" 
+                waktu: durasiFinal + " Menit",
+                email: email // Data email diselipkan di sini
             };
 
             fetch(GOOGLE_SCRIPT_URL, {
