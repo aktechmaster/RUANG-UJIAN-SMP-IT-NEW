@@ -192,6 +192,10 @@
         let kelasSiswa = sessionStorage.getItem('cbt_kelas');
         let mapelUjian = sessionStorage.getItem('cbt_mapel');
         let namaSiswa = sessionStorage.getItem('cbt_siswa') || "Siswa Contoh";
+        // Simpan waktu awal saat siswa pertama kali membuka halaman
+        if (!sessionStorage.getItem('exam_start_time')) {
+            sessionStorage.setItem('exam_start_time', Date.now());
+        }
         
         let bankSoalData = null; 
 
@@ -359,10 +363,15 @@
         }
 
         function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah) {
-            // Hitung durasi pengerjaan
-            let sisaWaktu = parseInt(sessionStorage.getItem('exam_time_left')) || totalWaktu;
-            let waktuTerpakaiDetik = totalWaktu - sisaWaktu;
-            let waktuTerpakaiMenit = Math.round(waktuTerpakaiDetik / 60); // Dibulatkan ke menit terdekat
+            // Ambil waktu mulai dari sessionStorage, jika tidak ada gunakan waktu saat ini
+            let startTime = parseInt(sessionStorage.getItem('exam_start_time')) || Date.now();
+            
+            // Hitung durasi dalam milidetik lalu ubah ke menit
+            let durasiMs = Date.now() - startTime;
+            let durasiMenit = Math.round(durasiMs / 60000); // 1 Menit = 60.000 ms
+
+            // Pastikan durasi minimal 1 menit
+            let durasiFinal = durasiMenit <= 0 ? 1 : durasiMenit;
 
             let dataSiswa = {
                 nama: nama,
@@ -371,7 +380,7 @@
                 skor: skor,
                 benar: benar,
                 salah: salah,
-                waktu: waktuTerpakaiMenit + " Menit" // Mengubah data waktu menjadi durasi dalam menit
+                waktu: durasiFinal + " Menit" 
             };
 
             fetch(GOOGLE_SCRIPT_URL, {
