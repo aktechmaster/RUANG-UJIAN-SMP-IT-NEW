@@ -2,22 +2,316 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Portal Ujian Sekolah</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Ujian CBT - SMP IT Al-Kautsar</title>
+    <link rel="icon" href="smpit.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        .card { border: 1px solid #ccc; padding: 20px; display: inline-block; border-radius: 10px; }
-        .btn { display: inline-block; padding: 15px 30px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; font-size: 18px; margin-top: 20px; }
-        .btn:hover { background: #218838; }
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* BACKGROUND FUTURISTIC EFFECTS */
+        .bg-shape1, .bg-shape2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+        }
+        .bg-shape1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(56, 189, 248, 0.4);
+            top: -100px;
+            left: -100px;
+        }
+        .bg-shape2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(139, 92, 246, 0.4);
+            bottom: -150px;
+            right: -100px;
+        }
+
+        /* GLASSMORPHISM CONTAINER */
+        .login-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* LOGO & TYPOGRAPHY */
+        .logo {
+            width: 90px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        /* FORM ELEMENTS */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            appearance: none; /* Removes default dropdown arrow */
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        select:disabled {
+            background: rgba(255, 255, 255, 0.02);
+            color: #64748b;
+            cursor: not-allowed;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        select option {
+            background: #1e293b;
+            color: #ffffff;
+        }
+
+        /* BUTTON */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        /* FOOTER */
+        .footer-credit {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        
+        .footer-credit span {
+            font-weight: 600;
+            color: #38bdf8;
+        }
+
+        /* LOADER */
+        .loader {
+            display: none;
+            font-size: 0.8rem;
+            color: #38bdf8;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>Selamat Datang di Portal Ujian CBT</h1>
-        <p>Silakan pilih mata pelajaran yang akan diujikan hari ini.</p>
+    <div class="bg-shape1"></div>
+    <div class="bg-shape2"></div>
+
+    <div class="login-container">
+        <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/90?text=LOGO'">
         
-        <a href="ujian.html" class="btn">Mulai Ujian Bahasa Inggris</a>
+        <h1>Selamat Datang di Ruang Ujian<br>SMP IT Al-Kautsar Mukomuko</h1>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="pilihKelas">Pilih Kelas</label>
+                <select id="pilihKelas" required>
+                    <option value="" disabled selected>-- Silakan Pilih Kelas --</option>
+                    <option value="9 Al-Quran">9 Al-Quran</option>
+                    <option value="9 As-Sunnah">9 As-Sunnah</option>
+                    <option value="9 Al-Hadits">9 Al-Hadits</option>
+                    </select>
+            </div>
+
+            <div class="input-group">
+                <label for="pilihSiswa">Nama Siswa</label>
+                <select id="pilihSiswa" required disabled>
+                    <option value="" disabled selected>-- Pilih Kelas Terlebih Dahulu --</option>
+                </select>
+                <div id="loadingSiswa" class="loader">Memuat data siswa dari server...</div>
+            </div>
+
+            <div class="input-group">
+                <label for="pilihMapel">Pilih Mata Pelajaran</label>
+                <select id="pilihMapel" required>
+                    <option value="" disabled selected>-- Silakan Pilih Mapel --</option>
+                    <option value="PAI">PAI</option>
+                    <option value="PKN">PKN</option>
+                    <option value="IND">Bahasa Indonesia (IND)</option>
+                    <option value="MTK">Matematika (MTK)</option>
+                    <option value="IPA">Ilmu Pengetahuan Alam (IPA)</option>
+                    <option value="IPS">Ilmu Pengetahuan Sosial (IPS)</option>
+                    <option value="ING">Bahasa Inggris (ING)</option>
+                    <option value="PJOK">PJOK</option>
+                    <option value="TIK">TIK</option>
+                    <option value="SBK">SBK</option>
+                    <option value="ARAB">Bahasa Arab</option>
+                    <option value="T2Q">Tahsin Tahfidz Qur'an (T2Q)</option>
+                    <option value="BPI">Bina Pribadi Islami (BPI)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Lanjutkan Ujian</button>
+        </form>
+
+        <div class="footer-credit">
+            &copy; 2026 <span>aktechmaster</span> <br>
+            Designed & Developed by aktechmaster
+        </div>
     </div>
 
+    <script>
+        const kelasSelect = document.getElementById('pilihKelas');
+        const siswaSelect = document.getElementById('pilihSiswa');
+        const loadingText = document.getElementById('loadingSiswa');
+        const form = document.getElementById('loginForm');
+
+        // URL Google Apps Script Anda (Ganti dengan Web App URL dari Spreadsheet Anda nantinya)
+        // const SPREADSHEET_API_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+
+        // ==========================================
+        // DUMMY DATA SEMENTARA (Simulasi Database)
+        // Hapus ini jika Anda sudah menyambungkan Google Sheets
+        // ==========================================
+        const dummyDatabase = {
+            "9 Al-Quran": ["Ahmad Fulan", "Budi Santoso", "Citra Kirana", "Deni Saputra"],
+            "9 As-Sunnah": ["Eka Prasetya", "Faisal Rahman", "Gita Gutawa"],
+            "9 Al-Hadits": ["Hadi Pratama", "Intan Permata", "Joko Susilo"]
+        };
+
+        // Logika ketika Kelas dipilih
+        kelasSelect.addEventListener('change', async function() {
+            const selectedKelas = this.value;
+            
+            // Reset dropdown siswa
+            siswaSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Nama Anda --</option>';
+            siswaSelect.disabled = true;
+            loadingText.style.display = 'block';
+
+            try {
+                // ========================================================
+                // CARA ASLI (FETCH DARI GOOGLE SHEETS):
+                // Jika ingin pakai data asli, uncomment kode di bawah ini:
+                // ========================================================
+                // const response = await fetch(`${SPREADSHEET_API_URL}?kelas=${selectedKelas}`);
+                // const data = await response.json();
+                // const daftarSiswa = data.siswa; // Asumsi response JSON memiliki array 'siswa'
+                
+                // ========================================================
+                // CARA SIMULASI (Pakai delay agar terlihat futuristik):
+                // ========================================================
+                await new Promise(resolve => setTimeout(resolve, 800)); // Delay 0.8 detik
+                const daftarSiswa = dummyDatabase[selectedKelas] || [];
+
+                // Masukkan data ke dropdown siswa
+                if (daftarSiswa.length > 0) {
+                    daftarSiswa.forEach(siswa => {
+                        const option = document.createElement('option');
+                        option.value = siswa;
+                        option.textContent = siswa;
+                        siswaSelect.appendChild(option);
+                    });
+                    siswaSelect.disabled = false;
+                } else {
+                    siswaSelect.innerHTML = '<option value="" disabled selected>Data siswa tidak ditemukan</option>';
+                }
+
+            } catch (error) {
+                console.error("Gagal mengambil data:", error);
+                siswaSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data. Cek koneksi.</option>';
+            } finally {
+                loadingText.style.display = 'none';
+            }
+        });
+
+        // Logika Tombol Lanjutkan
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah reload halaman
+            
+            const kelas = document.getElementById('pilihKelas').value;
+            const siswa = document.getElementById('pilihSiswa').value;
+            const mapel = document.getElementById('pilihMapel').value;
+
+            // Simpan data login ke Session Storage agar bisa dibaca di halaman ujian
+            sessionStorage.setItem('cbt_kelas', kelas);
+            sessionStorage.setItem('cbt_siswa', siswa);
+            sessionStorage.setItem('cbt_mapel', mapel);
+
+            // Arahkan ke halaman ujian
+            // Ganti "ujian.html" dengan nama file halaman soal Anda
+            alert(`Berhasil Login!\n\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nSistem akan mengarahkan ke halaman ujian.`);
+            window.location.href = "ujian.html"; 
+        });
+    </script>
 </body>
 </html>
