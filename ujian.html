@@ -123,13 +123,12 @@
     <div id="lembar-soal"></div>
     <button onclick="selesaiUjian()">Kumpulkan Jawaban</button>
 
-    <script>
+   <script>
         // 1. Ambil data siswa yang sudah login
         let kelasSiswa = sessionStorage.getItem('cbt_kelas');
         let mapelUjian = sessionStorage.getItem('cbt_mapel');
         
-        // VARIABEL GLOBAL BARU: Menyimpan data soal agar bisa diakses saat penghitungan skor
-        let bankSoalData = null;
+        let bankSoalData = null; // Menyimpan data soal di memori
 
         // Proteksi jika diakses langsung tanpa login (agar tidak error)
         if (!kelasSiswa || !mapelUjian) {
@@ -156,13 +155,10 @@
                 return response.json();
             })
             .then(data => {
-                // SIMPAN DATA KE VARIABEL GLOBAL
-                bankSoalData = data;
+                bankSoalData = data; // Amankan data soal
 
-                // Memperbaiki ID: Menggunakan judulMapel sesuai elemen HTML
                 document.getElementById('judulMapel').innerText = "Ujian Sekolah Berstandar Nasional " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
                 
-                // Menampilkan nama & kelas di header
                 document.getElementById('infoNama').innerText = sessionStorage.getItem('cbt_siswa') || "Nama Siswa Contoh";
                 document.getElementById('infoKelas').innerText = kelasSiswa;
                 
@@ -170,7 +166,6 @@
                 data.bank_soal.forEach((soal, index) => {
                     htmlSoal += `<div class="soal-box">`;
                     
-                    // MEMISAHKAN BACAAN DAN SOAL BERDASARKAN \n\n
                     let bagianTeks = soal.teks_pertanyaan.split('\n\n');
                     let teksPertanyaanBersih = "";
 
@@ -215,7 +210,6 @@
                 console.error("Error:", error);
             });
 
-        // FUNGSI BARU: Pemeriksaan dan Penghitungan Skor
         function selesaiUjian() {
             if (!bankSoalData) {
                 alert("Data soal belum selesai dimuat, harap tunggu beberapa saat.");
@@ -226,36 +220,38 @@
             let jumlahBenar = 0;
             let jumlahSalah = 0;
 
-            // Lakukan perulangan dan pencocokan jawaban
-            bankSoalData.bank_soal.forEach((soal) => {
+            bankSoalData.bank_soal.forEach((soal, index) => {
                 let opsiDipilih = document.querySelector(`input[name="soal_${soal.id_soal}"]:checked`);
+                
+                // MENGAMBIL KUNCI DARI OBJEK 'kunci_jawaban_rahasia' DI ROOT JSON
+                let kunciJawaban = bankSoalData.kunci_jawaban_rahasia ? bankSoalData.kunci_jawaban_rahasia[soal.id_soal] : undefined;
 
                 if (opsiDipilih) {
                     let jawabanSiswa = opsiDipilih.value;
-                    // Mengambil kunci jawaban entah itu key 'kunci_jawaban' atau 'jawaban_benar' di JSON
-                    let kunci = soal.kunci_jawaban || soal.jawaban_benar;
 
-                    if (jawabanSiswa === kunci) {
+                    // Membandingkan jawaban menggunakan toUpperCase agar tidak sensitif case (A/a)
+                    if (String(jawabanSiswa).toUpperCase() === String(kunciJawaban).toUpperCase()) {
                         jumlahBenar++;
                     } else {
                         jumlahSalah++;
                     }
+
+                    console.log(`Soal ${index + 1}: Siswa menjawab ${jawabanSiswa} | Kunci: ${kunciJawaban}`);
                 } else {
-                    jumlahSalah++; // Apabila siswa belum menjawab atau melewati soal
+                    jumlahSalah++;
+                    console.log(`Soal ${index + 1}: Tidak dijawab | Kunci: ${kunciJawaban}`);
                 }
             });
 
-            // Hitung persentase skor
             let skorAkhir = (jumlahBenar / totalSoal) * 100;
 
-            // Tampilkan hasil ke layar
             alert("Ujian Berhasil Dikumpulkan!\n\n" +
                   "Jumlah Soal : " + totalSoal + "\n" +
                   "Jawaban Benar : " + jumlahBenar + "\n" +
                   "Jawaban Salah : " + jumlahSalah + "\n\n" +
-                  "Skor Akhir  : " + skorAkhir.toFixed(2) + " / 100");
+                  "Skor Akhir  : " + skorAkhir.toFixed(2) + " / 100\n\n" +
+                  "(Silakan periksa detail jawaban pada menu Inspect/Console - F12)");
 
-            // Kunci semua tombol agar soal tidak bisa diubah lagi setelah pengumpulan
             const semuaInput = document.querySelectorAll('input[type="radio"]');
             semuaInput.forEach(input => input.disabled = true);
         }
