@@ -8,233 +8,258 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS RESET & VARIABLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    /* CSS RESET & VARIABLES */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-            /* 1. WARNA BACKGROUND LEMBUT */
-            background-color: #E0FFFF; 
-            
-            /* 2. MOTIF ABSTRAK MINIMALIS */
-            background-image: 
-                linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-                linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-                linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-                linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-                linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03)),
-                linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03));
-            background-size: 80px 140px;
-            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding: 20px;
-        }
-
-        /* GLASSMORPHISM CONTAINER (Disesuaikan untuk Background Terang) */
-        .login-container {
-            background: rgba(255, 255, 255, 0.6); /* Lebih putih transparan */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 25px;
-            padding: 40px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); /* Bayangan lebih lembut */
-            text-align: center;
-            z-index: 1;
-        }
-
-        /* LOGO & TYPOGRAPHY */
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 20px;
-            /* Filter bayangan lembut untuk logo */
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
-        }
-
-        h1 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 35px;
-            line-height: 1.5;
-            /* 3. WARNA TEKS GELAP (Untuk kontras) */
-            color: #1e293b; 
-        }
-
-        /* FORM ELEMENTS */
-        .input-group {
-            margin-bottom: 22px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            font-size: 0.88rem;
-            margin-bottom: 8px;
-            /* Warna label abu-abu gelap */
-            color: #475569; 
-            font-weight: 500;
-        }
-
-        /* Styles seragam untuk Select, Input Password, dan Input Email */
-        select, input[type="password"], input[type="email"] {
-            width: 100%;
-            padding: 13px 18px;
-            /* Background input putih bersih */
-            background: #ffffff; 
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            /* Warna teks input gelap */
-            color: #1e293b; 
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        /* Khusus Dropdown (panah custom warna gelap) */
-        select {
-            appearance: none; 
-            /* Panah dropdown warna abu-abu gelap %23475569 */
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 18px center;
-            background-size: 16px;
-            cursor: pointer;
-        }
-
-        select option {
-            background: #ffffff;
-            color: #1e293b;
-        }
-
-        select:disabled {
-            background: #f1f5f9;
-            color: #94a3b8;
-            cursor: not-allowed;
-            border-color: #e2e8f0;
-        }
-
-        /* Placeholder untuk Password & Email */
-        input[type="password"]::placeholder, input[type="email"]::placeholder {
-            color: #94a3b8;
-        }
-
-        /* Efek Fokus (Border membiru lembut) */
-        select:focus, input[type="password"]:focus, input[type="email"]:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
-        }
-
-        /* BUTTON (Gradient tetap dipertahankan agar futuristik) */
-        .btn-submit {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #38bdf8, #8b5cf6);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
-        }
-
-        .btn-submit:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        /* FOOTER */
-        .footer-credit {
-            margin-top: 35px;
-            font-size: 0.78rem;
-            /* Warna teks footer abu-abu */
-            color: #64748b; 
-            line-height: 1.7;
-        }
+    body {
+        /* 1. WARNA BACKGROUND LEMBUT */
+        background-color: #E0FFFF; 
         
-        .footer-credit span {
-            font-weight: 600;
-            color: #0284c7; /* Biru laut sedikit lebih gelap agar terbaca */
-        }
+        /* 2. MOTIF ABSTRAK MINIMALIS */
+        background-image: 
+            linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+            linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+            linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+            linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
+            linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03)),
+            linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03));
+        background-size: 80px 140px;
+        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 
-        /* LOADER */
-        .loader {
-            display: none;
-            font-size: 0.8rem;
-            color: #0284c7;
-            margin-top: 6px;
-            font-weight: 500;
-        }
-    </style>
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 20px;
+    }
+
+    /* GLASSMORPHISM CONTAINER (Disesuaikan untuk Background Terang) */
+    .login-container {
+        background: rgba(255, 255, 255, 0.6); /* Lebih putih transparan */
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 25px;
+        padding: 40px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); /* Bayangan lebih lembut */
+        text-align: center;
+        z-index: 1;
+    }
+
+    /* LOGO & TYPOGRAPHY */
+    .logo {
+        width: 100px;
+        height: auto;
+        margin-bottom: 20px;
+        /* Filter bayangan lembut untuk logo */
+        filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
+    }
+
+    h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 35px;
+        line-height: 1.5;
+        /* 3. WARNA TEKS GELAP (Untuk kontras) */
+        color: #1e293b; 
+    }
+
+    /* FORM ELEMENTS */
+    .input-group {
+        margin-bottom: 22px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        font-size: 0.88rem;
+        margin-bottom: 8px;
+        /* Warna label abu-abu gelap */
+        color: #475569; 
+        font-weight: 500;
+    }
+
+    /* Styles seragam untuk Select, Input Password, dan Input Email */
+    select, input[type="password"], input[type="email"], input[type="text"] {
+        width: 100%;
+        padding: 13px 18px;
+        /* Background input putih bersih */
+        background: #ffffff; 
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        /* Warna teks input gelap */
+        color: #1e293b; 
+        font-size: 0.95rem;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    /* Khusus Dropdown (panah custom warna gelap) */
+    select {
+        appearance: none; 
+        /* Panah dropdown warna abu-abu gelap %23475569 */
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 18px center;
+        background-size: 16px;
+        cursor: pointer;
+    }
+
+    select option {
+        background: #ffffff;
+        color: #1e293b;
+    }
+
+    select:disabled {
+        background: #f1f5f9;
+        color: #94a3b8;
+        cursor: not-allowed;
+        border-color: #e2e8f0;
+    }
+
+    /* Placeholder untuk Password & Email */
+    input[type="password"]::placeholder, input[type="email"]::placeholder, input[type="text"]::placeholder {
+        color: #94a3b8;
+    }
+
+    /* Efek Fokus (Border membiru lembut) */
+    select:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="text"]:focus {
+        border-color: #38bdf8;
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+    }
+
+    /* BUTTON (Gradient tetap dipertahankan agar futuristik) */
+    .btn-submit {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-submit:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+    }
+
+    /* TAMBAHAN: TOMBOL PILIHAN (BUTTON OPSI) */
+    .btn-opsi {
+        padding: 10px 14px;
+        background-color: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-family: inherit;
+        color: #334155;
+        transition: all 0.2s ease;
+    }
+
+    .btn-opsi:hover {
+        background-color: #f1f5f9;
+        border-color: #94a3b8;
+    }
+
+    .btn-opsi.selected {
+        background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+        color: #ffffff;
+        border: none;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+    }
+
+    /* FOOTER */
+    .footer-credit {
+        margin-top: 35px;
+        font-size: 0.78rem;
+        /* Warna teks footer abu-abu */
+        color: #64748b; 
+        line-height: 1.7;
+    }
+    
+    .footer-credit span {
+        font-weight: 600;
+        color: #0284c7; /* Biru laut sedikit lebih gelap agar terbaca */
+    }
+
+    /* LOADER */
+    .loader {
+        display: none;
+        font-size: 0.8rem;
+        color: #0284c7;
+        margin-top: 6px;
+        font-weight: 500;
+    }
+</style>
 </head>
 <body>
 
     <div class="login-container">
-        <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
-        
-        <h1>Selamat Datang di Ruang Ujian<br>SMP IT Al-Kautsar Mukomuko</h1>
+    <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
+    
+    <h1>Selamat Datang di Ruang Ujian<br>SMP IT Al-Kautsar Mukomuko</h1>
 
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="pilihKelas">Pilih Kelas</label>
-                <select id="pilihKelas" required disabled>
-                    <option value="" disabled selected>-- Memuat Kelas dari Server... --</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="pilihSiswa">Nama Siswa</label>
-                <select id="pilihSiswa" required disabled>
-                    <option value="" disabled selected>-- Pilih Kelas Terlebih Dahulu --</option>
-                </select>
-                <div id="loadingSiswa" class="loader">Memuat data siswa dari server...</div>
-            </div>
-
-            <div class="input-group">
-                <label for="pilihMapel">Pilih Mata Pelajaran</label>
-                <select id="pilihMapel" required disabled>
-                    <option value="" disabled selected>-- Memuat Mapel dari Server... --</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label for="emailSiswa">Email Anda</label>
-                <input type="email" id="emailSiswa" placeholder="contoh: siswa@email.com" required>
-            </div>
-            <div class="input-group">
-                <label for="tokenUjian">Token / Password Ujian</label>
-                <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
-            </div>
-
-            <button type="submit" class="btn-submit" id="btnSubmit" disabled>Memuat Sistem...</button>
-        </form>
-
-        <div class="footer-credit">
-            &copy; 2026 <span>aktechmaster</span> <br>
-            Designed & Developed by aktechmaster
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="pilihKelas">Pilih Kelas</label>
+            <div id="kelasContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
+                </div>
+            <input type="hidden" id="pilihKelas" required>
         </div>
+
+        <div class="input-group">
+            <label for="pilihSiswa">Nama Siswa</label>
+            <input type="text" id="pilihSiswa" placeholder="Ketik nama lengkap siswa..." autocomplete="off" required>
+            <div id="loadingSiswa" class="loader" style="display: none;">Memuat data siswa dari server...</div>
+        </div>
+
+        <div class="input-group">
+            <label for="pilihMapel">Pilih Mata Pelajaran</label>
+            <div id="mapelContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
+                </div>
+            <input type="hidden" id="pilihMapel" required>
+        </div>
+
+        <div class="input-group">
+            <label for="emailSiswa">Email Anda</label>
+            <input type="email" id="emailSiswa" placeholder="contoh: siswa@email.com" required>
+        </div>
+        
+        <div class="input-group">
+            <label for="tokenUjian">Token / Password Ujian</label>
+            <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmit" disabled>Memuat Sistem...</button>
+    </form>
+
+    <div class="footer-credit">
+        &copy; 2026 <span>aktechmaster</span> <br>
+        Designed & Developed by aktechmaster
     </div>
+</div>
 
   <script>
         const kelasSelect = document.getElementById('pilihKelas');
