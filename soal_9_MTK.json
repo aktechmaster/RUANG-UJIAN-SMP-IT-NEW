@@ -106,15 +106,15 @@
       ]
     },
     {
-  "id_soal": 10,
-  "teks_pertanyaan": "Perhatikan Gambar susunan Korek Api yang membentuk pola berikut ini. Banyak Batang Korek Api pada Pola ke-32 adalah..<br><img src=\"image_aecf7a.png\" alt=\"Pola Korek Api\">",
-  "pilihan_jawaban": [
-    "a. 130",
-    "b. 131",
-    "c. 132",
-    "d. 133"
-  ]
-},
+    "questionNumber": 11,
+    "question": "Suku pertama dari barisan aritmatika adalah 16 dan bedanya 6. Suku ke-12 pada barisan tersebut adalah....",
+    "answerOptions": [
+      { "text": "82", "isCorrect": true },
+      { "text": "92", "isCorrect": false },
+      { "text": "94", "isCorrect": false },
+      { "text": "96", "isCorrect": false }
+    ]
+  },
     {
       "id_soal": 12,
       "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....",
