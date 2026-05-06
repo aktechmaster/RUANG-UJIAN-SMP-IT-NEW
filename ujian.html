@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Ujian CBT</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
     <style>
         * { box-sizing: border-box; }
         body { 
@@ -120,7 +121,7 @@
             gap: 10px;
         }
 
-        /* POPUP MODAL G-FORM */
+        /* POPUP MODAL */
         .modal {
             display: none; 
             position: fixed; 
@@ -226,19 +227,18 @@
     let kelasSiswa = sessionStorage.getItem('cbt_kelas');
     let mapelUjian = sessionStorage.getItem('cbt_mapel');
     let namaSiswa = sessionStorage.getItem('cbt_siswa') || "Siswa Contoh";
-    let emailSiswa = sessionStorage.getItem('cbt_email') || "Tidak ada email"; // Tambahan
+    let emailSiswa = sessionStorage.getItem('cbt_email') || "Tidak ada email";
 
-    // Tampilkan email ke layar
     document.getElementById('infoEmail').innerText = emailSiswa;
     
     let bankSoalData = null; 
 
+    // Jika dibuka langsung tanpa melalui login CBT, defaultkan ke MTK
     if (!kelasSiswa || !mapelUjian) {
         kelasSiswa = "9 Al-Quran";
-        mapelUjian = "ING";
+        mapelUjian = "MTK";
     }
 
-    // Simpan waktu awal saat siswa pertama kali membuka halaman
     if (!sessionStorage.getItem('exam_start_time')) {
         sessionStorage.setItem('exam_start_time', Date.now());
     }
@@ -249,7 +249,7 @@
     const urlAsli = urlBaseGitHub + namaFile;
     const urlJSON = urlAsli + "?t=" + new Date().getTime();
 
-    // Timer Logic (2 Jam = 7200 detik)
+    // Timer (2 Jam = 7200 detik)
     let totalWaktu = 7200; 
     if (!sessionStorage.getItem('exam_time_left')) {
         sessionStorage.setItem('exam_time_left', totalWaktu);
@@ -316,11 +316,14 @@
                     </div>`;
                 
                 htmlSoal += `<div class="opsi-container">`;
+                
+                // MENGGUNAKAN i UNTUK MEMASTIKAN VALUE SELALU KAPITAL (A, B, C, D)
                 soal.pilihan_jawaban.forEach((opsi, i) => {
+                    let nilaiOpsi = String.fromCharCode(65 + i); // 65=A, 66=B, 67=C, 68=D
                     htmlSoal += `
                         <div class="opsi">
                             <label>
-                                <input type="radio" name="soal_${soal.id_soal}" value="${opsi.charAt(0)}"> 
+                                <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
                                 <span>${opsi}</span>
                             </label>
                         </div>`;
@@ -330,7 +333,12 @@
 
             document.getElementById('lembar-soal').innerHTML = htmlSoal;
 
-            // Ambil jawaban dari sessionStorage agar otomatis terhapus saat sesi selesai/keluar
+            // Merender ulang MathJax jika soal telah dimuat ke DOM
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+
+            // Simpan jawaban siswa pada sesi
             document.querySelectorAll('input[type="radio"]').forEach(input => {
                 let savedValue = sessionStorage.getItem(input.name);
                 if (savedValue && input.value === savedValue) {
@@ -393,25 +401,22 @@
 
         let skorAkhir = ((jumlahBenar / totalSoal) * 100).toFixed(2);
 
-        // Tampilkan popup tanpa menampilkan skor pada siswa
         document.getElementById('popupModal').style.display = 'flex';
 
-        // Panggil fungsi kumpulkanJawaban dan kirim rekap ke Spreadsheet
         let rekapJawaban = kumpulkanJawaban();
         simpanKeSpreadsheet(namaSiswa, kelasSiswa, mapelUjian, skorAkhir, jumlahBenar, jumlahSalah, rekapJawaban);
     }
 
     function kumpulkanJawaban() {
         let jawaban = [];
-        // Pastikan selector disesuaikan dengan elemen container setiap nomor soal (class="soal-box")
         const daftarSoal = document.querySelectorAll('.soal-box'); 
         
         daftarSoal.forEach((soal) => {
             const inputDipilih = soal.querySelector('input[type="radio"]:checked');
             if (inputDipilih) {
-                jawaban.push(inputDipilih.value); // Menyimpan nilai jawaban (A, B, C, D)
+                jawaban.push(inputDipilih.value); 
             } else {
-                jawaban.push("-"); // Jika tidak diisi, isi dengan strip "-"
+                jawaban.push("-"); 
             }
         });
         
@@ -426,7 +431,6 @@
         let durasiMenit = Math.round(durasiMs / 60000);
         let durasiFinal = durasiMenit <= 0 ? 1 : durasiMenit;
 
-        // Membangun data yang akan dikirim ke server
         let dataSiswa = {
             nama: nama,
             kelas: kelas,
@@ -436,7 +440,7 @@
             salah: salah,
             waktu: durasiFinal + " Menit",
             email: email,
-            jawaban: arrayJawaban // <-- Menyisipkan array jawaban (fleksibel sesuai jumlah soal)
+            jawaban: arrayJawaban
         };
 
         fetch(GOOGLE_SCRIPT_URL, {
@@ -452,19 +456,11 @@
     }
 
     function tutupModal() {
-        // Menyembunyikan modal kembali
         document.getElementById('popupModal').style.display = 'none';
-        
-        // Opsional: Arahkan ke halaman utama/login setelah ujian selesai
-        // window.location.href = 'index.html'; 
     }
 
     function keluarKeLogin() {
-        // 1. Hapus data ujian dari session storage agar bersih untuk sesi berikutnya
         sessionStorage.clear();
-        
-        // 2. Arahkan kembali ke halaman utama (login/scan barcode)
-        // Sesuaikan nama file utama Anda jika bukan 'index.html'
         window.location.href = 'index.html';
     }
     </script>
