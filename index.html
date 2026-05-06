@@ -262,12 +262,16 @@
 </div>
 
   <script>
-        const kelasSelect = document.getElementById('pilihKelas');
-        const siswaSelect = document.getElementById('pilihSiswa');
-        const mapelSelect = document.getElementById('pilihMapel');
+        // Mendapatkan elemen input atau container yang dibutuhkan
+        const kelasSelect = document.getElementById('pilihKelas'); // Input hidden kelas
+        const siswaSelect = document.getElementById('pilihSiswa'); // Input teks siswa
+        const mapelSelect = document.getElementById('pilihMapel'); // Input hidden mapel
         const loadingText = document.getElementById('loadingSiswa');
         const form = document.getElementById('loginForm');
         const submitBtn = document.getElementById('btnSubmit');
+
+        const kelasContainer = document.getElementById('kelasContainer');
+        const mapelContainer = document.getElementById('mapelContainer');
 
         // =========================================================
         // LINK URL WEB APP GOOGLE SCRIPT ANDA
@@ -283,28 +287,49 @@
                 const response = await fetch(`${SPREADSHEET_API_URL}?action=getInitialData`);
                 const data = await response.json();
 
-                // Memasukkan data Kelas ke dropdown
-                kelasSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Kelas --</option>';
+                // Memasukkan data Kelas ke dalam container sebagai tombol
+                kelasContainer.innerHTML = '';
                 if (data.kelas && data.kelas.length > 0) {
                     data.kelas.forEach(kelas => {
-                        const option = document.createElement('option');
-                        option.value = kelas;
-                        option.textContent = kelas;
-                        kelasSelect.appendChild(option);
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'btn-opsi';
+                        btn.textContent = kelas;
+                        
+                        // Event tombol kelas ketika diklik
+                        btn.onclick = function() {
+                            document.querySelectorAll('#kelasContainer .btn-opsi').forEach(b => b.classList.remove('selected'));
+                            this.classList.add('selected');
+                            
+                            kelasSelect.value = kelas;
+                            sessionStorage.setItem('cbt_kelas', kelas);
+                            
+                            // Muat siswa secara otomatis setelah kelas dipilih
+                            muatDaftarSiswa(kelas);
+                        };
+                        kelasContainer.appendChild(btn);
                     });
-                    kelasSelect.disabled = false;
                 }
 
-                // Memasukkan data Mapel ke dropdown
-                mapelSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Mapel --</option>';
+                // Memasukkan data Mapel ke dalam container sebagai tombol
+                mapelContainer.innerHTML = '';
                 if (data.mapel && data.mapel.length > 0) {
                     data.mapel.forEach(mapel => {
-                        const option = document.createElement('option');
-                        option.value = mapel;
-                        option.textContent = mapel;
-                        mapelSelect.appendChild(option);
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'btn-opsi';
+                        btn.textContent = mapel;
+
+                        // Event tombol mapel ketika diklik
+                        btn.onclick = function() {
+                            document.querySelectorAll('#mapelContainer .btn-opsi').forEach(b => b.classList.remove('selected'));
+                            this.classList.add('selected');
+                            
+                            mapelSelect.value = mapel;
+                            sessionStorage.setItem('cbt_mapel', mapel);
+                        };
+                        mapelContainer.appendChild(btn);
                     });
-                    mapelSelect.disabled = false;
                 }
 
                 // Mengaktifkan kembali tombol Lanjutkan
@@ -313,20 +338,19 @@
 
             } catch (error) {
                 console.error("Gagal mengambil data awal:", error);
-                kelasSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data kelas</option>';
-                mapelSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data mapel</option>';
+                kelasContainer.innerHTML = '<span style="color:red; font-size:0.85rem;">Gagal memuat data kelas</span>';
+                mapelContainer.innerHTML = '<span style="color:red; font-size:0.85rem;">Gagal memuat data mapel</span>';
                 submitBtn.textContent = "Error Jaringan";
             }
         });
 
         // ========================================================
-        // 2. KETIKA KELAS DIPILIH (AMBIL NAMA SISWA)
+        // 2. FUNGSI KETIKA KELAS DIPILIH (AMBIL NAMA SISWA)
         // ========================================================
-        kelasSelect.addEventListener('change', async function() {
-            const selectedKelas = this.value;
-            
-            // Tampilkan animasi loading
-            siswaSelect.innerHTML = '<option value="" disabled selected>-- Memuat data siswa dari server... --</option>';
+        async function muatDaftarSiswa(selectedKelas) {
+            // Tampilkan animasi loading pada input teks siswa
+            siswaSelect.value = '';
+            siswaSelect.placeholder = "Memuat data siswa dari server...";
             siswaSelect.disabled = true;
             loadingText.style.display = 'block';
 
@@ -336,27 +360,34 @@
                 const data = await response.json();
                 const daftarSiswa = data.siswa;
 
-                // Memasukkan data siswa ke dropdown
-                siswaSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Nama Anda --</option>';
-                
+                // Memasukkan data siswa ke datalist agar mudah diketik atau dipilih oleh siswa
                 if (daftarSiswa && daftarSiswa.length > 0) {
+                    let datalist = document.getElementById('listSiswa');
+                    if (!datalist) {
+                        datalist = document.createElement('datalist');
+                        datalist.id = 'listSiswa';
+                        document.body.appendChild(datalist);
+                        siswaSelect.setAttribute('list', 'listSiswa');
+                    }
+                    datalist.innerHTML = '';
                     daftarSiswa.forEach(siswa => {
                         const option = document.createElement('option');
                         option.value = siswa;
-                        option.textContent = siswa;
-                        siswaSelect.appendChild(option);
+                        datalist.appendChild(option);
                     });
+
+                    siswaSelect.placeholder = "Ketik nama lengkap siswa...";
                     siswaSelect.disabled = false;
                 } else {
-                    siswaSelect.innerHTML = '<option value="" disabled selected>Data siswa kosong / tidak ditemukan</option>';
+                    siswaSelect.placeholder = "Data siswa kosong / tidak ditemukan";
                 }
             } catch (error) {
                 console.error("Gagal mengambil data:", error);
-                siswaSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data. Cek koneksi internet.</option>';
+                siswaSelect.placeholder = "Gagal memuat data. Cek koneksi internet.";
             } finally {
                 loadingText.style.display = 'none';
             }
-        });
+        }
 
         // ========================================================
         // 3. LOGIKA TOMBOL SUBMIT & PENGECEKAN PASSWORD
@@ -364,10 +395,16 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault(); // Mencegah reload halaman
             
-            const kelas = document.getElementById('pilihKelas').value;
-            const siswa = document.getElementById('pilihSiswa').value;
-            const mapel = document.getElementById('pilihMapel').value;
+            const kelas = kelasSelect.value;
+            const siswa = siswaSelect.value;
+            const mapel = mapelSelect.value;
             const enteredToken = document.getElementById('tokenUjian').value.trim(); 
+
+            // Validasi apakah tombol kelas & mapel telah diklik
+            if (!kelas || !mapel) {
+                alert("Harap pilih Kelas dan Mata Pelajaran terlebih dahulu sebelum melanjutkan.");
+                return;
+            }
 
             // Ubah teks tombol saat memvalidasi ke server
             submitBtn.textContent = "Memeriksa Token...";
@@ -395,7 +432,6 @@
                 }
 
                 // JIKA TOKEN BENAR, SIMPAN DATA DAN MASUK KE UJIAN
-                // Mengambil nilai input email siswa
                 const emailInput = document.getElementById('emailSiswa').value;
                 
                 sessionStorage.setItem('cbt_kelas', kelas);
