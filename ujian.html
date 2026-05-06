@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Ujian CBT</title>
+    <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
     <style>
         * { box-sizing: border-box; }
@@ -334,9 +342,11 @@
             document.getElementById('lembar-soal').innerHTML = htmlSoal;
 
             // Merender ulang MathJax jika soal telah dimuat ke DOM
-            if (typeof MathJax !== 'undefined') {
-                MathJax.typesetPromise();
-            }
+            setTimeout(() => {
+                if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                    MathJax.typesetPromise();
+                }
+            }, 1000);
 
             // Simpan jawaban siswa pada sesi
             document.querySelectorAll('input[type="radio"]').forEach(input => {
