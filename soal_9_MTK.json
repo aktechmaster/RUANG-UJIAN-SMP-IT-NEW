@@ -56,15 +56,15 @@
       ]
     },
     {
-  "id_soal": 6,
-  "teks_pertanyaan": "Hasil dari $2\\frac{1}{4}\\times\\frac{2}{5}:1\\frac{5}{10}$ adalah.....",
-  "pilihan_jawaban": [
-    "A. $\\frac{1}{10}$",
-    "B. $\\frac{1}{5}$",
-    "C. $\\frac{3}{10}$",
-    "D. $\\frac{3}{5}$"
-  ]
-},
+      "id_soal": 6,
+      "teks_pertanyaan": "Hasil dari $2\\frac{1}{4}\\times\\frac{2}{5}:1\\frac{5}{10}$ adalah.....",
+      "pilihan_jawaban": [
+        "A. $\\frac{1}{10}$",
+        "B. $\\frac{1}{5}$",
+        "C. $\\frac{3}{10}$",
+        "D. $\\frac{3}{5}$"
+      ]
+    },
     {
       "id_soal": 7,
       "teks_pertanyaan": "Bentuk sederhana dari $3x^{2}+4xy+3y^{2}-5y^{2}+3xy-2x^{2}$ adalah....",
@@ -89,7 +89,7 @@
       "id_soal": 9,
       "teks_pertanyaan": "Diketahui : A = {Bilangan asli lebih dari 5 Kurang dari15}, B = {2, 3, 5, 7, 11, 13}. Maka anggota dari $B^{C}$ adalah....",
       "pilihan_jawaban": [
-        "A. {6, 8, 10, 12, 14, }",
+        "A. {6, 8, 10, 12, 14}",
         "B. {5, 7, 9, 11, 13, 15}",
         "C. {6, 8, 9, 10, 12, 14, 15}",
         "D. {2, 3, 5, 7, 9, 11, 13, 15}"
@@ -99,25 +99,25 @@
       "id_soal": 10,
       "teks_pertanyaan": "Perhatikan Gambar susunan Korek Api yang membentuk pola berikut ini.<br><br><img src='images_MTK/10.png' alt='Pola Korek Api' style='max-width: 80%; height: auto;'><br><br> Banyak Batang Korek Api pada Pola ke-32 adalah..",
       "pilihan_jawaban": [
-        "a. 130",
-        "b. 131",
-        "c. 132",
-        "d. 133"
+        "A. 130",
+        "B. 131",
+        "C. 132",
+        "D. 133"
       ]
     },
     {
-    "questionNumber": 11,
-    "question": "Suku pertama dari barisan aritmatika adalah 16 dan bedanya 6. Suku ke-12 pada barisan tersebut adalah....",
-    "answerOptions": [
-      { "text": "82", "isCorrect": true },
-      { "text": "92", "isCorrect": false },
-      { "text": "94", "isCorrect": false },
-      { "text": "96", "isCorrect": false }
-    ]
-  },
-   {
+      "id_soal": 11,
+      "teks_pertanyaan": "Suku pertama dari barisan aritmatika adalah 16 dan bedanya 6. Suku ke-12 pada barisan tersebut adalah....",
+      "pilihan_jawaban": [
+        "A. 82",
+        "B. 92",
+        "C. 94",
+        "D. 96"
+      ]
+    },
+    {
       "id_soal": 12,
-      "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....",
+      "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....<br><img src='12.png' alt='Gambar 12.png'>",
       "pilihan_jawaban": [
         "A. {a, b, c, d }",
         "B. {1, 2, 3}",
@@ -129,10 +129,10 @@
       "id_soal": 13,
       "teks_pertanyaan": "Diketahui $f(x)=-3x+8$ dan $f(m)=29$ nilai m adalah..",
       "pilihan_jawaban": [
-        "a. 7",
-        "b. -7",
-        "c. 11",
-        "d. -11"
+        "A. 7",
+        "B. -7",
+        "C. 11",
+        "D. -11"
       ]
     },
     {
@@ -219,20 +219,20 @@
       "id_soal": 22,
       "teks_pertanyaan": "Sebuah ban mobil berbentuk lingkaran dengan diameter 35 cm. Keliling dari ban mobil tersebut adalah....",
       "pilihan_jawaban": [
-        "a. 107",
-        "b. 108",
-        "c. 109",
-        "d. 110"
+        "A. 107",
+        "B. 108",
+        "C. 109",
+        "D. 110"
       ]
     },
     {
       "id_soal": 23,
       "teks_pertanyaan": "Sebuah keliling lingkaran memiliki keliling 176 dengan $\\pi=22/7$ maka luas lingkaran adalah....cm²",
       "pilihan_jawaban": [
-        "a. 2.446",
-        "b. 2.466",
-        "c. 2.464",
-        "d. 2.644"
+        "A. 2.446",
+        "B. 2.466",
+        "C. 2.464",
+        "D. 2.644"
       ]
     },
     {
@@ -299,20 +299,20 @@
       "id_soal": 30,
       "teks_pertanyaan": "Hasil pembagian $5^{-6}:5^{-4}$ adalah....",
       "pilihan_jawaban": [
-        "a. $-\\frac{1}{25}$",
-        "b. $-\\frac{1}{10}$",
-        "c. $\\frac{1}{25}$",
-        "d. $\\frac{1}{10}$"
+        "A. $-\\frac{1}{25}$",
+        "B. $-\\frac{1}{10}$",
+        "C. $\\frac{1}{25}$",
+        "D. $\\frac{1}{10}$"
       ]
     },
     {
       "id_soal": 31,
       "teks_pertanyaan": "Hasil pemangkatan dari $(-2a^{2})^{-5}$ adalah",
       "pilihan_jawaban": [
-        "a. $-\\frac{1}{32a^{3}}$",
-        "b. $-\\frac{1}{32a^{10}}$",
-        "c. $\\frac{1}{32a^{3}}$",
-        "d. $\\frac{1}{32a^{10}}$"
+        "A. $-\\frac{1}{32a^{3}}$",
+        "B. $-\\frac{1}{32a^{10}}$",
+        "C. $\\frac{1}{32a^{3}}$",
+        "D. $\\frac{1}{32a^{10}}$"
       ]
     },
     {
@@ -366,15 +366,15 @@
       ]
     },
     {
-  "id_soal": 37,
-  "teks_pertanyaan": "Titik bayangan dari titik K (4,1) yang dicerminkan terhadap garis y = x adalah",
-  "pilihan_jawaban": [
-    "A. K'(1,4)",
-    "B. $K^{\\prime}(1,-4)$",
-    "C. $K^{\\prime}(-1,4)$",
-    "D. K'(-1,4)"
-  ]
-},
+      "id_soal": 37,
+      "teks_pertanyaan": "Titik bayangan dari titik K (4,1) yang dicerminkan terhadap garis y = x adalah",
+      "pilihan_jawaban": [
+        "A. K'(1,4)",
+        "B. $K^{\\prime}(1,-4)$",
+        "C. $K^{\\prime}(-1,4)$",
+        "D. K'(-1,4)"
+      ]
+    },
     {
       "id_soal": 38,
       "teks_pertanyaan": "Titik (6, 10) dirotasikan terhadap titik pusat (0,0) sebesar $90^{\\circ}$. Bayangan titik tersebut adalah ...",
@@ -399,10 +399,10 @@
       "id_soal": 40,
       "teks_pertanyaan": "Bayangan titik P oleh dilatasi [0, 2] adalah",
       "pilihan_jawaban": [
-        "a. (8, -12)",
-        "b. (-8, 12)",
-        "c. (2, -3)",
-        "d. (-2, 3)"
+        "A. (8, -12)",
+        "B. (-8, 12)",
+        "C. (2, -3)",
+        "D. (-2, 3)"
       ]
     }
   ],
