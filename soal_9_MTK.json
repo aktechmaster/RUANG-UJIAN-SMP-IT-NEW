@@ -117,7 +117,7 @@
     },
     {
       "id_soal": 12,
-      "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....<br><img src='12.png' alt='Gambar 12.png'>",
+      "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....<br><img src='images_MTK/12.png' alt='Gambar 12.png'>",
       "pilihan_jawaban": [
         "A. {a, b, c, d }",
         "B. {1, 2, 3}",
