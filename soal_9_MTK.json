@@ -115,16 +115,16 @@
       { "text": "96", "isCorrect": false }
     ]
   },
-    {
-  "id_soal": 12,
-  "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....<br><img src=\"12.png\">",
-  "pilihan_jawaban": [
-    "A. {a, b, c, d }",
-    "B. {1, 2, 3}",
-    "C. {b, c}",
-    "D. {1, 2}"
-  ]
-},
+   {
+      "id_soal": 12,
+      "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....",
+      "pilihan_jawaban": [
+        "A. {a, b, c, d }",
+        "B. {1, 2, 3}",
+        "C. {b, c}",
+        "D. {1, 2}"
+      ]
+    },
     {
       "id_soal": 13,
       "teks_pertanyaan": "Diketahui $f(x)=-3x+8$ dan $f(m)=29$ nilai m adalah..",
