@@ -117,7 +117,7 @@
   },
     {
   "id_soal": 12,
-  "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....\n\n![Gambar 12.png](12.png)",
+  "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....<br><img src=\"12.png\">",
   "pilihan_jawaban": [
     "A. {a, b, c, d }",
     "B. {1, 2, 3}",
@@ -125,6 +125,8 @@
     "D. {1, 2}"
   ]
 },
+
+saya mau menyelipkan gambar 12.png pada soal nomor 12. setelah soal sebelum pilihan jawaban. bagaimana kode nya
     {
       "id_soal": 13,
       "teks_pertanyaan": "Diketahui $f(x)=-3x+8$ dan $f(m)=29$ nilai m adalah..",
