@@ -240,10 +240,10 @@
             </div>
 
             <div class="input-group">
-                <label for="pilihSiswa">Nama Siswa</label>
-                <input type="text" id="pilihSiswa" placeholder="KETIK NAMA LENGKAP SISWA..." autocomplete="off" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" required>
-                <div id="loadingSiswa" class="loader" style="display: none;">Memuat data siswa dari server...</div>
-            </div>
+    <label for="pilihSiswa">Nama Siswa</label>
+    <input type="text" id="pilihSiswa" placeholder="Ketik nama lengkap siswa..." autocomplete="off" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
+    <div id="loadingSiswa" class="loader" style="display: none;">Memuat data siswa dari server...</div>
+</div>
 
             <div class="input-group">
                 <label for="pilihMapel">Pilih Mata Pelajaran</label>
