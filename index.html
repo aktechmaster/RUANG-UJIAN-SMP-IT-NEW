@@ -17,95 +17,91 @@
     }
 
     body {
-        /* 1. WARNA BACKGROUND LEMBUT */
-        background-color: #E0FFFF; 
-        
-        /* 2. MOTIF ABSTRAK MINIMALIS */
-        background-image: 
-            linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03)),
-            linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03));
-        background-size: 80px 140px;
-        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-
+        /* Background modern dengan gradasi pastel yang lembut */
+        background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 50%, #ede9fe 100%);
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
-        padding: 20px;
+        padding: 24px;
     }
 
     /* GLASSMORPHISM CONTAINER (Disesuaikan untuk Background Terang) */
     .login-container {
-        background: rgba(255, 255, 255, 0.6); /* Lebih putih transparan */
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 25px;
-        padding: 40px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 28px;
+        padding: 42px 36px;
         width: 100%;
-        max-width: 450px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); /* Bayangan lebih lembut */
+        max-width: 480px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
         text-align: center;
         z-index: 1;
+        transition: all 0.3s ease;
+    }
+
+    .login-container:hover {
+        box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.1);
+        border-color: rgba(56, 189, 248, 0.3);
     }
 
     /* LOGO & TYPOGRAPHY */
     .logo {
-        width: 100px;
+        width: 90px;
         height: auto;
-        margin-bottom: 20px;
-        /* Filter bayangan lembut untuk logo */
-        filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
+        margin-bottom: 16px;
+        filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.08));
+        transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
     }
 
     h1 {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 600;
-        margin-bottom: 35px;
+        margin-bottom: 32px;
         line-height: 1.5;
-        /* 3. WARNA TEKS GELAP (Untuk kontras) */
-        color: #1e293b; 
+        color: #0f172a; 
+        letter-spacing: -0.01em;
     }
 
     /* FORM ELEMENTS */
     .input-group {
-        margin-bottom: 22px;
+        margin-bottom: 20px;
         text-align: left;
     }
 
     label {
         display: block;
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         margin-bottom: 8px;
-        /* Warna label abu-abu gelap */
         color: #475569; 
-        font-weight: 500;
+        font-weight: 600;
+        letter-spacing: 0.01em;
     }
 
     /* Styles seragam untuk Select, Input Password, dan Input Email */
     select, input[type="password"], input[type="email"], input[type="text"] {
         width: 100%;
         padding: 13px 18px;
-        /* Background input putih bersih */
         background: #ffffff; 
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        /* Warna teks input gelap */
+        border: 1.5px solid #cbd5e1;
+        border-radius: 14px;
         color: #1e293b; 
         font-size: 0.95rem;
         outline: none;
-        transition: all 0.3s ease;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
     }
 
     /* Khusus Dropdown (panah custom warna gelap) */
     select {
         appearance: none; 
-        /* Panah dropdown warna abu-abu gelap %23475569 */
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
         background-repeat: no-repeat;
         background-position: right 18px center;
@@ -119,42 +115,49 @@
     }
 
     select:disabled {
-        background: #f1f5f9;
+        background: #f8fafc;
         color: #94a3b8;
         cursor: not-allowed;
         border-color: #e2e8f0;
     }
 
-    /* Placeholder untuk Password & Email */
+    /* Placeholder untuk Input */
     input[type="password"]::placeholder, input[type="email"]::placeholder, input[type="text"]::placeholder {
         color: #94a3b8;
+        font-weight: 300;
     }
 
-    /* Efek Fokus (Border membiru lembut) */
+    /* Efek Fokus */
     select:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="text"]:focus {
         border-color: #38bdf8;
-        box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+        box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+        background: #ffffff;
     }
 
-    /* BUTTON (Gradient tetap dipertahankan agar futuristik) */
+    /* BUTTON */
     .btn-submit {
         width: 100%;
         padding: 15px;
         background: linear-gradient(135deg, #38bdf8, #8b5cf6);
         border: none;
-        border-radius: 12px;
+        border-radius: 14px;
         color: white;
-        font-size: 1rem;
+        font-size: 1.05rem;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 10px;
-        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-top: 12px;
+        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
     }
 
     .btn-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 24px rgba(56, 189, 248, 0.4);
+        filter: brightness(1.05);
+    }
+
+    .btn-submit:active {
+        transform: translateY(1px);
     }
 
     .btn-submit:disabled {
@@ -162,24 +165,28 @@
         cursor: not-allowed;
         box-shadow: none;
         transform: none;
+        filter: none;
+        opacity: 0.7;
     }
 
     /* TAMBAHAN: TOMBOL PILIHAN (BUTTON OPSI) */
     .btn-opsi {
         padding: 10px 14px;
         background-color: #f8fafc;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 10px;
         cursor: pointer;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-family: inherit;
+        font-weight: 500;
         color: #334155;
-        transition: all 0.2s ease;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .btn-opsi:hover {
         background-color: #f1f5f9;
         border-color: #94a3b8;
+        color: #0f172a;
     }
 
     .btn-opsi.selected {
@@ -187,80 +194,78 @@
         color: #ffffff;
         border: none;
         font-weight: 600;
-        box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
+        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
     }
 
     /* FOOTER */
     .footer-credit {
-        margin-top: 35px;
+        margin-top: 32px;
         font-size: 0.78rem;
-        /* Warna teks footer abu-abu */
         color: #64748b; 
-        line-height: 1.7;
+        line-height: 1.6;
     }
     
     .footer-credit span {
         font-weight: 600;
-        color: #0284c7; /* Biru laut sedikit lebih gelap agar terbaca */
+        color: #0284c7; 
     }
 
     /* LOADER */
     .loader {
         display: none;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         color: #0284c7;
-        margin-top: 6px;
+        margin-top: 8px;
         font-weight: 500;
     }
-</style>
+    </style>
 </head>
 <body>
 
     <div class="login-container">
-    <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
-    
-    <h1>Selamat Datang di Ruang Ujian<br>SMP IT Al-Kautsar Mukomuko</h1>
-
-    <form id="loginForm">
-        <div class="input-group">
-            <label for="pilihKelas">Pilih Kelas</label>
-            <div id="kelasContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
-                </div>
-            <input type="hidden" id="pilihKelas" required>
-        </div>
-
-        <div class="input-group">
-    <label for="pilihSiswa">Nama Siswa</label>
-    <input type="text" id="pilihSiswa" placeholder="KETIK NAMA LENGKAP SISWA..." autocomplete="off" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" required>
-    <div id="loadingSiswa" class="loader" style="display: none;">Memuat data siswa dari server...</div>
-</div>
-        <div class="input-group">
-            <label for="pilihMapel">Pilih Mata Pelajaran</label>
-            <div id="mapelContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
-                </div>
-            <input type="hidden" id="pilihMapel" required>
-        </div>
-
-        <div class="input-group">
-            <label for="emailSiswa">Email Anda</label>
-            <input type="email" id="emailSiswa" placeholder="contoh: siswa@email.com" required>
-        </div>
+        <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
         
-        <div class="input-group">
-            <label for="tokenUjian">Token / Password Ujian</label>
-            <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
+        <h1>Selamat Datang di Ruang Ujian<br>SMP IT Al-Kautsar Mukomuko</h1>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="pilihKelas">Pilih Kelas</label>
+                <div id="kelasContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;"></div>
+                <input type="hidden" id="pilihKelas" required>
+            </div>
+
+            <div class="input-group">
+                <label for="pilihSiswa">Nama Siswa</label>
+                <input type="text" id="pilihSiswa" placeholder="KETIK NAMA LENGKAP SISWA..." autocomplete="off" oninput="this.value = this.value.toUpperCase().replace(/[^A-Z\s]/g, '')" required>
+                <div id="loadingSiswa" class="loader" style="display: none;">Memuat data siswa dari server...</div>
+            </div>
+
+            <div class="input-group">
+                <label for="pilihMapel">Pilih Mata Pelajaran</label>
+                <div id="mapelContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;"></div>
+                <input type="hidden" id="pilihMapel" required>
+            </div>
+
+            <div class="input-group">
+                <label for="emailSiswa">Email Anda</label>
+                <input type="email" id="emailSiswa" placeholder="contoh: siswa@email.com" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="tokenUjian">Token / Password Ujian</label>
+                <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnSubmit" disabled>Memuat Sistem...</button>
+        </form>
+
+        <div class="footer-credit">
+            &copy; 2026 <span>aktechmaster</span> <br>
+            Designed & Developed by aktechmaster
         </div>
-
-        <button type="submit" class="btn-submit" id="btnSubmit" disabled>Memuat Sistem...</button>
-    </form>
-
-    <div class="footer-credit">
-        &copy; 2026 <span>aktechmaster</span> <br>
-        Designed & Developed by aktechmaster
     </div>
-</div>
 
-  <script>
+    <script>
         // Mendapatkan elemen input atau container yang dibutuhkan
         const kelasSelect = document.getElementById('pilihKelas'); // Input hidden kelas
         const siswaSelect = document.getElementById('pilihSiswa'); // Input teks siswa
