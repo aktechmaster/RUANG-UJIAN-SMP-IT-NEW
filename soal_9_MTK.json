@@ -56,15 +56,15 @@
       ]
     },
     {
-      "id_soal": 6,
-      "teks_pertanyaan": "Hasil dari $2\\frac{1}{4}\\times\\frac{2}{5}:1\\frac{5}{10}$ adalah.....",
-      "pilihan_jawaban": [
-        "A.",
-        "B.",
-        "C. $\\frac{3}{10}$",
-        "D. $\\frac{3}{5}$"
-      ]
-    },
+  "id_soal": 6,
+  "teks_pertanyaan": "Hasil dari $2\\frac{1}{4}\\times\\frac{2}{5}:1\\frac{5}{10}$ adalah.....",
+  "pilihan_jawaban": [
+    "A. $\\frac{1}{10}$",
+    "B. $\\frac{1}{5}$",
+    "C. $\\frac{3}{10}$",
+    "D. $\\frac{3}{5}$"
+  ]
+},
     {
       "id_soal": 7,
       "teks_pertanyaan": "Bentuk sederhana dari $3x^{2}+4xy+3y^{2}-5y^{2}+3xy-2x^{2}$ adalah....",
@@ -106,15 +106,15 @@
       ]
     },
     {
-      "id_soal": 11,
-      "teks_pertanyaan": "Suku pertama dari barisan aritmatika adalah 16 dan bedanya 6. Suku ke-12 pada barisan tersebut adalah....",
-      "pilihan_jawaban": [
-        "a. 82",
-        "b. 92",
-        "c. 94",
-        "d. 96"
-      ]
-    },
+  "id_soal": 10,
+  "teks_pertanyaan": "Perhatikan Gambar susunan Korek Api yang membentuk pola berikut ini. Banyak Batang Korek Api pada Pola ke-32 adalah..<br><img src=\"image_aecf7a.png\" alt=\"Pola Korek Api\">",
+  "pilihan_jawaban": [
+    "a. 130",
+    "b. 131",
+    "c. 132",
+    "d. 133"
+  ]
+},
     {
       "id_soal": 12,
       "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....",
@@ -366,15 +366,15 @@
       ]
     },
     {
-      "id_soal": 37,
-      "teks_pertanyaan": "Titik bayangan dari titik K (4,1) yang dicerminkan terhadap garis y = x adalah",
-      "pilihan_jawaban": [
-        "A. K'(1,4)",
-        "B. $K^{\prime}(1,-4)$",
-        "C. $K^{\prime}(1,-4)$",
-        "D. K'(-1,4)"
-      ]
-    },
+  "id_soal": 37,
+  "teks_pertanyaan": "Titik bayangan dari titik K (4,1) yang dicerminkan terhadap garis y = x adalah",
+  "pilihan_jawaban": [
+    "A. K'(1,4)",
+    "B. $K^{\\prime}(1,-4)$",
+    "C. $K^{\\prime}(-1,4)$",
+    "D. K'(-1,4)"
+  ]
+},
     {
       "id_soal": 38,
       "teks_pertanyaan": "Titik (6, 10) dirotasikan terhadap titik pusat (0,0) sebesar $90^{\\circ}$. Bayangan titik tersebut adalah ...",
