@@ -166,8 +166,8 @@
       ]
     },
     {
-      "id_soal": 17,
-      "teks_pertanyaan": "Panjang PQ pada gambar bangun di bawah adalah"<br><img src='images_MTK/17.png' alt='Gambar 17.png'>",
+  "id_soal": 17,
+  "teks_pertanyaan": "Panjang PQ pada gambar bangun di bawah adalah<br><img src='images_MTK/17.png' alt='Gambar 17.png'>",
       "pilihan_jawaban": [
         "A. 9 cm",
         "B. 11 cm",
@@ -246,8 +246,8 @@
       ]
     },
     {
-      "id_soal": 25,
-      "teks_pertanyaan": "Dari tabel tersebut diatas, hasil panen terbesar terjadi pada tahun....<br><img src='images_MTK/25.png' alt='Gambar 25.png'>"",
+  "id_soal": 25,
+  "teks_pertanyaan": "Dari tabel tersebut diatas, hasil panen terbesar terjadi pada tahun....<br><img src='images_MTK/25.png' alt='Gambar 25.png'>",
       "pilihan_jawaban": [
         "A. 2018",
         "B. 2017",
