@@ -7,7 +7,7 @@
   "bank_soal": [
     {
       "id_soal": 1,
-      "teks_pertanyaan": "Suhu udara didalam kulkas $-8^{\circ}C$, sedangkan suhu udara di luar kulkas $33^{\circ}C.$ Selisih suhu udara didalam dan diluar kulkas adalah.....",
+      "teks_pertanyaan": "Suhu udara didalam kulkas $-8^{\\circ}C$, sedangkan suhu udara di luar kulkas $33^{\\circ}C.$ Selisih suhu udara didalam dan diluar kulkas adalah.....",
       "pilihan_jawaban": [
         "A. -41 derajat",
         "B. -33 derajat",
@@ -17,7 +17,7 @@
     },
     {
       "id_soal": 2,
-      "teks_pertanyaan": "Hasil dari $(-168)+120\times5-108$: (-12) adalah....",
+      "teks_pertanyaan": "Hasil dari $(-168)+120\\times5-108$: (-12) adalah....",
       "pilihan_jawaban": [
         "A. 114",
         "B. 144",
@@ -37,7 +37,7 @@
     },
     {
       "id_soal": 4,
-      "teks_pertanyaan": "Untuk a=20, $b=5$ dan $c=-5$ maka nilai $\frac{a \times b}{b \times c}$ adalah ...",
+      "teks_pertanyaan": "Untuk a=20, $b=5$ dan $c=-5$ maka nilai $\\frac{a \\times b}{b \\times c}$ adalah ...",
       "pilihan_jawaban": [
         "A. 4",
         "B. -4",
@@ -57,12 +57,12 @@
     },
     {
       "id_soal": 6,
-      "teks_pertanyaan": "Hasil dari $2\frac{1}{4}\times\frac{2}{5}:1\frac{5}{10}$ adalah.....",
+      "teks_pertanyaan": "Hasil dari $2\\frac{1}{4}\\times\\frac{2}{5}:1\\frac{5}{10}$ adalah.....",
       "pilihan_jawaban": [
         "A.",
         "B.",
-        "C. $\frac{3}{10}$",
-        "D. $\frac{3}{5}$"
+        "C. $\\frac{3}{10}$",
+        "D. $\\frac{3}{5}$"
       ]
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "id_soal": 12,
-      "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....",
+      "teks_pertanyaan": "Gambar dibawah menunjukan pemetaan f: A $\\rightarrow$ B Daerah yang menunjukan range (Daerah Hasil) adalah....",
       "pilihan_jawaban": [
         "A. {a, b, c, d }",
         "B. {1, 2, 3}",
@@ -139,10 +139,10 @@
       "id_soal": 14,
       "teks_pertanyaan": "Gradien garis yang menghubungkan pasangan titik $P(-3,3)$ dan $Q(4,1)$ adalah...",
       "pilihan_jawaban": [
-        "A. $-\frac{2}{7}$",
-        "B. $-\frac{3}{7}$",
-        "C. $\frac{2}{7}$",
-        "D. $\frac{3}{7}$"
+        "A. $-\\frac{2}{7}$",
+        "B. $-\\frac{3}{7}$",
+        "C. $\\frac{2}{7}$",
+        "D. $\\frac{3}{7}$"
       ]
     },
     {
@@ -199,10 +199,10 @@
       "id_soal": 20,
       "teks_pertanyaan": "Pada kubus ABCDEFGH di samping, panjang rusuk $AB=14$ cm. Luas segitiga AHB adalah ... cm²",
       "pilihan_jawaban": [
-        "A. $50\sqrt{2}$",
-        "B. $50\sqrt{3}$",
-        "C. $100\sqrt{2}$",
-        "D. $100\sqrt{3}$"
+        "A. $50\\sqrt{2}$",
+        "B. $50\\sqrt{3}$",
+        "C. $100\\sqrt{2}$",
+        "D. $100\\sqrt{3}$"
       ]
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "id_soal": 23,
-      "teks_pertanyaan": "Sebuah keliling lingkaran memiliki keliling 176 dengan $\pi=22/7$ maka luas lingkaran adalah....cm²",
+      "teks_pertanyaan": "Sebuah keliling lingkaran memiliki keliling 176 dengan $\\pi=22/7$ maka luas lingkaran adalah....cm²",
       "pilihan_jawaban": [
         "a. 2.446",
         "b. 2.466",
@@ -267,7 +267,7 @@
     },
     {
       "id_soal": 27,
-      "teks_pertanyaan": "Hasil dari $216^{\frac{1}{3}}$ adalah",
+      "teks_pertanyaan": "Hasil dari $216^{\\frac{1}{3}}$ adalah",
       "pilihan_jawaban": [
         "A. 6",
         "B. 36",
@@ -277,42 +277,42 @@
     },
     {
       "id_soal": 28,
-      "teks_pertanyaan": "Hasil dari $\sqrt{75}-\sqrt{12}+\sqrt{48}$ adalah....",
+      "teks_pertanyaan": "Hasil dari $\\sqrt{75}-\\sqrt{12}+\\sqrt{48}$ adalah....",
       "pilihan_jawaban": [
-        "A. $7\sqrt{3}$",
-        "B. $\sqrt{15}$",
-        "C. $-7\sqrt{3}$",
-        "D. $\sqrt{39}$"
+        "A. $7\\sqrt{3}$",
+        "B. $\\sqrt{15}$",
+        "C. $-7\\sqrt{3}$",
+        "D. $\\sqrt{39}$"
       ]
     },
     {
       "id_soal": 29,
-      "teks_pertanyaan": "Bentuk $\sqrt{14+2\sqrt{24}}$ dapat disederhanakan menjadi....",
+      "teks_pertanyaan": "Bentuk $\\sqrt{14+2\\sqrt{24}}$ dapat disederhanakan menjadi....",
       "pilihan_jawaban": [
-        "A. $\sqrt{2}+\sqrt{7}$",
-        "B. $\sqrt{2}+\sqrt{12}$",
-        "C. $\sqrt{3}+\sqrt{8}$",
-        "D. $\sqrt{4}+\sqrt{6}$"
+        "A. $\\sqrt{2}+\\sqrt{7}$",
+        "B. $\\sqrt{2}+\\sqrt{12}$",
+        "C. $\\sqrt{3}+\\sqrt{8}$",
+        "D. $\\sqrt{4}+\\sqrt{6}$"
       ]
     },
     {
       "id_soal": 30,
       "teks_pertanyaan": "Hasil pembagian $5^{-6}:5^{-4}$ adalah....",
       "pilihan_jawaban": [
-        "a. $-\frac{1}{25}$",
-        "b. $-\frac{1}{10}$",
-        "c. $\frac{1}{25}$",
-        "d. $\frac{1}{10}$"
+        "a. $-\\frac{1}{25}$",
+        "b. $-\\frac{1}{10}$",
+        "c. $\\frac{1}{25}$",
+        "d. $\\frac{1}{10}$"
       ]
     },
     {
       "id_soal": 31,
       "teks_pertanyaan": "Hasil pemangkatan dari $(-2a^{2})^{-5}$ adalah",
       "pilihan_jawaban": [
-        "a. $-\frac{1}{32a^{3}}$",
-        "b. $-\frac{1}{32a^{10}}$",
-        "c. $\frac{1}{32a^{3}}$",
-        "d. $\frac{1}{32a^{10}}$"
+        "a. $-\\frac{1}{32a^{3}}$",
+        "b. $-\\frac{1}{32a^{10}}$",
+        "c. $\\frac{1}{32a^{3}}$",
+        "d. $\\frac{1}{32a^{10}}$"
       ]
     },
     {
@@ -377,7 +377,7 @@
     },
     {
       "id_soal": 38,
-      "teks_pertanyaan": "Titik (6, 10) dirotasikan terhadap titik pusat (0,0) sebesar $90^{\circ}$. Bayangan titik tersebut adalah ...",
+      "teks_pertanyaan": "Titik (6, 10) dirotasikan terhadap titik pusat (0,0) sebesar $90^{\\circ}$. Bayangan titik tersebut adalah ...",
       "pilihan_jawaban": [
         "A. P'(6, -10)",
         "B. P'(-10, 6)",
