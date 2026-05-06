@@ -177,8 +177,51 @@
         </div>
     </div>
 
+    <div id="customAlertModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="customAlertTitle" style="color: #3b82f6;">Informasi</h3>
+            <p id="customAlertMessage">-</p>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button id="customAlertBtnCancel" onclick="tutupCustomAlert(false)" style="background: #ef4444; width: 48%; margin: 0; display: none;">Batal</button>
+                <button id="customAlertBtnOk" onclick="tutupCustomAlert(true)" style="background: #007bff; width: 48%; margin: 0;">OK</button>
+            </div>
+        </div>
+    </div>
+
     <script>
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec"; 
+
+    // MENGGANTI ALERT DAN CONFIRM AGAR AMAN DAN TIDAK DIBLOKIR APLIKASI
+    window.alert = function(message) {
+        document.getElementById('customAlertTitle').innerText = 'Informasi';
+        document.getElementById('customAlertMessage').innerText = message;
+        document.getElementById('customAlertBtnCancel').style.display = 'none';
+        document.getElementById('customAlertBtnOk').innerText = 'OK';
+        document.getElementById('customAlertBtnOk').onclick = function() {
+            tutupCustomAlert(true);
+        };
+        document.getElementById('customAlertModal').style.display = 'flex';
+    };
+
+    window.confirm = function(message) {
+        document.getElementById('customAlertTitle').innerText = 'Konfirmasi';
+        document.getElementById('customAlertMessage').innerText = message;
+        document.getElementById('customAlertBtnCancel').style.display = 'inline-block';
+        document.getElementById('customAlertBtnOk').innerText = 'Ya';
+        document.getElementById('customAlertBtnOk').onclick = function() {
+            tutupCustomAlert(true);
+            selesaiUjian();
+        };
+        document.getElementById('customAlertBtnCancel').onclick = function() {
+            tutupCustomAlert(false);
+        };
+        document.getElementById('customAlertModal').style.display = 'flex';
+        return false;
+    };
+
+    function tutupCustomAlert(ok) {
+        document.getElementById('customAlertModal').style.display = 'none';
+    }
 
     let kelasSiswa = sessionStorage.getItem('cbt_kelas');
     let mapelUjian = sessionStorage.getItem('cbt_mapel');
@@ -408,7 +451,7 @@
         });
     }
 
-        function tutupModal() {
+    function tutupModal() {
         // Menyembunyikan modal kembali
         document.getElementById('popupModal').style.display = 'none';
         
@@ -416,14 +459,14 @@
         // window.location.href = 'index.html'; 
     }
 
-        function keluarKeLogin() {
-    // 1. Hapus data ujian dari session storage agar bersih untuk sesi berikutnya
-    sessionStorage.clear();
-    
-    // 2. Arahkan kembali ke halaman utama (login/scan barcode)
-    // Sesuaikan nama file utama Anda jika bukan 'index.html'
-    window.location.href = 'index.html';
-}
-</script>
+    function keluarKeLogin() {
+        // 1. Hapus data ujian dari session storage agar bersih untuk sesi berikutnya
+        sessionStorage.clear();
+        
+        // 2. Arahkan kembali ke halaman utama (login/scan barcode)
+        // Sesuaikan nama file utama Anda jika bukan 'index.html'
+        window.location.href = 'index.html';
+    }
+    </script>
 </body>
 </html>
