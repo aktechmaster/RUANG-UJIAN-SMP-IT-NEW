@@ -1,0 +1,387 @@
+[
+  {
+    "id_soal": 1,
+    "teks_pertanyaan": "Perhatikan hasil pengukuran benda berikut!<br><br><img src='images_IPA/1.png' alt='Pengukuran mikrometer' style='max-width: 100%; height: auto;'><br><br>Hasil pengukuran benda yang ditunjukkan pada mikrometer sekrup tersebut adalah",
+    "pilihan_jawaban": [
+      "A. 6,34 mm",
+      "B. 6,35 mm",
+      "C. 6,50 mm",
+      "D. 6,84 mm"
+    ],
+    "kunci_jawaban_rahasia": "D"
+  },
+  {
+    "id_soal": 2,
+    "teks_pertanyaan": "Perhatikan peristiwa perubahan zat berikut!<br>(1) Jagung digiling menjadi tepung maizena.<br>(2) Air dibuat menjadi es batu.<br>(3) Singkong berubah menjadi tape.<br>(4) Perkaratan pada jembatan yang terbuat dari besi.<br><br>Berdasarkan peristiwa tersebut, perubahan kimia ditunjukkan oleh nomor",
+    "pilihan_jawaban": [
+      "A. (1) dan (2)",
+      "B. (1) dan (3)",
+      "C. (2) dan (4)",
+      "D. (3) dan (4)"
+    ],
+    "kunci_jawaban_rahasia": "D"
+  },
+  {
+    "id_soal": 3,
+    "teks_pertanyaan": "Perhatikan model atom berikut!<br><br><img src='images_IPA/2.png' alt='Model atom' style='max-width: 100%; height: auto;'><br><br>Berdasarkan gambar tersebut, nomor atom, nomor massa, dan jumlah neutron berturut-turut adalah",
+    "pilihan_jawaban": [
+      "A. 2, 2, dan 2",
+      "B. 2, 4, dan 2",
+      "C. 2, 2, dan 4",
+      "D. 4, 2, dan 2"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 4,
+    "teks_pertanyaan": "Garam yang kita konsumsi pada umumnya berasal dari air laut. Petani garam di Indramayu memanfaatkan panas matahari untuk membuat garam. Proses pembuatan garam yang dilakukan petani tersebut dilakukan dengan teknik...",
+    "pilihan_jawaban": [
+      "A. evaporasi",
+      "B. filtrasi",
+      "C. sublimasi",
+      "D. kromatografi"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 5,
+    "teks_pertanyaan": "Pengukuran massa dan volume dari tiga benda padat terdapat pada tabel berikut:<br><br><img src='images_IPA/3.png' alt='Tabel Benda Padat' style='max-width: 100%; height: auto;'><br><br>Bila ketiga benda tersebut dimasukkan ke dalam bejana yang berisi air (massa jenis air = 1 gr/cm<sup>3</sup>), maka posisi benda padat 1, 2 dan 3 dalam bejana tersebut yang benar ditunjukkan oleh gambar",
+    "pilihan_jawaban": [
+      "A. <img src='images_IPA/5a.png' style='height:80px;'>",
+      "B. <img src='images_IPA/5b.png' style='height:80px;'>",
+      "C. <img src='images_IPA/5c.png' style='height:80px;'>",
+      "D. <img src='images_IPA/5d.png' style='height:80px;'>"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 6,
+    "teks_pertanyaan": "Beberapa zat diuji dengan kertas lakmus merah dan lakmus biru. Data perubahan warna lakmus tercantum pada tabel berikut:<br><br><img src='images_IPA/6.png' alt='Tabel Lakmus' style='max-width: 100%; height: auto;'><br><br>Pasangan larutan yang membentuk garam adalah ....",
+    "pilihan_jawaban": [
+      "A. 1 dan 2",
+      "B. 1 dan 3",
+      "C. 2 dan 3",
+      "D. 3 dan 4"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 7,
+    "teks_pertanyaan": "Perhatikan grafik pemanasan 1 kg es berikut ini!<br><br><img src='images_IPA/7.png' alt='Grafik Pemanasan Es' style='max-width: 100%; height: auto;'><br><br>Jika kalor jenis es 2.100 J/kg°C, kalor lebur es 336.000 J/kg dan kalor jenis air adalah 4.200 J/kg°C maka kalor yang dibutuhkan dalam proses dari P-Q-R adalah ...",
+    "pilihan_jawaban": [
+      "A. 10.500 J",
+      "B. 21.000 J",
+      "C. 336.000 J",
+      "D. 346.500 J"
+    ],
+    "kunci_jawaban_rahasia": "D"
+  },
+  {
+    "id_soal": 8,
+    "teks_pertanyaan": "Saat praktikum IPA, Anisa memanaskan sebuah bimetal yang terbuat dari lempengan tembaga dan besi dengan api. Jika koefisien muai panjang tembaga adalah 17×10<sup>-6</sup> /°C sedangkan besi 12×10<sup>-6</sup> /°C, maka bentuk bimetal yang terjadi adalah",
+    "pilihan_jawaban": [
+      "A. <img src='images_IPA/8a.png' style='height:80px;'>",
+      "B. <img src='images_IPA/8b.png' style='height:80px;'>",
+      "C. <img src='images_IPA/8c.png' style='height:80px;'>",
+      "D. <img src='images_IPA/8d.png' style='height:80px;'>"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 9,
+    "teks_pertanyaan": "Perhatikan kejadian sehari-hari berikut ini!<br>(1) Bola basket menggelinding di lapangan basket.<br>(2) Budi menjatuhkan bola basket dari atas tangga ke lantai.<br>(3) Mobil mainan digerakkan dengan baterai.<br>(4) Tamia meluncur pada lintasannya.<br>Yang termasuk gerak lurus berubah beraturan ditunjukkan oleh nomor ...",
+    "pilihan_jawaban": [
+      "A. (1) dan (2)",
+      "B. (2) dan (3)",
+      "C. (3) dan (4)",
+      "D. (1) dan (4)"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 10,
+    "teks_pertanyaan": "Sebuah benda bergerak di atas lantai. Kecepatan benda tersebut semakin lama semakin kecil dan akhirnya berhenti. Gaya yang menyebabkan gerak benda tersebut semakin melambat adalah ....",
+    "pilihan_jawaban": [
+      "A. gaya dorong",
+      "B. gaya gesekan",
+      "C. gaya tarik",
+      "D. gaya berat"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 11,
+    "teks_pertanyaan": "Perhatikan gambar gaya-gaya yang bekerja pada benda berikut!<br><br><img src='images_IPA/11.png' alt='Gaya pada benda' style='max-width: 100%; height: auto;'><br><br>Jika massa benda tersebut 3 kg, percepatan yang akan terjadi pada benda adalah",
+    "pilihan_jawaban": [
+      "A. 15 m/s<sup>2</sup>",
+      "B. 10 m/s<sup>2</sup>",
+      "C. 5 m/s<sup>2</sup>",
+      "D. 2,5 m/s<sup>2</sup>"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 12,
+    "teks_pertanyaan": "Perhatikan gambar sangkar burung berikut!<br><br><img src='images_IPA/12.png' alt='Sangkar burung' style='max-width: 100%; height: auto;'><br><br>Jika masa sangkar burung tersebut 2 kg, maka energi potensial yang dimiliki oleh sangkar tersebut adalah",
+    "pilihan_jawaban": [
+      "A. 10 J",
+      "B. 16 J",
+      "C. 100 J",
+      "D. 160 J"
+    ],
+    "kunci_jawaban_rahasia": "D"
+  },
+  {
+    "id_soal": 13,
+    "teks_pertanyaan": "Perhatikan gambar tuas berikut!<br><br><img src='images_IPA/13.png' alt='Tuas' style='max-width: 100%; height: auto;'><br><br>Tuas ini akan menghasilkan gaya kuasa F paling kecil bila beban W diletakkan di titik",
+    "pilihan_jawaban": [
+      "A. 1, tumpu T di titik 2 dan F di titik 7",
+      "B. 2, tumpu T di titik 3 dan F di titik 7",
+      "C. 1, tumpu T di titik 5 dan F di titik 6",
+      "D. 3, tumpu T di titik 4 dan F di titik 7"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 14,
+    "teks_pertanyaan": "Perhatikan pernyataan berikut ini!<br>1) Matahari terlihat terbit dari timur dan terbenam ke barat.<br>2) Adanya pergantian musim di belahan bumi.<br>3) Lama waktu siang dan malam di khatulistiwa berbeda.<br>4) Tempat di wilayah timur dan barat memiliki perbedaan waktu.<br>Pernyataan di atas yang merupakan akibat rotasi bumi adalah",
+    "pilihan_jawaban": [
+      "A. 1 dan 3",
+      "B. 1 dan 4",
+      "C. 2 dan 3",
+      "D. 3 dan 4"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 15,
+    "teks_pertanyaan": "Dua balok kayu terapung di permukaan laut. Masing-masing balok berada di puncak gelombang dan diantara keduanya terdapat 3 lembah dan 2 bukit gelombang. Jika jarak kedua balok kayu 6 m dan keduanya mengalami gerakan naik turun sebanyak 10 kali dalam 2 sekon, cepat rambat gelombangnya adalah",
+    "pilihan_jawaban": [
+      "A. 5 m/s",
+      "B. 10 m/s",
+      "C. 15 m/s",
+      "D. 20 m/s"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 16,
+    "teks_pertanyaan": "Dari atas kapal seorang peneliti memancarkan bunyi ke dasar laut seperti gambar berikut:<br><br><img src='images_IPA/16.png' alt='Kapal sonar' style='max-width: 100%; height: auto;'><br><br>Berdasarkan observasi, ternyata bunyi pantul terdeteksi setelah 5 sekon. Jika kecepatan bunyi di air laut 1400 m/s, maka kedalaman laut tersebut adalah",
+    "pilihan_jawaban": [
+      "A. 350 m",
+      "B. 700 m",
+      "C. 3.500 m",
+      "D. 7.000 m"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 17,
+    "teks_pertanyaan": "Bentuk bayangan yang benar pada cermin datar ditunjukkan oleh gambar",
+    "pilihan_jawaban": [
+      "A. <img src='images_IPA/17a.png' style='height:80px;'>",
+      "B. <img src='images_IPA/17b.png' style='height:80px;'>",
+      "C. <img src='images_IPA/17c.png' style='height:80px;'>",
+      "D. <img src='images_IPA/17d.png' style='height:80px;'>"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 18,
+    "teks_pertanyaan": "Dua buah muatan masing-masing Q1 dan Q2 berada di udara terpisah pada jarak 2r, sehingga terjadi gaya tarik sebesar F seperti tampak pada gambar.<br><br><img src='images_IPA/18.png' alt='Muatan listrik' style='max-width: 100%; height: auto;'><br><br>Jika kedua muatan dipindahkan sehingga berjarak setengah kali jarak mula-mula, maka gaya tarik antara kedua muatan menjadi",
+    "pilihan_jawaban": [
+      "A. 4 F",
+      "B. 2 F",
+      "C. 1 F",
+      "D. 1/2 F"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 19,
+    "teks_pertanyaan": "Perhatikan gambar rangkaian listrik berikut!<br><br><img src='images_IPA/19.png' alt='Rangkaian listrik' style='max-width: 100%; height: auto;'><br><br>Besar kuat arus yang mengalir dalam rangkaian tersebut adalah",
+    "pilihan_jawaban": [
+      "A. 1 A",
+      "B. 2 A",
+      "C. 3 A",
+      "D. 4 A"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 20,
+    "teks_pertanyaan": "Sebuah transformator step up menghasilkan beda potensial 200 volt. Transformator tersebut dihubungkan dengan sumber tegangan 100 volt. Jika arus yang mengalir pada kumparan primer 150 mA, maka arus listrik yang mengalir pada kumparan sekunder adalah",
+    "pilihan_jawaban": [
+      "A. 75 mA",
+      "B. 100 mA",
+      "C. 150 mA",
+      "D. 300 mA"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 21,
+    "teks_pertanyaan": "Ketika bayi baru lahir tingginya 50 cm, setelah 1 bulan diukur tingginya di posyandu menjadi 55 cm. Hal ini merupakan ciri makhluk hidup yaitu",
+    "pilihan_jawaban": [
+      "A. tumbuh",
+      "B. memerlukan nutrisi",
+      "C. berkembang",
+      "D. berkembang biak"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 22,
+    "teks_pertanyaan": "Perhatikan data berikut ini!<br>1. Padi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Jahe<br>2. Rumput &nbsp;&nbsp; 7. Katak<br>3. beruang &nbsp;&nbsp;&nbsp; 8. Rumput laut<br>4. Strowberi &nbsp; 9. Apel<br>5. Belalang &nbsp; 10. Kucing<br>Yang merupakan komponen biotik penyusun ekosistem sawah adalah ...",
+    "pilihan_jawaban": [
+      "A. 1, 2, 3",
+      "B. 1, 5, 7",
+      "C. 3, 6, 8",
+      "D. 4, 9, 10"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 23,
+    "teks_pertanyaan": "Perhatikan gambar rantai makanan berikut!<br><br><img src='images_IPA/23.png' alt='Rantai makanan' style='max-width: 100%; height: auto;'><br><br>Organisme yang berperan sebagai produsen ditunjukkan oleh nomor",
+    "pilihan_jawaban": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 24,
+    "teks_pertanyaan": "Informasi tentang domba-domba yang mati dimangsa macan tutul sering terjadi di daerah Lebak. Beberapa kemungkinan penyebab terjadinya fenomena tersebut di atas adalah sebagai berikut:<br>1) Keseimbangan alam terganggu.<br>2) Sumber makanan macan tutul terbatas.<br>3) Peternak domba dekat daerah hutan.<br>4) Habitat macan tutul terganggu.<br>Kemungkinan yang tepat sebagai penyebab terjadinya fenomena tersebut ditunjukkan oleh nomor",
+    "pilihan_jawaban": [
+      "A. 1), 2) dan 3)",
+      "B. 1), 2) dan 4)",
+      "C. 2), 3) dan 4)",
+      "D. 3) dan 4)"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 25,
+    "teks_pertanyaan": "Perhatikan pernyataan tentang perilaku berikut!<br>1. Membiasakan membuang sampah di pinggir sungai.<br>2. Memilah sampah plastik untuk dilebur menjadi produk lain.<br>3. Membuang limbah industri ke sungai sebelum disaring.<br>4. Membakar jerami padi sisa panen.<br>Perilaku yang benar untuk menjaga kelestarian lingkungan kita adalah ...",
+    "pilihan_jawaban": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 26,
+    "teks_pertanyaan": "Perhatikan gambar pabrik-pabrik yang menimbulkan pencemaran udara berikut!<br><br><img src='images_IPA/26.png' alt='Pabrik' style='max-width: 100%; height: auto;'><br><br>Upaya yang dapat dilakukan untuk memperbaiki lingkungan tersebut adalah",
+    "pilihan_jawaban": [
+      "A. mewajibkan semua karyawan memakai masker",
+      "B. mengganti bahan bakar fosil dengan bahan gas",
+      "C. memindahkan pabrik ke daerah pegunungan",
+      "D. memperbaiki instalasi pembuangan limbah/cerobong asap"
+    ],
+    "kunci_jawaban_rahasia": "D"
+  },
+  {
+    "id_soal": 27,
+    "teks_pertanyaan": "Perhatikan tabel pemanfaatan bioteknologi berikut:<br><br><img src='images_IPA/27.png' alt='Tabel bioteknologi' style='max-width: 100%; height: auto;'><br><br>Hubungan yang benar antara produk, proses dan aspek ditunjukkan nomor",
+    "pilihan_jawaban": [
+      "A. 1 dan 2",
+      "B. 1 dan 3",
+      "C. 3 dan 4",
+      "D. 4 dan 5"
+    ],
+    "kunci_jawaban_rahasia": "B"
+  },
+  {
+    "id_soal": 28,
+    "teks_pertanyaan": "Perhatikan data berikut!<br>1). Organisme &nbsp;&nbsp;&nbsp; 3). Organ &nbsp;&nbsp;&nbsp; 5). sistem organ<br>2). Sel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4). jaringan<br>Urutan organisasi kehidupan yang benar ditunjukkan oleh",
+    "pilihan_jawaban": [
+      "A. 1-2-3-4-5",
+      "B. 2-3-4-5-1",
+      "C. 2-4-3-5-1",
+      "D. 3-4-5-1-2"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 29,
+    "teks_pertanyaan": "Sel tumbuhan lebih kuat dan lebih kaku dibandingkan sel hewan, bagian organel sel yang membedakan adalah",
+    "pilihan_jawaban": [
+      "A. dinding sel",
+      "B. membran sel",
+      "C. kloroplas",
+      "D. mitokondria"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 30,
+    "teks_pertanyaan": "Perhatikan tabel data hasil percobaan Sach berikut:<br><br><img src='images_IPA/30.png' alt='Tabel percobaan Sach' style='max-width: 100%; height: auto;'><br><br>Simpulan yang dapat diperoleh dari data percobaan adalah ...",
+    "pilihan_jawaban": [
+      "A. Daun yang tidak tertutup tidak terjadi fotosintesis.",
+      "B. Daun yang tertutup dapat terjadi fotosintesis.",
+      "C. Daun yang tidak tertutup terjadi fotosintesis.",
+      "D. Daun yang tertutup dan tidak tertutup terjadi fotosintesis."
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 31,
+    "teks_pertanyaan": "Kebiasaan membawa beban yang terlalu berat dibagian punggung sehingga tubuh membungkuk. Kebiasaan tersebut dapat mengakibatkan kelainan tulang yang disebut",
+    "pilihan_jawaban": [
+      "A. skoliosis",
+      "B. rakitis",
+      "C. kifosis",
+      "D. lordosis"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 32,
+    "teks_pertanyaan": "Perhatikan tabel data hasil uji makanan berikut:<br><br><img src='images_IPA/32.png' alt='Tabel uji makanan' style='max-width: 100%; height: auto;'><br><br>Berdasarkan data tersebut, bahan makanan yang mengandung protein dan amilum adalah ...",
+    "pilihan_jawaban": [
+      "A. K dan L",
+      "B. K dan M",
+      "C. L dan M",
+      "D. M dan N"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 33,
+    "teks_pertanyaan": "Perhatikan gambar proses pernapasan berikut!<br><br><img src='images_IPA/33.png' alt='Pernapasan' style='max-width: 100%; height: auto;'><br><br>Dari gambar tersebut volume rongga dada pada saat inspirasi dan ekspirasi adalah",
+    "pilihan_jawaban": [
+      "A. volume rongga dada pada saat inspirasi lebih besar dibandingkan pada saat ekspirasi",
+      "B. volume rongga dada pada saat inspirasi lebih kecil dibandingkan pada saat ekspirasi",
+      "C. volume rongga dada pada saat ekspirasi lebih besar dibandingkan pada saat inspirasi",
+      "D. volume rongga dada pada saat inspirasi sama besar pada saat ekspirasi"
+    ],
+    "kunci_jawaban_rahasia": "A"
+  },
+  {
+    "id_soal": 34,
+    "teks_pertanyaan": "Terdapat pada organ apakah struktur gambar tersebut!<br><br><img src='images_IPA/34.png' alt='Organ ginjal' style='max-width: 100%; height: auto;'><br><br>",
+    "pilihan_jawaban": [
+      "A. Hati",
+      "B. Kulit",
+      "C. Ginjal",
+      "D. Paru-paru"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  },
+  {
+    "id_soal": 35,
+    "teks_pertanyaan": "Penyakit AIDS dapat menular dari penderita kepada orang lain. Hal-hal utama yang dapat dilakukan agar terhindar dari penyakit menular seksual seperti AIDS adalah",
+    "pilihan_jawaban": [
+      "A. menjaga kesehatan",
+      "B. berolah raga secara teratur",
+      "C. menjauhi gaya hidup yang menganut seks bebas",
+      "D. makan makanan bergizi"
+    ],
+    "kunci_jawaban_rahasia": "C"
+  }
+]
