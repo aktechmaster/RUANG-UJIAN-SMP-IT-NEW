@@ -67,7 +67,7 @@
     },
     {
       "id_soal": 7,
-      "teks_pertanyaan": "شَاهَدَتِ التَّلَامِيْذُ مِنْ خِلَالِ نَافِذَةِ الْحَافِلَةِ ...",
+      "teks_pertanyaan": "<img src='images_ARAB/7.png' alt='Gambar Bintang' style='max-width: 100%; height: auto;'><br>شَاهَدَتِ التَّلَامِيْذُ مِنْ خِلَالِ نَافِذَةِ الْحَافِلَةِ ...",
       "pilihan_jawaban": [
         "أ. الْمَزَارِعَ",
         "ب. الْأَشْجَارَ",
@@ -127,7 +127,7 @@
     },
     {
       "id_soal": 13,
-      "teks_pertanyaan": "أَيْنَ نَقْضِي الْعُطْلَةَ الدِّرَاسِيَّةَ؟",
+      "teks_pertanyaan": "<img src='images_ARAB/13.png' alt='Gambar Bintang' style='max-width: 100%; height: auto;'><br>أَيْنَ نَقْضِي الْعُطْلَةَ الدِّرَاسِيَّةَ؟",
       "pilihan_jawaban": [
         "أ. نَذْهَبُ إِلَى شَاطِئِ الْبَحْرِ",
         "ب. نَزُوْرُ إِلَى حَدِيْقَةِ الْحَيَوَانِ بِسُوْرَابَايَا",
