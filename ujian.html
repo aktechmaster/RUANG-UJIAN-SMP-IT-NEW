@@ -158,6 +158,29 @@
             color: #10b981;
             margin-bottom: 15px;
         }
+
+        /* Load Font Arab (Pastikan file font tersedia atau gunakan alternatif Google Font) */
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+
+        /* Class khusus untuk teks Bahasa Arab */
+        .teks-arab {
+            font-family: 'Amiri', 'Segoe UI', Tahoma, serif; /* Gunakan Amiri sebagai cadangan jika MohammadNaskh tidak terload */
+            direction: rtl;
+            font-size: 1.6rem; /* Teks Arab perlu lebih besar agar harakat terbaca */
+            line-height: 1.8;
+            text-align: right;
+            display: block;
+        }
+        
+        /* Jika Anda memiliki file font MohammadNaskh sendiri di folder yang sama */
+        @font-face {
+            font-family: 'MohammadNaskh';
+            src: url('MohammadNaskh.ttf') format('truetype');
+        }
+
+        .font-khusus-arab {
+            font-family: 'MohammadNaskh', serif;
+        }
     </style>
 </head>
 <body>
@@ -284,86 +307,92 @@
     }, 1000);
 
     fetch(urlJSON)
-        .then(response => {
-            if (!response.ok) throw new Error("Gagal mengambil data");
-            return response.json();
-        })
-        .then(data => {
-            bankSoalData = data;
+    .then(response => {
+        if (!response.ok) throw new Error("Gagal mengambil data");
+        return response.json();
+    })
+    .then(data => {
+        bankSoalData = data;
 
-            document.getElementById('judulMapel').innerText = "Ujian Sekolah Berstandar Nasional " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
-            document.getElementById('infoNama').innerText = namaSiswa;
-            document.getElementById('infoKelas').innerText = kelasSiswa;
+        document.getElementById('judulMapel').innerText = "Ujian Sekolah Berstandar Nasional " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
+        document.getElementById('infoNama').innerText = namaSiswa;
+        document.getElementById('infoKelas').innerText = kelasSiswa;
+        
+        let htmlSoal = "";
+        data.bank_soal.forEach((soal, index) => {
+            htmlSoal += `<div class="soal-box">`;
             
-            let htmlSoal = "";
-            data.bank_soal.forEach((soal, index) => {
-                htmlSoal += `<div class="soal-box">`;
+            let bagianTeks = soal.teks_pertanyaan.split('\n\n');
+            let teksPertanyaanBersih = "";
+
+            if (bagianTeks.length > 1) {
+                let bacaan = bagianTeks[0];
+                bacaan = bacaan.replace(/ • /g, "\n• "); 
+                bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); 
+                bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
+                bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
+
+                // Menambahkan class teks-arab pada bacaan jika isinya bahasa arab
+                htmlSoal += `<div class="bacaan teks-arab font-khusus-arab">${bacaan.trim()}</div>`;
+                teksPertanyaanBersih = bagianTeks[1];
+            } else {
+                teksPertanyaanBersih = soal.teks_pertanyaan;
+            }
+
+            teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
+
+            // MODIFIKASI: Membungkus pertanyaan dengan class teks-arab
+            htmlSoal += `
+                <div class="pertanyaan">
+                    <span style="font-weight:bold;">${index + 1}.</span>
+                    <span class="teks-arab font-khusus-arab">${teksPertanyaanBersih}</span>
+                </div>`;
+            
+            htmlSoal += `<div class="opsi-container">`;
+            
+            soal.pilihan_jawaban.forEach((opsi, i) => {
+                let nilaiOpsi = String.fromCharCode(65 + i);
                 
-                let bagianTeks = soal.teks_pertanyaan.split('\n\n');
-                let teksPertanyaanBersih = "";
-
-                if (bagianTeks.length > 1) {
-                    let bacaan = bagianTeks[0];
-                    bacaan = bacaan.replace(/ • /g, "\n• "); 
-                    bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); 
-                    bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
-                    bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
-
-                    htmlSoal += `<div class="bacaan">${bacaan.trim()}</div>`;
-                    teksPertanyaanBersih = bagianTeks[1];
-                } else {
-                    teksPertanyaanBersih = soal.teks_pertanyaan;
-                }
-
-                teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
+                // DETEKSI OTOMATIS: Jika opsi mengandung huruf Arab, pakai font Arab
+                let isArab = /[\u0600-\u06FF]/.test(opsi);
+                let classArab = isArab ? "teks-arab font-khusus-arab" : "";
 
                 htmlSoal += `
-                    <div class="pertanyaan">
-                        <span>${index + 1}.</span>
-                        <span>${teksPertanyaanBersih}</span>
+                    <div class="opsi">
+                        <label>
+                            <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
+                            <span class="${classArab}">${opsi}</span>
+                        </label>
                     </div>`;
-                
-                htmlSoal += `<div class="opsi-container">`;
-                
-                // MENGGUNAKAN i UNTUK MEMASTIKAN VALUE SELALU KAPITAL (A, B, C, D)
-                soal.pilihan_jawaban.forEach((opsi, i) => {
-                    let nilaiOpsi = String.fromCharCode(65 + i); // 65=A, 66=B, 67=C, 68=D
-                    htmlSoal += `
-                        <div class="opsi">
-                            <label>
-                                <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
-                                <span>${opsi}</span>
-                            </label>
-                        </div>`;
-                });
-                htmlSoal += `</div></div>`;
             });
-
-            document.getElementById('lembar-soal').innerHTML = htmlSoal;
-
-            // Merender ulang MathJax jika soal telah dimuat ke DOM
-            setTimeout(() => {
-                if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
-                    MathJax.typesetPromise();
-                }
-            }, 1000);
-
-            // Simpan jawaban siswa pada sesi
-            document.querySelectorAll('input[type="radio"]').forEach(input => {
-                let savedValue = sessionStorage.getItem(input.name);
-                if (savedValue && input.value === savedValue) {
-                    input.checked = true;
-                }
-
-                input.addEventListener('change', function() {
-                    sessionStorage.setItem(this.name, this.value);
-                });
-            });
-        })
-        .catch(error => {
-            document.getElementById('lembar-soal').innerHTML = "<p style='color:red;'><b>Gagal memuat soal! Pastikan file '" + namaFile + "' sudah ada di GitHub Anda.</b></p>";
-            console.error("Error:", error);
+            htmlSoal += `</div></div>`;
         });
+
+        document.getElementById('lembar-soal').innerHTML = htmlSoal;
+
+        // Merender ulang MathJax jika soal telah dimuat ke DOM
+        setTimeout(() => {
+            if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise();
+            }
+        }, 1000);
+
+        // Simpan jawaban siswa pada sesi
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            let savedValue = sessionStorage.getItem(input.name);
+            if (savedValue && input.value === savedValue) {
+                input.checked = true;
+            }
+
+            input.addEventListener('change', function() {
+                sessionStorage.setItem(this.name, this.value);
+            });
+        });
+    })
+    .catch(error => {
+        document.getElementById('lembar-soal').innerHTML = "<p style='color:red;'><b>Gagal memuat soal! Pastikan file '" + namaFile + "' sudah ada di GitHub Anda.</b></p>";
+        console.error("Error:", error);
+    });
 
     function sebelumSubmit() {
         let belumTerjawab = [];
