@@ -15,18 +15,23 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
     <style>
         * { box-sizing: border-box; }
-        body { 
+        body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 15px; 
-            max-width: 800px; 
-            margin: auto; 
-            background-color: #E0FFFF;
-            background-image: url('floating-cogs.svg');
-            background-size: 120px 120px;
-            color: #333;
-            font-size: 16px;
-            line-height: 1.6;
-        }
+    padding: 15px; 
+    max-width: 800px; 
+    margin: auto; 
+    background-color: #E0FFFF;
+    background-image: url('floating-cogs.svg');
+    background-size: 120px 120px;
+    background-repeat: repeat;
+    /* ✅ CARA AMAN: Hanya atur transparansi gambar latar saja */
+    background-color: #E0FFFF;
+    background-image: linear-gradient(rgba(224, 255, 255, 0.92), rgba(224, 255, 255, 0.92)), url('floating-cogs.svg');
+    background-blend-mode: lighten;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+}
         
         h1 { font-size: 20px; text-align: center; margin-bottom: 20px; }
         hr { border: 0; border-top: 2px solid #ddd; margin-bottom: 20px; }
