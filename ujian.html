@@ -119,21 +119,28 @@
 
         /* TIMER MENGAMBANG */
         #floating-timer {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1e293b;
-            color: #38bdf8;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    
+    /* MENGGUNAKAN RGBA UNTUK TRANSPARANSI (0.7 artinya 70% kepekatan) */
+    background: rgba(30, 41, 59, 0.7); 
+    
+    /* EFEK KACA BURAM (Hanya berfungsi di browser modern/Exambro berbasis Chromium) */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); 
+    
+    color: #38bdf8;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
         /* POPUP MODAL */
         .modal {
