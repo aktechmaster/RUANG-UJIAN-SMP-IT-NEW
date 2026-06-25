@@ -181,9 +181,22 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     font-family: 'Amiri', 'MohammadNaskh', serif;
     direction: rtl !important;         /* Arah tulisan kanan ke kiri */
     text-align: right !important;       /* Posisi rata kanan */
-    font-size: 1.6rem;                 /* Tetap besar sesuai keinginan */
+    font-size: 1.6rem;                  /* Tetap besar untuk huruf Arab */
     line-height: 1.8;
     display: block;
+}
+
+/* TARGET JITU: Jika di dalam teks Arab ada teks Indonesia/Alfabet biasa */
+.teks-arab span, 
+.teks-arab p, 
+.teks-arab a,
+.teks-arab .teks-indo {
+    direction: ltr !important;         /* Kembalikan arah baca kiri ke kanan */
+    text-align: left !important;        /* Rata kiri */
+    font-size: 16px !important;         /* Paksa kembali ke ukuran normal */
+    line-height: 1.6;
+    display: inline-block;              /* Agar teks mengalir normal */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Kembalikan font latin */
 }
 
 /* Font cadangan Arab */
