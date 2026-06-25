@@ -176,37 +176,54 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     line-height: 1.6;
 }
 
-/* === Khusus Teks Bahasa Arab Saja === */
-.teks-arab {
-    font-family: 'Amiri', 'MohammadNaskh', serif;
-    direction: rtl !important;         /* Arah tulisan kanan ke kiri */
-    text-align: right !important;       /* Posisi rata kanan */
-    font-size: 1.6rem;                  /* Tetap besar untuk huruf Arab */
-    line-height: 1.8;
-    display: block;
-}
+/* Load Font Arab */
+@import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
-/* TARGET JITU: Jika di dalam teks Arab ada teks Indonesia/Alfabet biasa */
-.teks-arab span, 
-.teks-arab p, 
-.teks-arab a,
-.teks-arab .teks-indo {
-    direction: ltr !important;         /* Kembalikan arah baca kiri ke kanan */
-    text-align: left !important;        /* Rata kiri */
-    font-size: 16px !important;         /* Paksa kembali ke ukuran normal */
-    line-height: 1.6;
-    display: inline-block;              /* Agar teks mengalir normal */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Kembalikan font latin */
-}
-
-/* Font cadangan Arab */
+/* Font Cadangan Arab */
 @font-face {
     font-family: 'MohammadNaskh';
     src: url('MohammadNaskh.ttf') format('truetype');
 }
 
-.font-khusus-arab {
-    font-family: 'MohammadNaskh', 'Amiri', serif;
+/* === REKAYASA SISTEM: PEMISAH UKURAN OTOMATIS (LATIN vs ARAB) === */
+
+/* 1. Paksa semua elemen pilihan jawaban dan soal kembali ke ukuran normal teks Indonesia */
+.opsi, .opsi *, .soal-box, .pertanyaan {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px !important;
+    direction: ltr !important;
+    text-align: left !important;
+    line-height: 1.6;
+}
+
+/* 2. Khusus untuk elemen yang memiliki teks Arab, jalankan aturan ini */
+.teks-arab, .font-khusus-arab {
+    font-family: 'Amiri', 'MohammadNaskh', serif;
+    direction: rtl !important;
+    text-align: right !important;
+    font-size: 1.6rem !important; /* Ukuran besar khusus Arab */
+    line-height: 1.8;
+    display: block;
+}
+
+/* 3. JALUR PINTAS: Jika teks Alfabet/Indonesia berada di dalam area Arab (.teks-arab) 
+   atau jika teks Arab berada di dalam area pilihan jawaban (.opsi) */
+.teks-arab :not([class*="arab"]), 
+.opsi {
+    font-size: 16px !important;
+    direction: ltr !important;
+    text-align: left !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* 4. Kembalikan kebesaran huruf Arab jika dia disisipkan di dalam pilihan jawaban (.opsi) */
+.opsi .teks-arab, 
+.opsi [class*="arab"] {
+    font-size: 1.6rem !important;
+    direction: rtl !important;
+    text-align: right !important;
+    display: inline-block;
+    font-family: 'Amiri', 'MohammadNaskh', serif !important;
 }
     </style>
     
