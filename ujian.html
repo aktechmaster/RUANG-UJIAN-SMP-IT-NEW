@@ -162,27 +162,37 @@
         /* Load Font Arab (Pastikan file font tersedia atau gunakan alternatif Google Font) */
         @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
-        /* Class khusus untuk teks Bahasa Arab */
-        .teks-arab {
-            font-family: 'Amiri', 'Segoe UI', Tahoma, serif; /* Gunakan Amiri sebagai cadangan jika MohammadNaskh tidak terload */
-            direction: rtl;
-            font-size: 1.6rem; /* Teks Arab perlu lebih besar agar harakat terbaca */
-            line-height: 1.8;
-            text-align: right;
-            display: block;
-        }
-        
-        /* Jika Anda memiliki file font MohammadNaskh sendiri di folder yang sama */
-        @font-face {
-            font-family: 'MohammadNaskh';
-            src: url('MohammadNaskh.ttf') format('truetype');
-        }
+        /* === Aturan Dasar Semua Teks Biasa (Bahasa Indonesia) === */
+body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
+    direction: ltr !important;        /* Arah tulisan kiri ke kanan */
+    text-align: left !important;       /* Posisi rata kiri */
+    font-size: 16px;                   /* Ukuran normal */
+    line-height: 1.6;
+}
 
-        .font-khusus-arab {
-            font-family: 'MohammadNaskh', serif;
-        }
+/* === Khusus Teks Bahasa Arab Saja === */
+.teks-arab {
+    font-family: 'Amiri', 'MohammadNaskh', serif;
+    direction: rtl !important;         /* Arah tulisan kanan ke kiri */
+    text-align: right !important;       /* Posisi rata kanan */
+    font-size: 1.6rem;                 /* Tetap besar sesuai keinginan */
+    line-height: 1.8;
+    display: block;
+}
+
+/* Font cadangan Arab */
+@font-face {
+    font-family: 'MohammadNaskh';
+    src: url('MohammadNaskh.ttf') format('truetype');
+}
+
+.font-khusus-arab {
+    font-family: 'MohammadNaskh', 'Amiri', serif;
+}
     </style>
+    
 </head>
+    
 <body>
 
     <div id="floating-timer">
@@ -320,53 +330,59 @@
         
         let htmlSoal = "";
         data.bank_soal.forEach((soal, index) => {
-            htmlSoal += `<div class="soal-box">`;
-            
-            let bagianTeks = soal.teks_pertanyaan.split('\n\n');
-            let teksPertanyaanBersih = "";
+    htmlSoal += `<div class="soal-box">`;
+    
+    let bagianTeks = soal.teks_pertanyaan.split('\n\n');
+    let teksPertanyaanBersih = "";
 
-            if (bagianTeks.length > 1) {
-                let bacaan = bagianTeks[0];
-                bacaan = bacaan.replace(/ • /g, "\n• "); 
-                bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); 
-                bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
-                bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
+    if (bagianTeks.length > 1) {
+        let bacaan = bagianTeks[0];
+        bacaan = bacaan.replace(/ • /g, "\n• "); 
+        bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); 
+        bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
+        bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
 
-                // Menambahkan class teks-arab pada bacaan jika isinya bahasa arab
-                htmlSoal += `<div class="bacaan teks-arab font-khusus-arab">${bacaan.trim()}</div>`;
-                teksPertanyaanBersih = bagianTeks[1];
-            } else {
-                teksPertanyaanBersih = soal.teks_pertanyaan;
-            }
+        // ✅ Cek otomatis: berisi huruf Arab atau tidak
+        const adaArabBacaan = /[\u0600-\u06FF]/.test(bacaan);
+        const kelasBacaan = adaArabBacaan ? "teks-arab font-khusus-arab" : "";
 
-            teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
+        htmlSoal += `<div class="bacaan ${kelasBacaan}">${bacaan.trim()}</div>`;
+        teksPertanyaanBersih = bagianTeks[1];
+    } else {
+        teksPertanyaanBersih = soal.teks_pertanyaan;
+    }
 
-            // MODIFIKASI: Membungkus pertanyaan dengan class teks-arab
-            htmlSoal += `
-                <div class="pertanyaan">
-                    <span style="font-weight:bold;">${index + 1}.</span>
-                    <span class="teks-arab font-khusus-arab">${teksPertanyaanBersih}</span>
-                </div>`;
-            
-            htmlSoal += `<div class="opsi-container">`;
-            
-            soal.pilihan_jawaban.forEach((opsi, i) => {
-                let nilaiOpsi = String.fromCharCode(65 + i);
-                
-                // DETEKSI OTOMATIS: Jika opsi mengandung huruf Arab, pakai font Arab
-                let isArab = /[\u0600-\u06FF]/.test(opsi);
-                let classArab = isArab ? "teks-arab font-khusus-arab" : "";
+    teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
 
-                htmlSoal += `
-                    <div class="opsi">
-                        <label>
-                            <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
-                            <span class="${classArab}">${opsi}</span>
-                        </label>
-                    </div>`;
-            });
-            htmlSoal += `</div></div>`;
-        });
+    // ✅ Cek otomatis pada pertanyaan
+    const adaArabPertanyaan = /[\u0600-\u06FF]/.test(teksPertanyaanBersih);
+    const kelasPertanyaan = adaArabPertanyaan ? "teks-arab font-khusus-arab" : "";
+
+    htmlSoal += `
+        <div class="pertanyaan">
+            <span style="font-weight:bold;">${index + 1}.</span>
+            <span class="${kelasPertanyaan}">${teksPertanyaanBersih}</span>
+        </div>`;
+    
+    htmlSoal += `<div class="opsi-container">`;
+    
+    soal.pilihan_jawaban.forEach((opsi, i) => {
+        let nilaiOpsi = String.fromCharCode(65 + i);
+        
+        // ✅ Cek otomatis pada setiap opsi jawaban
+        const adaArabOpsi = /[\u0600-\u06FF]/.test(opsi);
+        const kelasOpsi = adaArabOpsi ? "teks-arab font-khusus-arab" : "";
+
+        htmlSoal += `
+            <div class="opsi">
+                <label>
+                    <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
+                    <span class="${kelasOpsi}">${opsi}</span>
+                </label>
+            </div>`;
+    });
+    htmlSoal += `</div></div>`;
+});
 
         document.getElementById('lembar-soal').innerHTML = htmlSoal;
 
