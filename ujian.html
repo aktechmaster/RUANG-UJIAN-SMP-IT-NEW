@@ -309,10 +309,10 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     }
 
     const tingkatKelas = kelasSiswa.charAt(0); 
-    const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
-    const urlBaseGitHub = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/";
-    const urlAsli = urlBaseGitHub + namaFile;
-    const urlJSON = urlAsli + "?t=" + new Date().getTime();
+const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
+const urlBaseGitHub = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/";
+const urlAsli = urlBaseGitHub + "Soal_Kelas_9/" + namaFile; // <-- DITAMBAH
+const urlJSON = urlAsli + "?t=" + new Date().getTime();
 
     // Timer (2 Jam = 7200 detik)
     let totalWaktu = 7200; 
