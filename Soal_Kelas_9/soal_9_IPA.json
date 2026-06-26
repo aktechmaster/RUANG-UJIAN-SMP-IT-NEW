@@ -7,7 +7,7 @@
   "bank_soal": [
     {
       "id_soal": 1,
-      "teks_pertanyaan": "Perhatikan hasil pengukuran benda berikut!<br><br><img src='images_IPA/1.png' alt='Pengukuran mikrometer' style='max-width: 100%; height: auto;'><br><br>Hasil pengukuran benda yang ditunjukkan pada mikrometer sekrup tersebut adalah",
+      "teks_pertanyaan": "Perhatikan hasil pengukuran benda berikut!<br><br><img src='images_IPA_9/1.png' alt='Pengukuran mikrometer' style='max-width: 100%; height: auto;'><br><br>Hasil pengukuran benda yang ditunjukkan pada mikrometer sekrup tersebut adalah",
       "pilihan_jawaban": [
         "A. 6,34 mm",
         "B. 6,35 mm",
@@ -27,7 +27,7 @@
     },
     {
       "id_soal": 3,
-      "teks_pertanyaan": "Perhatikan model atom berikut!<br><br><img src='images_IPA/2.png' alt='Model atom' style='max-width: 100%; height: auto;'><br><br>Berdasarkan gambar tersebut, nomor atom, nomor massa, dan jumlah neutron berturut-turut adalah",
+      "teks_pertanyaan": "Perhatikan model atom berikut!<br><br><img src='images_IPA_9/2.png' alt='Model atom' style='max-width: 100%; height: auto;'><br><br>Berdasarkan gambar tersebut, nomor atom, nomor massa, dan jumlah neutron berturut-turut adalah",
       "pilihan_jawaban": [
         "A. 2, 2, dan 2",
         "B. 2, 4, dan 2",
@@ -47,17 +47,17 @@
     },
     {
       "id_soal": 5,
-      "teks_pertanyaan": "Pengukuran massa dan volume dari tiga benda padat terdapat pada tabel berikut:<br><br><img src='images_IPA/3.png' alt='Tabel Benda Padat' style='max-width: 100%; height: auto;'><br><br>Bila ketiga benda tersebut dimasukkan ke dalam bejana yang berisi air (massa jenis air = 1 gr/cm<sup>3</sup>), maka posisi benda padat 1, 2 dan 3 dalam bejana tersebut yang benar ditunjukkan oleh gambar",
+      "teks_pertanyaan": "Pengukuran massa dan volume dari tiga benda padat terdapat pada tabel berikut:<br><br><img src='images_IPA_9/3.png' alt='Tabel Benda Padat' style='max-width: 100%; height: auto;'><br><br>Bila ketiga benda tersebut dimasukkan ke dalam bejana yang berisi air (massa jenis air = 1 gr/cm<sup>3</sup>), maka posisi benda padat 1, 2 dan 3 dalam bejana tersebut yang benar ditunjukkan oleh gambar",
       "pilihan_jawaban": [
-        "A. <img src='images_IPA/5a.png' style='height:80px;'>",
-        "B. <img src='images_IPA/5b.png' style='height:80px;'>",
-        "C. <img src='images_IPA/5c.png' style='height:80px;'>",
-        "D. <img src='images_IPA/5d.png' style='height:80px;'>"
+        "A. <img src='images_IPA_9/5a.png' style='height:80px;'>",
+        "B. <img src='images_IPA_9/5b.png' style='height:80px;'>",
+        "C. <img src='images_IPA_9/5c.png' style='height:80px;'>",
+        "D. <img src='images_IPA_9/5d.png' style='height:80px;'>"
       ]
     },
     {
       "id_soal": 6,
-      "teks_pertanyaan": "Beberapa zat diuji dengan kertas lakmus merah dan lakmus biru. Data perubahan warna lakmus tercantum pada tabel berikut:<br><br><img src='images_IPA/6.png' alt='Tabel Lakmus' style='max-width: 100%; height: auto;'><br><br>Pasangan larutan yang membentuk garam adalah ....",
+      "teks_pertanyaan": "Beberapa zat diuji dengan kertas lakmus merah dan lakmus biru. Data perubahan warna lakmus tercantum pada tabel berikut:<br><br><img src='images_IPA_9/6.png' alt='Tabel Lakmus' style='max-width: 100%; height: auto;'><br><br>Pasangan larutan yang membentuk garam adalah ....",
       "pilihan_jawaban": [
         "A. 1 dan 2",
         "B. 1 dan 3",
@@ -67,7 +67,7 @@
     },
     {
       "id_soal": 7,
-      "teks_pertanyaan": "Perhatikan grafik pemanasan 1 kg es berikut ini!<br><br><img src='images_IPA/7.png' alt='Grafik Pemanasan Es' style='max-width: 100%; height: auto;'><br><br>Jika kalor jenis es 2.100 J/kg°C, kalor lebur es 336.000 J/kg dan kalor jenis air adalah 4.200 J/kg°C maka kalor yang dibutuhkan dalam proses dari P-Q-R adalah ...",
+      "teks_pertanyaan": "Perhatikan grafik pemanasan 1 kg es berikut ini!<br><br><img src='images_IPA_9/7.png' alt='Grafik Pemanasan Es' style='max-width: 100%; height: auto;'><br><br>Jika kalor jenis es 2.100 J/kg°C, kalor lebur es 336.000 J/kg dan kalor jenis air adalah 4.200 J/kg°C maka kalor yang dibutuhkan dalam proses dari P-Q-R adalah ...",
       "pilihan_jawaban": [
         "A. 10.500 J",
         "B. 21.000 J",
@@ -79,10 +79,10 @@
       "id_soal": 8,
       "teks_pertanyaan": "Saat praktikum IPA, Anisa memanaskan sebuah bimetal yang terbuat dari lempengan tembaga dan besi dengan api. Jika koefisien muai panjang tembaga adalah 17×10<sup>-6</sup> /°C sedangkan besi 12×10<sup>-6</sup> /°C, maka bentuk bimetal yang terjadi adalah",
       "pilihan_jawaban": [
-        "A. <img src='images_IPA/8a.png' style='height:80px;'>",
-        "B. <img src='images_IPA/8b.png' style='height:80px;'>",
-        "C. <img src='images_IPA/8c.png' style='height:80px;'>",
-        "D. <img src='images_IPA/8d.png' style='height:80px;'>"
+        "A. <img src='images_IPA_9/8a.png' style='height:80px;'>",
+        "B. <img src='images_IPA_9/8b.png' style='height:80px;'>",
+        "C. <img src='images_IPA_9/8c.png' style='height:80px;'>",
+        "D. <img src='images_IPA_9/8d.png' style='height:80px;'>"
       ]
     },
     {
@@ -107,7 +107,7 @@
     },
     {
       "id_soal": 11,
-      "teks_pertanyaan": "Perhatikan gambar gaya-gaya yang bekerja pada benda berikut!<br><br><img src='images_IPA/11.png' alt='Gaya pada benda' style='max-width: 100%; height: auto;'><br><br>Jika massa benda tersebut 3 kg, percepatan yang akan terjadi pada benda adalah",
+      "teks_pertanyaan": "Perhatikan gambar gaya-gaya yang bekerja pada benda berikut!<br><br><img src='images_IPA_9/11.png' alt='Gaya pada benda' style='max-width: 100%; height: auto;'><br><br>Jika massa benda tersebut 3 kg, percepatan yang akan terjadi pada benda adalah",
       "pilihan_jawaban": [
         "A. 15 m/s<sup>2</sup>",
         "B. 10 m/s<sup>2</sup>",
@@ -117,7 +117,7 @@
     },
     {
       "id_soal": 12,
-      "teks_pertanyaan": "Perhatikan gambar sangkar burung berikut!<br><br><img src='images_IPA/12.png' alt='Sangkar burung' style='max-width: 100%; height: auto;'><br><br>Jika masa sangkar burung tersebut 2 kg, maka energi potensial yang dimiliki oleh sangkar tersebut adalah",
+      "teks_pertanyaan": "Perhatikan gambar sangkar burung berikut!<br><br><img src='images_IPA_9/12.png' alt='Sangkar burung' style='max-width: 100%; height: auto;'><br><br>Jika masa sangkar burung tersebut 2 kg, maka energi potensial yang dimiliki oleh sangkar tersebut adalah",
       "pilihan_jawaban": [
         "A. 10 J",
         "B. 16 J",
@@ -127,7 +127,7 @@
     },
     {
       "id_soal": 13,
-      "teks_pertanyaan": "Perhatikan gambar tuas berikut!<br><br><img src='images_IPA/13.png' alt='Tuas' style='max-width: 100%; height: auto;'><br><br>Tuas ini akan menghasilkan gaya kuasa F paling kecil bila beban W diletakkan di titik",
+      "teks_pertanyaan": "Perhatikan gambar tuas berikut!<br><br><img src='images_IPA_9/13.png' alt='Tuas' style='max-width: 100%; height: auto;'><br><br>Tuas ini akan menghasilkan gaya kuasa F paling kecil bila beban W diletakkan di titik",
       "pilihan_jawaban": [
         "A. 1, tumpu T di titik 2 dan F di titik 7",
         "B. 2, tumpu T di titik 3 dan F di titik 7",
@@ -157,7 +157,7 @@
     },
     {
       "id_soal": 16,
-      "teks_pertanyaan": "Dari atas kapal seorang peneliti memancarkan bunyi ke dasar laut seperti gambar berikut:<br><br><img src='images_IPA/16.png' alt='Kapal sonar' style='max-width: 100%; height: auto;'><br><br>Berdasarkan observasi, ternyata bunyi pantul terdeteksi setelah 5 sekon. Jika kecepatan bunyi di air laut 1400 m/s, maka kedalaman laut tersebut adalah",
+      "teks_pertanyaan": "Dari atas kapal seorang peneliti memancarkan bunyi ke dasar laut seperti gambar berikut:<br><br><img src='images_IPA_9/16.png' alt='Kapal sonar' style='max-width: 100%; height: auto;'><br><br>Berdasarkan observasi, ternyata bunyi pantul terdeteksi setelah 5 sekon. Jika kecepatan bunyi di air laut 1400 m/s, maka kedalaman laut tersebut adalah",
       "pilihan_jawaban": [
         "A. 350 m",
         "B. 700 m",
@@ -169,15 +169,15 @@
       "id_soal": 17,
       "teks_pertanyaan": "Bentuk bayangan yang benar pada cermin datar ditunjukkan oleh gambar",
       "pilihan_jawaban": [
-        "A. <img src='images_IPA/17a.png' style='height:80px;'>",
-        "B. <img src='images_IPA/17b.png' style='height:80px;'>",
-        "C. <img src='images_IPA/17c.png' style='height:80px;'>",
-        "D. <img src='images_IPA/17d.png' style='height:80px;'>"
+        "A. <img src='images_IPA_9/17a.png' style='height:80px;'>",
+        "B. <img src='images_IPA_9/17b.png' style='height:80px;'>",
+        "C. <img src='images_IPA_9/17c.png' style='height:80px;'>",
+        "D. <img src='images_IPA_9/17d.png' style='height:80px;'>"
       ]
     },
     {
       "id_soal": 18,
-      "teks_pertanyaan": "Dua buah muatan masing-masing Q1 dan Q2 berada di udara terpisah pada jarak 2r, sehingga terjadi gaya tarik sebesar F seperti tampak pada gambar.<br><br><img src='images_IPA/18.png' alt='Muatan listrik' style='max-width: 100%; height: auto;'><br><br>Jika kedua muatan dipindahkan sehingga berjarak setengah kali jarak mula-mula, maka gaya tarik antara kedua muatan menjadi",
+      "teks_pertanyaan": "Dua buah muatan masing-masing Q1 dan Q2 berada di udara terpisah pada jarak 2r, sehingga terjadi gaya tarik sebesar F seperti tampak pada gambar.<br><br><img src='images_IPA_9/18.png' alt='Muatan listrik' style='max-width: 100%; height: auto;'><br><br>Jika kedua muatan dipindahkan sehingga berjarak setengah kali jarak mula-mula, maka gaya tarik antara kedua muatan menjadi",
       "pilihan_jawaban": [
         "A. 4 F",
         "B. 2 F",
@@ -187,7 +187,7 @@
     },
     {
       "id_soal": 19,
-      "teks_pertanyaan": "Perhatikan gambar rangkaian listrik berikut!<br><br><img src='images_IPA/19.png' alt='Rangkaian listrik' style='max-width: 100%; height: auto;'><br><br>Besar kuat arus yang mengalir dalam rangkaian tersebut adalah",
+      "teks_pertanyaan": "Perhatikan gambar rangkaian listrik berikut!<br><br><img src='images_IPA_9/19.png' alt='Rangkaian listrik' style='max-width: 100%; height: auto;'><br><br>Besar kuat arus yang mengalir dalam rangkaian tersebut adalah",
       "pilihan_jawaban": [
         "A. 1 A",
         "B. 2 A",
@@ -227,7 +227,7 @@
     },
     {
       "id_soal": 23,
-      "teks_pertanyaan": "Perhatikan gambar rantai makanan berikut!<br><br><img src='images_IPA/23.png' alt='Rantai makanan' style='max-width: 100%; height: auto;'><br><br>Organisme yang berperan sebagai produsen ditunjukkan oleh nomor",
+      "teks_pertanyaan": "Perhatikan gambar rantai makanan berikut!<br><br><img src='images_IPA_9/23.png' alt='Rantai makanan' style='max-width: 100%; height: auto;'><br><br>Organisme yang berperan sebagai produsen ditunjukkan oleh nomor",
       "pilihan_jawaban": [
         "A. 1",
         "B. 2",
@@ -257,7 +257,7 @@
     },
     {
       "id_soal": 26,
-      "teks_pertanyaan": "Perhatikan gambar pabrik-pabrik yang menimbulkan pencemaran udara berikut!<br><br><img src='images_IPA/26.png' alt='Pabrik' style='max-width: 100%; height: auto;'><br><br>Upaya yang dapat dilakukan untuk memperbaiki lingkungan tersebut adalah",
+      "teks_pertanyaan": "Perhatikan gambar pabrik-pabrik yang menimbulkan pencemaran udara berikut!<br><br><img src='images_IPA_9/26.png' alt='Pabrik' style='max-width: 100%; height: auto;'><br><br>Upaya yang dapat dilakukan untuk memperbaiki lingkungan tersebut adalah",
       "pilihan_jawaban": [
         "A. mewajibkan semua karyawan memakai masker",
         "B. mengganti bahan bakar fosil dengan bahan gas",
@@ -267,7 +267,7 @@
     },
     {
       "id_soal": 27,
-      "teks_pertanyaan": "Perhatikan tabel pemanfaatan bioteknologi berikut:<br><br><img src='images_IPA/27.png' alt='Tabel bioteknologi' style='max-width: 100%; height: auto;'><br><br>Hubungan yang benar antara produk, proses dan aspek ditunjukkan nomor",
+      "teks_pertanyaan": "Perhatikan tabel pemanfaatan bioteknologi berikut:<br><br><img src='images_IPA_9/27.png' alt='Tabel bioteknologi' style='max-width: 100%; height: auto;'><br><br>Hubungan yang benar antara produk, proses dan aspek ditunjukkan nomor",
       "pilihan_jawaban": [
         "A. 1 dan 2",
         "B. 1 dan 3",
@@ -297,7 +297,7 @@
     },
     {
       "id_soal": 30,
-      "teks_pertanyaan": "Perhatikan tabel data hasil percobaan Sach berikut:<br><br><img src='images_IPA/30.png' alt='Tabel percobaan Sach' style='max-width: 100%; height: auto;'><br><br>Simpulan yang dapat diperoleh dari data percobaan adalah ...",
+      "teks_pertanyaan": "Perhatikan tabel data hasil percobaan Sach berikut:<br><br><img src='images_IPA_9/30.png' alt='Tabel percobaan Sach' style='max-width: 100%; height: auto;'><br><br>Simpulan yang dapat diperoleh dari data percobaan adalah ...",
       "pilihan_jawaban": [
         "A. Daun yang tidak tertutup tidak terjadi fotosintesis.",
         "B. Daun yang tertutup dapat terjadi fotosintesis.",
@@ -317,7 +317,7 @@
     },
     {
       "id_soal": 32,
-      "teks_pertanyaan": "Perhatikan tabel data hasil uji makanan berikut:<br><br><img src='images_IPA/32.png' alt='Tabel uji makanan' style='max-width: 100%; height: auto;'><br><br>Berdasarkan data tersebut, bahan makanan yang mengandung protein dan amilum adalah ...",
+      "teks_pertanyaan": "Perhatikan tabel data hasil uji makanan berikut:<br><br><img src='images_IPA_9/32.png' alt='Tabel uji makanan' style='max-width: 100%; height: auto;'><br><br>Berdasarkan data tersebut, bahan makanan yang mengandung protein dan amilum adalah ...",
       "pilihan_jawaban": [
         "A. K dan L",
         "B. K dan M",
@@ -327,7 +327,7 @@
     },
     {
       "id_soal": 33,
-      "teks_pertanyaan": "Perhatikan gambar proses pernapasan berikut!<br><br><img src='images_IPA/33.png' alt='Pernapasan' style='max-width: 100%; height: auto;'><br><br>Dari gambar tersebut volume rongga dada pada saat inspirasi dan ekspirasi adalah",
+      "teks_pertanyaan": "Perhatikan gambar proses pernapasan berikut!<br><br><img src='images_IPA_9/33.png' alt='Pernapasan' style='max-width: 100%; height: auto;'><br><br>Dari gambar tersebut volume rongga dada pada saat inspirasi dan ekspirasi adalah",
       "pilihan_jawaban": [
         "A. volume rongga dada pada saat inspirasi lebih besar dibandingkan pada saat ekspirasi",
         "B. volume rongga dada pada saat inspirasi lebih kecil dibandingkan pada saat ekspirasi",
@@ -337,7 +337,7 @@
     },
     {
       "id_soal": 34,
-      "teks_pertanyaan": "Terdapat pada organ apakah struktur gambar tersebut!<br><br><img src='images_IPA/34.png' alt='Organ ginjal' style='max-width: 100%; height: auto;'><br><br>",
+      "teks_pertanyaan": "Terdapat pada organ apakah struktur gambar tersebut!<br><br><img src='images_IPA_9/34.png' alt='Organ ginjal' style='max-width: 100%; height: auto;'><br><br>",
       "pilihan_jawaban": [
         "A. Hati",
         "B. Kulit",
