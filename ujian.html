@@ -254,33 +254,7 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
         </div>
     </div>
 
-    <script>
-        // === BLOKIR TOMBOL KEMBALI - TANPA POPUP, LEBIH KUAT ===
-// Isi riwayat agar tidak ada halaman sebelumnya yang bisa dituju
-history.pushState(null, document.title, window.location.href);
-
-// Setiap kali ada perintah "kembali", paksa tetap di halaman ini
-window.addEventListener('popstate', function (e) {
-    // Cegah aksi bawaan
-    e.preventDefault();
-    // Kembalikan posisi ke halaman ujian
-    history.pushState(null, document.title, window.location.href);
-    // Tidak ada pesan, hanya diam di tempat
-    return false;
-});
-
-// Cegah navigasi keluar lewat cara lain
-window.onbeforeunload = function () {
-    // Biarkan kosong, JANGAN isi teks apa pun — agar tidak muncul peringatan
-    return undefined;
-};
-
-// Cegah halaman dimuat ulang dari cache
-window.addEventListener('pageshow', function(e) {
-    if (e.persisted) window.location.reload();
-});
-// ==================BATAS AKHIR==========================
-        
+    <script>    
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec"; 
 
     // MENGGANTI ALERT DAN CONFIRM AGAR AMAN DAN TIDAK DIBLOKIR APLIKASI
