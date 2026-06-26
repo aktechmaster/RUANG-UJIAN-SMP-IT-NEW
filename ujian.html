@@ -255,6 +255,21 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     </div>
 
     <script>
+        // === HALANGI TOMBOL KEMBALI - TANPA POPUP ===
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function () {
+        // Paksa tetap di halaman ini, TANPA alert
+        history.pushState(null, null, location.href);
+        // Bisa tambahkan log jika perlu, tapi tidak terlihat siswa
+        console.log("Navigasi kembali diblokir");
+        });
+
+        // Cegah juga jika halaman dimuat ulang dari cache
+        window.addEventListener('pageshow', function (e) {
+        if (e.persisted) history.go(0);
+        });
+        // ==================BATAS AKHIR==========================
+        
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec"; 
 
     // MENGGANTI ALERT DAN CONFIRM AGAR AMAN DAN TIDAK DIBLOKIR APLIKASI
