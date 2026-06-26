@@ -17,19 +17,16 @@
     }
 
     body {
-        /* 1. WARNA BACKGROUND LEMBUT */
+        /* Warna dasar latar belakang */
         background-color: #FFFFFF; 
         
-        /* 2. MOTIF ABSTRAK MINIMALIS */
-        background-image: 
-            linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(30deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(150deg, rgba(56, 189, 248, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(56, 189, 248, 0.03) 87.5%, rgba(56, 189, 248, 0.03)),
-            linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03)),
-            linear-gradient(60deg, rgba(139, 92, 246, 0.03) 25%, transparent 25.5%, transparent 75%, rgba(139, 92, 246, 0.03) 75%, rgba(139, 92, 246, 0.03));
-        background-size: 80px 140px;
-        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+        /* Menggunakan file Hexagon.svg sebagai latar belakang */
+        background-image: url("Hexagon.svg");
+        background-repeat: repeat; /* Mengulang pola agar menutupi seluruh halaman */
+        background-size: 150px auto; /* Ukuran pola, sesuaikan jika perlu */
+        background-position: center center;
+        background-attachment: fixed; /* Agar pola tidak bergeser saat halaman digulir */
+        opacity: 0.95; /* Opsional: sedikit redup agar tidak mengganggu tulisan */
 
         min-height: 100vh;
         display: flex;
@@ -37,6 +34,22 @@
         align-items: center;
         position: relative;
         padding: 20px;
+    }
+
+    /* Opsional: Jika ingin membuat latar belakang lebih samar */
+    body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.7); /* Lapisan putih transparan */
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Pastikan konten tetap terlihat di atas latar belakang */
+    .konten {
+        position: relative;
+        z-index: 1;
     }
 
     /* GLASSMORPHISM CONTAINER (Disesuaikan untuk Background Terang) */
