@@ -348,7 +348,7 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
     .then(data => {
         bankSoalData = data;
 
-        document.getElementById('judulMapel').innerText = "Ujian Sekolah Berstandar Nasional " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
+        document.getElementById('judulMapel').innerText = "Sumatif Tengah Semester Ganjil | " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
         document.getElementById('infoNama').innerText = namaSiswa;
         document.getElementById('infoKelas').innerText = kelasSiswa;
         
