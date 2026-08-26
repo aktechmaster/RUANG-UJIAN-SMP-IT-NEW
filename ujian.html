@@ -456,83 +456,104 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
     }
 
     function selesaiUjian() {
-        if (!bankSoalData) return;
+    if (!bankSoalData) return;
 
-        let totalSoal = bankSoalData.bank_soal.length;
-        let jumlahBenar = 0;
-        let jumlahSalah = 0;
+    let totalSoal = bankSoalData.bank_soal.length;
+    let jumlahBenar = 0;
+    let jumlahSalah = 0;
 
-        bankSoalData.bank_soal.forEach((soal, index) => {
-            let opsiDipilih = document.querySelector(`input[name="soal_${soal.id_soal}"]:checked`);
-            let kunciJawaban = bankSoalData.kunci_jawaban_rahasia ? bankSoalData.kunci_jawaban_rahasia[soal.id_soal] : undefined;
+    bankSoalData.bank_soal.forEach((soal) => {
+        let opsiDipilih = document.querySelector(`input[name="soal_${soal.id_soal}"]:checked`);
+        let kunciJawaban = bankSoalData.kunci_jawaban_rahasia ? bankSoalData.kunci_jawaban_rahasia[soal.id_soal] : undefined;
 
-            if (opsiDipilih) {
-                let jawabanSiswa = opsiDipilih.value;
-                if (String(jawabanSiswa).toUpperCase() === String(kunciJawaban).toUpperCase()) {
-                    jumlahBenar++;
-                } else {
-                    jumlahSalah++;
-                }
-            } else {
-                jumlahSalah++;
-            }
-        });
+        if (opsiDipilih && String(opsiDipilih.value).toUpperCase() === String(kunciJawaban).toUpperCase()) {
+            jumlahBenar++;
+        } else {
+            jumlahSalah++;
+        }
+    });
 
-        let skorAkhir = ((jumlahBenar / totalSoal) * 100).toFixed(2);
+    let skorAkhir = ((jumlahBenar / totalSoal) * 100).toFixed(2);
+    let rekapJawaban = kumpulkanJawaban();
 
-        document.getElementById('popupModal').style.display = 'flex';
+    // Kirim data terlebih dahulu (Popup sukses dipindah ke dalam fungsi simpanKeSpreadsheet)
+    simpanKeSpreadsheet(namaSiswa, kelasSiswa, mapelUjian, skorAkhir, jumlahBenar, jumlahSalah, rekapJawaban);
+}
 
-        let rekapJawaban = kumpulkanJawaban();
-        simpanKeSpreadsheet(namaSiswa, kelasSiswa, mapelUjian, skorAkhir, jumlahBenar, jumlahSalah, rekapJawaban);
+function kumpulkanJawaban() {
+    let jawaban = [];
+    const daftarSoal = document.querySelectorAll('.soal-box'); 
+    
+    daftarSoal.forEach((soal) => {
+        const inputDipilih = soal.querySelector('input[type="radio"]:checked');
+        if (inputDipilih) {
+            jawaban.push(inputDipilih.value); 
+        } else {
+            jawaban.push("-"); 
+        }
+    });
+    
+    return jawaban;
+}
+
+function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah, arrayJawaban) {
+    // 1. KUNCI TOMBOL: Cegah siswa klik berulang kali saat loading (Anti Data Ganda)
+    const btnSubmit = document.querySelector('button[onclick="sebelumSubmit()"]');
+    if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.innerText = "⏳ Sedang Mengirim Jawaban... Mohon Tunggu";
+        btnSubmit.style.background = "#94a3b8";
     }
 
-    function kumpulkanJawaban() {
-        let jawaban = [];
-        const daftarSoal = document.querySelectorAll('.soal-box'); 
-        
-        daftarSoal.forEach((soal) => {
-            const inputDipilih = soal.querySelector('input[type="radio"]:checked');
-            if (inputDipilih) {
-                jawaban.push(inputDipilih.value); 
-            } else {
-                jawaban.push("-"); 
-            }
-        });
-        
-        return jawaban;
-    }
+    let email = sessionStorage.getItem('cbt_email') || "-"; 
+    let startTime = parseInt(sessionStorage.getItem('exam_start_time')) || Date.now();
+    let durasiMenit = Math.round((Date.now() - startTime) / 60000);
+    let durasiFinal = durasiMenit <= 0 ? 1 : durasiMenit;
 
-    function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah, arrayJawaban) {
-        let email = sessionStorage.getItem('cbt_email') || "-"; 
-        let startTime = parseInt(sessionStorage.getItem('exam_start_time')) || Date.now();
+    let dataSiswa = {
+        nama: nama,
+        kelas: kelas,
+        mapel: mapel,
+        skor: skor,
+        benar: benar,
+        salah: salah,
+        waktu: durasiFinal + " Menit",
+        email: email,
+        jawaban: arrayJawaban
+    };
+
+    // 2. KIRIM TANPA 'no-cors' agar browser bisa membaca status asli dari Apps Script
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(dataSiswa)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Respon server bermasalah (Status: " + response.status + ")");
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.status === "success") {
+            // HASIL PASTI SUKSES: Baru tampilkan Modal Popup bahwa jawaban terekam
+            document.getElementById('popupModal').style.display = 'flex';
+        } else {
+            // SERVER DITOLAK: Lempar error sesuai pesan Apps Script
+            throw new Error(data.message || "Database menolak menyimpan data.");
+        }
+    })
+    .catch(err => {
+        // HASIL PASTI GAGAL: Tampilkan alert error & BUKA KEMBALI tombol agar siswa bisa coba lagi
+        alert("❌ GAGAL MENGIRIM JAWABAN!\n\nPenyebab: " + err.message + "\n\nJawaban Anda belum terkirim. Silakan periksa koneksi internet lalu klik tombol 'Kumpulkan Jawaban' sekali lagi.");
         
-        let durasiMs = Date.now() - startTime;
-        let durasiMenit = Math.round(durasiMs / 60000);
-        let durasiFinal = durasiMenit <= 0 ? 1 : durasiMenit;
-
-        let dataSiswa = {
-            nama: nama,
-            kelas: kelas,
-            mapel: mapel,
-            skor: skor,
-            benar: benar,
-            salah: salah,
-            waktu: durasiFinal + " Menit",
-            email: email,
-            jawaban: arrayJawaban
-        };
-
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dataSiswa)
-        }).then(() => {
-            console.log("Data dan rekap jawaban berhasil dikirim.");
-        }).catch(err => {
-            console.error("Gagal mengirim data", err);
-        });
-    }
+        if (btnSubmit) {
+            btnSubmit.disabled = false;
+            btnSubmit.innerText = "Kumpulkan Jawaban";
+            btnSubmit.style.background = "#007bff";
+        }
+    });
+}
 
     function tutupModal() {
         document.getElementById('popupModal').style.display = 'none';
