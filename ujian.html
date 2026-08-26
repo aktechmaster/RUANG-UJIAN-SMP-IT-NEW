@@ -255,17 +255,9 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     </div>
 
     <script>    
-    // ⚠️ GANTI DENGAN URL HASIL NEW DEPLOYMENT APPS SCRIPT BARU ANDA
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec"; 
 
-    // OTOMATIS KIRIM ULANG SAAT SISWA MEMBUKA/RELOAD HALAMAN JIKA ADA DATA TERTUNDA
-    window.addEventListener('DOMContentLoaded', () => {
-        if (localStorage.getItem('jawaban_cbt_backup')) {
-            prosesKirimKeServer();
-        }
-    });
-
-    // MENGGANTI ALERT DAN CONFIRM AGAR AMAN DI EXAMBRO / BROWSER HP
+    // MENGGANTI ALERT DAN CONFIRM AGAR AMAN DAN TIDAK DIBLOKIR APLIKASI
     window.alert = function(message) {
         document.getElementById('customAlertTitle').innerText = 'Informasi';
         document.getElementById('customAlertMessage').innerText = message;
@@ -306,6 +298,7 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     
     let bankSoalData = null; 
 
+    // Jika dibuka langsung tanpa melalui login CBT, defaultkan ke MTK
     if (!kelasSiswa || !mapelUjian) {
         kelasSiswa = "9 Al-Quran";
         mapelUjian = "MTK";
@@ -316,10 +309,10 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     }
 
     const tingkatKelas = kelasSiswa.charAt(0); 
-    const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
-    const urlBaseGitHub = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/";
-    const urlAsli = urlBaseGitHub + "Soal_Kelas_9/" + namaFile;
-    const urlJSON = urlAsli + "?t=" + new Date().getTime();
+const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
+const urlBaseGitHub = "https://raw.githubusercontent.com/aktechmaster/RUANG-UJIAN-SMP-IT-NEW/refs/heads/main/";
+const urlAsli = urlBaseGitHub + "Soal_Kelas_9/" + namaFile; // <-- DITAMBAH
+const urlJSON = urlAsli + "?t=" + new Date().getTime();
 
     // Timer (2 Jam = 7200 detik)
     let totalWaktu = 7200; 
@@ -361,65 +354,70 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
         
         let htmlSoal = "";
         data.bank_soal.forEach((soal, index) => {
-            htmlSoal += `<div class="soal-box">`;
-            
-            let bagianTeks = soal.teks_pertanyaan.split('\n\n');
-            let teksPertanyaanBersih = "";
+    htmlSoal += `<div class="soal-box">`;
+    
+    let bagianTeks = soal.teks_pertanyaan.split('\n\n');
+    let teksPertanyaanBersih = "";
 
-            if (bagianTeks.length > 1) {
-                let bacaan = bagianTeks[0];
-                bacaan = bacaan.replace(/ • /g, "\n• "); 
-                bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); 
-                bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
-                bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
+    if (bagianTeks.length > 1) {
+        let bacaan = bagianTeks[0];
+        bacaan = bacaan.replace(/ • /g, "\n• "); 
+        bacaan = bacaan.replace(/ (\d+\.) /g, "\n$1 "); 
+        bacaan = bacaan.replace(/Materials:/g, "\nMaterials:\n");
+        bacaan = bacaan.replace(/Steps:/g, "\nSteps:\n");
 
-                const adaArabBacaan = /[\u0600-\u06FF]/.test(bacaan);
-                const kelasBacaan = adaArabBacaan ? "teks-arab font-khusus-arab" : "";
+        // ✅ Cek otomatis: berisi huruf Arab atau tidak
+        const adaArabBacaan = /[\u0600-\u06FF]/.test(bacaan);
+        const kelasBacaan = adaArabBacaan ? "teks-arab font-khusus-arab" : "";
 
-                htmlSoal += `<div class="bacaan ${kelasBacaan}">${bacaan.trim()}</div>`;
-                teksPertanyaanBersih = bagianTeks[1];
-            } else {
-                teksPertanyaanBersih = soal.teks_pertanyaan;
-            }
+        htmlSoal += `<div class="bacaan ${kelasBacaan}">${bacaan.trim()}</div>`;
+        teksPertanyaanBersih = bagianTeks[1];
+    } else {
+        teksPertanyaanBersih = soal.teks_pertanyaan;
+    }
 
-            teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
+    teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
 
-            const adaArabPertanyaan = /[\u0600-\u06FF]/.test(teksPertanyaanBersih);
-            const kelasPertanyaan = adaArabPertanyaan ? "teks-arab font-khusus-arab" : "";
+    // ✅ Cek otomatis pada pertanyaan
+    const adaArabPertanyaan = /[\u0600-\u06FF]/.test(teksPertanyaanBersih);
+    const kelasPertanyaan = adaArabPertanyaan ? "teks-arab font-khusus-arab" : "";
 
-            htmlSoal += `
-                <div class="pertanyaan">
-                    <span style="font-weight:bold;">${index + 1}.</span>
-                    <span class="${kelasPertanyaan}">${teksPertanyaanBersih}</span>
-                </div>`;
-            
-            htmlSoal += `<div class="opsi-container">`;
-            
-            soal.pilihan_jawaban.forEach((opsi, i) => {
-                let nilaiOpsi = String.fromCharCode(65 + i);
-                
-                const adaArabOpsi = /[\u0600-\u06FF]/.test(opsi);
-                const kelasOpsi = adaArabOpsi ? "teks-arab font-khusus-arab" : "";
+    htmlSoal += `
+        <div class="pertanyaan">
+            <span style="font-weight:bold;">${index + 1}.</span>
+            <span class="${kelasPertanyaan}">${teksPertanyaanBersih}</span>
+        </div>`;
+    
+    htmlSoal += `<div class="opsi-container">`;
+    
+    soal.pilihan_jawaban.forEach((opsi, i) => {
+        let nilaiOpsi = String.fromCharCode(65 + i);
+        
+        // ✅ Cek otomatis pada setiap opsi jawaban
+        const adaArabOpsi = /[\u0600-\u06FF]/.test(opsi);
+        const kelasOpsi = adaArabOpsi ? "teks-arab font-khusus-arab" : "";
 
-                htmlSoal += `
-                    <div class="opsi">
-                        <label>
-                            <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
-                            <span class="${kelasOpsi}">${opsi}</span>
-                        </label>
-                    </div>`;
-            });
-            htmlSoal += `</div></div>`;
-        });
+        htmlSoal += `
+            <div class="opsi">
+                <label>
+                    <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
+                    <span class="${kelasOpsi}">${opsi}</span>
+                </label>
+            </div>`;
+    });
+    htmlSoal += `</div></div>`;
+});
 
         document.getElementById('lembar-soal').innerHTML = htmlSoal;
 
+        // Merender ulang MathJax jika soal telah dimuat ke DOM
         setTimeout(() => {
             if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
                 MathJax.typesetPromise();
             }
         }, 1000);
 
+        // Simpan jawaban siswa pada sesi
         document.querySelectorAll('input[type="radio"]').forEach(input => {
             let savedValue = sessionStorage.getItem(input.name);
             if (savedValue && input.value === savedValue) {
@@ -451,7 +449,10 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
             return;
         }
 
-        confirm("Apakah Anda yakin ingin mengumpulkan jawaban?");
+        let konfirmasi = confirm("Apakah Anda yakin ingin mengumpulkan jawaban?");
+        if (konfirmasi) {
+            selesaiUjian();
+        }
     }
 
     function selesaiUjian() {
@@ -478,6 +479,8 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
         });
 
         let skorAkhir = ((jumlahBenar / totalSoal) * 100).toFixed(2);
+
+        document.getElementById('popupModal').style.display = 'flex';
 
         let rekapJawaban = kumpulkanJawaban();
         simpanKeSpreadsheet(namaSiswa, kelasSiswa, mapelUjian, skorAkhir, jumlahBenar, jumlahSalah, rekapJawaban);
@@ -519,52 +522,15 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
             jawaban: arrayJawaban
         };
 
-        // Simpan jawaban ke localStorage sebagai cadangan utama
-        localStorage.setItem('jawaban_cbt_backup', JSON.stringify(dataSiswa));
-
-        // Eksekusi pengiriman ke server
-        prosesKirimKeServer();
-    }
-
-    function prosesKirimKeServer() {
-        let rawData = localStorage.getItem('jawaban_cbt_backup');
-        if (!rawData) return;
-
-        // Tampilkan modal loading
-        document.getElementById('customAlertTitle').innerText = 'Mengirim Jawaban...';
-        document.getElementById('customAlertMessage').innerText = 'Sedang menghubungkan ke server dan mengunci antrean data. Mohon tunggu...';
-        document.getElementById('customAlertBtnCancel').style.display = 'none';
-        document.getElementById('customAlertBtnOk').style.display = 'none';
-        document.getElementById('customAlertModal').style.display = 'flex';
-
         fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
-            body: rawData
-        })
-        .then(response => {
-            if (!response.ok) throw new Error("Respon server abnormal");
-            return response.json();
-        })
-        .then(data => {
-            if (data && data.status === "success") {
-                // BERHASIL 100%: Hapus cadangan data lokal & tampilkan Modal Selamat
-                localStorage.removeItem('jawaban_cbt_backup');
-                document.getElementById('customAlertModal').style.display = 'none';
-                document.getElementById('popupModal').style.display = 'flex';
-            } else {
-                throw new Error(data.message || "Gagal menyimpan di server");
-            }
-        })
-        .catch(err => {
-            // GAGAL: Jawaban aman di localStorage, tampilkan tombol coba lagi
-            document.getElementById('customAlertTitle').innerText = 'Gagal Mengirim!';
-            document.getElementById('customAlertMessage').innerText = 'Koneksi internet terganggu atau server padat. Jawaban Anda tersimpan AMAN di perangkat ini. Klik "Coba Kirim Ulang" di bawah.';
-            document.getElementById('customAlertBtnOk').innerText = 'Coba Kirim Ulang';
-            document.getElementById('customAlertBtnOk').style.display = 'inline-block';
-            document.getElementById('customAlertBtnOk').onclick = function() {
-                prosesKirimKeServer();
-            };
-            document.getElementById('customAlertModal').style.display = 'flex';
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataSiswa)
+        }).then(() => {
+            console.log("Data dan rekap jawaban berhasil dikirim.");
+        }).catch(err => {
+            console.error("Gagal mengirim data", err);
         });
     }
 
@@ -576,6 +542,6 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
         sessionStorage.clear();
         window.location.href = 'index.html';
     }
-</script>
+    </script>
 </body>
 </html>
