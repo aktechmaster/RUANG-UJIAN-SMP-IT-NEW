@@ -503,36 +503,77 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
     }
 
     function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah, arrayJawaban) {
-        let email = sessionStorage.getItem('cbt_email') || "-"; 
-        let startTime = parseInt(sessionStorage.getItem('exam_start_time')) || Date.now();
-        
-        let durasiMs = Date.now() - startTime;
-        let durasiMenit = Math.round(durasiMs / 60000);
-        let durasiFinal = durasiMenit <= 0 ? 1 : durasiMenit;
+    let email = sessionStorage.getItem('cbt_email') || "-"; 
+    let startTime = parseInt(sessionStorage.getItem('exam_start_time')) || Date.now();
+    
+    let durasiMs = Date.now() - startTime;
+    let durasiMenit = Math.round(durasiMs / 60000);
+    let durasiFinal = durasiMenit <= 0 ? 1 : durasiMenit;
 
-        let dataSiswa = {
-            nama: nama,
-            kelas: kelas,
-            mapel: mapel,
-            skor: skor,
-            benar: benar,
-            salah: salah,
-            waktu: durasiFinal + " Menit",
-            email: email,
-            jawaban: arrayJawaban
+    let dataSiswa = {
+        nama: nama,
+        kelas: kelas,
+        mapel: mapel,
+        skor: skor,
+        benar: benar,
+        salah: salah,
+        waktu: durasiFinal + " Menit",
+        email: email,
+        jawaban: arrayJawaban
+    };
+
+    // 1. Simpan jawaban ke localStorage sebagai cadangan darurat jika sinyal mati
+    localStorage.setItem('jawaban_cbt_backup', JSON.stringify(dataSiswa));
+
+    // 2. Eksekusi pengiriman ke server
+    prosesKirimKeServer();
+}
+
+function prosesKirimKeServer() {
+    let rawData = localStorage.getItem('jawaban_cbt_backup');
+    if (!rawData) return;
+
+    // Tampilkan pesan loading di alert/modal
+    document.getElementById('customAlertTitle').innerText = 'Mengirim Jawaban...';
+    document.getElementById('customAlertMessage').innerText = 'Sedang menghubungkan ke server dan mengunci antrean data. Mohon tunggu...';
+    document.getElementById('customAlertBtnCancel').style.display = 'none';
+    document.getElementById('customAlertBtnOk').style.display = 'none';
+    document.getElementById('customAlertModal').style.display = 'flex';
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // Menggunakan text/plain menghindari kendala preflight CORS pada GAS
+        body: rawData,
+        redirect: 'follow'
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Respon server abnormal");
+        return response.json();
+    })
+    .then(data => {
+        if (data && data.status === "success") {
+            // BERHASIL 100%: Hapus cadangan data lokal
+            localStorage.removeItem('jawaban_cbt_backup');
+            
+            // Sembunyikan alert loading, tampilkan Modal Selamat
+            document.getElementById('customAlertModal').style.display = 'none';
+            document.getElementById('popupModal').style.display = 'flex';
+        } else {
+            throw new Error(data.message || "Gagal menyimpan di server");
+        }
+    })
+    .catch(err => {
+        // GAGAL: Jangan pura-pura sukses. Jawaban siswa aman di localStorage HP/laptop mereka.
+        document.getElementById('customAlertTitle').innerText = 'Gagal Mengirim!';
+        document.getElementById('customAlertMessage').innerText = 'Koneksi internet terganggu atau server padat. Jawaban Anda tersimpan AMAN di perangkat ini. Klik "Coba Kirim Ulang" di bawah.';
+        document.getElementById('customAlertBtnOk').innerText = 'Coba Kirim Ulang';
+        document.getElementById('customAlertBtnOk').style.display = 'inline-block';
+        document.getElementById('customAlertBtnOk').onclick = function() {
+            prosesKirimKeServer();
         };
-
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dataSiswa)
-        }).then(() => {
-            console.log("Data dan rekap jawaban berhasil dikirim.");
-        }).catch(err => {
-            console.error("Gagal mengirim data", err);
-        });
-    }
+        document.getElementById('customAlertModal').style.display = 'flex';
+    });
+}
 
     function tutupModal() {
         document.getElementById('popupModal').style.display = 'none';
