@@ -271,9 +271,12 @@
             </div>
             
             <div class="input-group">
-                <label for="tokenUjian">Token / Password Ujian</label>
-                <input type="password" id="tokenUjian" placeholder="Masukkan token mapel..." required>
-            </div>
+    <label for="tokenUjian">Token / Password Ujian</label>
+    <div style="position: relative;">
+        <input type="password" id="tokenUjian" placeholder="Masukkan token yang diberikan pengawas" required style="padding-right: 45px;">
+        <span id="toggleToken" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">👁️</span>
+    </div>
+</div>
 
             <button type="submit" class="btn-submit" id="btnSubmit" disabled>Memuat Sistem...</button>
         </form>
@@ -292,6 +295,19 @@
         const loadingText = document.getElementById('loadingSiswa');
         const form = document.getElementById('loginForm');
         const submitBtn = document.getElementById('btnSubmit');
+
+        // =========================================================
+        // TAMBAHKAN KODE INI DI SINI
+        // =========================================================
+        const tokenInput = document.getElementById('tokenUjian');
+        const toggleToken = document.getElementById('toggleToken');
+
+        toggleToken.addEventListener('click', function () {
+            const isPassword = tokenInput.getAttribute('type') === 'password';
+            tokenInput.setAttribute('type', isPassword ? 'text' : 'password');
+            this.textContent = isPassword ? '🙈' : '👁️';
+        });
+        // =========================================================
 
         const kelasContainer = document.getElementById('kelasContainer');
         const mapelContainer = document.getElementById('mapelContainer');
