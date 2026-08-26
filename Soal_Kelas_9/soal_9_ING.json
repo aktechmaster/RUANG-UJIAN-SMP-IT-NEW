@@ -2,7 +2,8 @@
   "metadata": {
     "mata_pelajaran": "Bahasa Inggris",
     "jenis_ujian": "Try Out USBN",
-    "jumlah_soal": 40
+    "jumlah_soal": 40,
+    "durasi_menit": 90
   },
   "bank_soal": [
     {
