@@ -322,23 +322,30 @@ const urlJSON = urlAsli + "?t=" + new Date().getTime();
 
     let timeLeft = parseInt(sessionStorage.getItem('exam_time_left'));
 
-    const timerInterval = setInterval(() => {
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
+const timerInterval = setInterval(() => {
+    if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        
+        // Jeda acak 0 s.d 4 detik untuk meratakan antrean 250 siswa
+        let jedaAcak = Math.floor(Math.random() * 4000); 
+        
+        setTimeout(() => {
             alert("Waktu habis! Ujian akan dikumpulkan.");
             selesaiUjian();
-        } else {
-            timeLeft--;
-            sessionStorage.setItem('exam_time_left', timeLeft);
-            let hours = Math.floor(timeLeft / 3600);
-            let minutes = Math.floor((timeLeft % 3600) / 60);
-            let seconds = timeLeft % 60;
-            document.getElementById('timer-display').innerText = 
-                (hours < 10 ? "0" : "") + hours + ":" +
-                (minutes < 10 ? "0" : "") + minutes + ":" +
-                (seconds < 10 ? "0" : "") + seconds;
-        }
-    }, 1000);
+        }, jedaAcak);
+
+    } else {
+        timeLeft--;
+        sessionStorage.setItem('exam_time_left', timeLeft);
+        let hours = Math.floor(timeLeft / 3600);
+        let minutes = Math.floor((timeLeft % 3600) / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById('timer-display').innerText = 
+            (hours < 10 ? "0" : "") + hours + ":" +
+            (minutes < 10 ? "0" : "") + minutes + ":" +
+            (seconds < 10 ? "0" : "") + seconds;
+    }
+}, 1000);
 
     fetch(urlJSON)
     .then(response => {
