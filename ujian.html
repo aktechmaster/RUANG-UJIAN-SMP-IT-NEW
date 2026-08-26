@@ -7,33 +7,28 @@
     
     <link rel="icon" type="image/png" href="smpit.png">
     <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']]
-    }
-  };
-</script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
     <style>
         * { box-sizing: border-box; }
         body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        padding: 15px; 
-        max-width: 800px; 
-        margin: auto; 
-        
-        /* 1. WARNA DASAR: Sudah benar Putih */
-        background-color: #FFFFFF;
-        
-        /* 2. LAPISAN TRANSPARANSI: Diubah ke Putih (255, 255, 255) agar tidak membiru lagi */
-        background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('floating-cogs.svg');
-        
-        background-size: 200px 200px;
-        color: #333;
-        font-size: 16px;
-        line-height: 1.6;
-    }
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 15px; 
+            max-width: 800px; 
+            margin: auto; 
+            background-color: #FFFFFF;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('floating-cogs.svg');
+            background-size: 200px 200px;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
         
         h1 { font-size: 20px; text-align: center; margin-bottom: 20px; }
         hr { border: 0; border-top: 2px solid #ddd; margin-bottom: 20px; }
@@ -102,14 +97,13 @@
         button:hover { background: #0056b3; }
 
         .header-ujian {
-    /* Mengubah background putih menjadi gradasi biru-langit super soft ke putih */
-    background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Soft shadow */
-    border-left: 5px solid #38bdf8;
-}
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-left: 5px solid #38bdf8;
+        }
         .header-ujian h2 {
             margin-bottom: 10px;
             color: #1e293b;
@@ -120,32 +114,25 @@
             color: #475569;
         }
 
-        /* TIMER MENGAMBANG */
         #floating-timer {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    
-    /* MENGGUNAKAN RGBA UNTUK TRANSPARANSI (0.7 artinya 70% kepekatan) */
-    background: rgba(30, 41, 59, 0.7); 
-    
-    /* EFEK KACA BURAM (Hanya berfungsi di browser modern/Exambro berbasis Chromium) */
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px); 
-    
-    color: #38bdf8;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 41, 59, 0.7); 
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px); 
+            color: #38bdf8;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-        /* POPUP MODAL */
         .modal {
             display: none; 
             position: fixed; 
@@ -175,62 +162,54 @@
             margin-bottom: 15px;
         }
 
-        /* Load Font Arab (Pastikan file font tersedia atau gunakan alternatif Google Font) */
         @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
 
+        body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
+            direction: ltr !important;
+            text-align: left !important;
+            font-size: 16px;
+            line-height: 1.6;
+        }
 
-        /* === Aturan Dasar Semua Teks Biasa (Bahasa Indonesia) === */
-body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
-    direction: ltr !important;        /* Arah tulisan kiri ke kanan */
-    text-align: left !important;       /* Posisi rata kiri */
-    font-size: 16px;                   /* Ukuran normal */
-    line-height: 1.6;
-}
+        .teks-arab {
+            font-family: 'Amiri', 'MohammadNaskh', serif;
+            direction: rtl !important;
+            text-align: right !important;
+            font-size: 1.6rem;
+            line-height: 1.8;
+            display: block;
+        }
 
-/* === Khusus Teks Bahasa Arab Saja === */
-.teks-arab {
-    font-family: 'Amiri', 'MohammadNaskh', serif;
-    direction: rtl !important;         /* Arah tulisan kanan ke kiri */
-    text-align: right !important;       /* Posisi rata kanan */
-    font-size: 1.6rem;                 /* Tetap besar sesuai keinginan */
-    line-height: 1.8;
-    display: block;
-}
+        @font-face {
+            font-family: 'MohammadNaskh';
+            src: url('MohammadNaskh.ttf') format('truetype');
+        }
 
-/* Font cadangan Arab */
-@font-face {
-    font-family: 'MohammadNaskh';
-    src: url('MohammadNaskh.ttf') format('truetype');
-}
-
-.font-khusus-arab {
-    font-family: 'MohammadNaskh', 'Amiri', serif;
-}
+        .font-khusus-arab {
+            font-family: 'MohammadNaskh', 'Amiri', serif;
+        }
     </style>
-    
 </head>
     
 <body>
 
     <div id="floating-timer">
-        ⏳ <span id="timer-display">02:00:00</span>
+        ⏳ <span id="timer-display">--:--:--</span>
     </div>
 
     <div class="header-ujian">
-    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
-        <img src="smpit.png" alt="Logo Sekolah" style="height: 60px; width: auto;">
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
+            <img src="smpit.png" alt="Logo Sekolah" style="height: 60px; width: auto;">
+            <div style="width: 2px; height: 50px; background-color: #cbd5e1;"></div>
+            <h2 id="judulMapel" style="margin: 0; font-size: 1.3rem;">Memuat Mata Pelajaran...</h2>
+        </div>
         
-        <div style="width: 2px; height: 50px; background-color: #cbd5e1;"></div>
-        
-        <h2 id="judulMapel" style="margin: 0; font-size: 1.3rem;">Memuat Mata Pelajaran...</h2>
+        <div class="info-siswa" style="border-top: 1px dashed #e2e8f0; padding-top: 10px;">
+            <p><strong>Nama    :</strong> <span id="infoNama">-</span></p>
+            <p><strong>Kelas   :</strong> <span id="infoKelas">-</span></p>
+            <p><strong>Email   :</strong> <span id="infoEmail">-</span></p>
+        </div>
     </div>
-    
-    <div class="info-siswa" style="border-top: 1px dashed #e2e8f0; padding-top: 10px;">
-        <p><strong>Nama    :</strong> <span id="infoNama">-</span></p>
-        <p><strong>Kelas   :</strong> <span id="infoKelas">-</span></p>
-        <p><strong>Email   :</strong> <span id="infoEmail">-</span></p>
-    </div>
-</div>
     
     <div id="lembar-soal"></div>
     <button onclick="sebelumSubmit()">Kumpulkan Jawaban</button>
@@ -257,7 +236,7 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     <script>    
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec"; 
 
-    // MODAL ALERT DAN CONFIRM CUSTOM (AMAN UNTUK EXAMBRO)
+    // MODAL ALERT DAN CONFIRM CUSTOM
     window.alert = function(message) {
         document.getElementById('customAlertTitle').innerText = 'Informasi';
         document.getElementById('customAlertMessage').innerText = message;
@@ -294,18 +273,29 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
     let namaSiswa = sessionStorage.getItem('cbt_siswa') || "Siswa Contoh";
     let emailSiswa = sessionStorage.getItem('cbt_email') || "Tidak ada email";
 
-    document.getElementById('infoEmail').innerText = emailSiswa;
-    
-    let bankSoalData = null; 
-
     if (!kelasSiswa || !mapelUjian) {
         kelasSiswa = "9 Al-Quran";
         mapelUjian = "MTK";
     }
 
-    if (!sessionStorage.getItem('exam_start_time')) {
+    // === DETEKTOR PERGANTIAN SISWA AUTOMATIS ===
+    let siswaTerakhir = sessionStorage.getItem('cbt_siswa_aktif');
+    let mapelTerakhir = sessionStorage.getItem('cbt_mapel_aktif');
+
+    // Jika Siswa berganti ATAU Mata Pelajaran berganti, bersihkan memori ujian lama!
+    if (siswaTerakhir !== namaSiswa || mapelTerakhir !== mapelUjian) {
+        Object.keys(sessionStorage).forEach(key => {
+            if (key.startsWith('soal_') || key === 'exam_time_left' || key === 'exam_start_time') {
+                sessionStorage.removeItem(key);
+            }
+        });
+        sessionStorage.setItem('cbt_siswa_aktif', namaSiswa);
+        sessionStorage.setItem('cbt_mapel_aktif', mapelUjian);
         sessionStorage.setItem('exam_start_time', Date.now());
     }
+
+    document.getElementById('infoEmail').innerText = emailSiswa;
+    let bankSoalData = null; 
 
     const tingkatKelas = kelasSiswa.charAt(0); 
     const namaFile = `soal_${tingkatKelas}_${mapelUjian}.json`; 
@@ -326,7 +316,7 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
         document.getElementById('infoNama').innerText = namaSiswa;
         document.getElementById('infoKelas').innerText = kelasSiswa;
 
-        // === START LOGIKA TIMER DINAMIS ===
+        // === LOGIKA TIMER DINAMIS ===
         const DURASI_MAPEL = {
             "PKN": 90,
             "MTK": 120,
@@ -337,19 +327,12 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
             "PAI": 90
         };
 
-        // Priority 1: Ambil durasi_menit dari JSON metadata
-        // Priority 2: Ambil durasi dari DURASI_MAPEL di atas
-        // Priority 3: Default 120 menit
         let durasiMenit = (data.metadata && data.metadata.durasi_menit) 
                           ? data.metadata.durasi_menit 
                           : (DURASI_MAPEL[mapelUjian] || 120);
 
-        let mapelAktif = sessionStorage.getItem('cbt_mapel_aktif');
-
-        // Reset timer jika siswa baru mulai atau ganti mata pelajaran
-        if (mapelAktif !== mapelUjian || !sessionStorage.getItem('exam_time_left')) {
+        if (!sessionStorage.getItem('exam_time_left')) {
             sessionStorage.setItem('exam_time_left', durasiMenit * 60);
-            sessionStorage.setItem('cbt_mapel_aktif', mapelUjian);
         }
 
         let timeLeft = parseInt(sessionStorage.getItem('exam_time_left'));
@@ -357,8 +340,6 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
         const timerInterval = setInterval(() => {
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                
-                // Jeda acak 0-4 detik untuk pemerataan antrean 250 siswa
                 let jedaAcak = Math.floor(Math.random() * 4000); 
                 
                 setTimeout(() => {
@@ -378,7 +359,6 @@ body, .soal-box, .bacaan, .pertanyaan, .opsi, .info-siswa, h1, h2, p, span {
                     (seconds < 10 ? "0" : "") + seconds;
             }
         }, 1000);
-        // === END LOGIKA TIMER DINAMIS ===
 
         // RENDER SOAL KE HTML
         let htmlSoal = "";
