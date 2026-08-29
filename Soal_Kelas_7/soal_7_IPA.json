@@ -10,11 +10,12 @@
       "id_soal": 1,
       "teks_pertanyaan": "Suatu logam melebur pada suhu 1.250°C. Jika dinyatakan dalam satuan Kelvin, logam tersebut melebur pada suhu....",
       "pilihan_jawaban": [
-        "A. 1.253°K",
-        "B. 1.352°K",
-        "C. 1.523°K",
-        "D. 1.532°K"
-      ]
+        "A. 1.253 K",
+        "B. 1.352 K",
+        "C. 1.523 K",
+        "D. 1.532 K"
+      ],
+      "kunci": "C"
     },
     {
       "id_soal": 2,
@@ -24,7 +25,8 @@
         "B. 1.258 K",
         "C. 1.358 K",
         "D. 1.538 K"
-      ]
+      ],
+      "kunci": "C"
     },
     {
       "id_soal": 3,
@@ -34,7 +36,8 @@
         "B. Menghitung",
         "C. Besaran",
         "D. Satuan turunan"
-      ]
+      ],
+      "kunci": "A"
     },
     {
       "id_soal": 4,
@@ -44,17 +47,19 @@
         "B. Satuan tak baku",
         "C. Satuan pokok",
         "D. Satuan turunan"
-      ]
+      ],
+      "kunci": "A"
     },
     {
       "id_soal": 5,
       "teks_pertanyaan": "Sebuah tabung memiliki jari-jari 8 cm dan tinggi 25 cm. Berapa volume tabung tersebut?",
       "pilihan_jawaban": [
-        "A. 5.024 cm<sup>3</sup>",
-        "B. 5.042 cm<sup>3</sup>",
-        "C. 5.240 cm<sup>3</sup>",
-        "D. 5.204 cm<sup>3</sup>"
-      ]
+        "A. 5.024 cm³",
+        "B. 5.042 cm³",
+        "C. 5.240 cm³",
+        "D. 5.204 cm³"
+      ],
+      "kunci": "A"
     }
   ]
 }
