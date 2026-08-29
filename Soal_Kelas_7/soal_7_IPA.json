@@ -2,8 +2,8 @@
   "metadata": {
     "mata_pelajaran": "IPA",
     "jenis_ujian": "Penilaian Harian",
-    "jumlah_soal": 5,
-    "durasi_menit": 15
+    "jumlah_soal": 10,
+    "durasi_menit": 30
   },
   "bank_soal": [
     {
@@ -14,7 +14,8 @@
         "B. 1.352°K",
         "C. 1.523°K",
         "D. 1.532°K"
-      ]
+      ],
+      "kunci_jawaban": "C"
     },
     {
       "id_soal": 2,
@@ -24,7 +25,8 @@
         "B. 1.258°K",
         "C. 1.358°K",
         "D. 1.538°K"
-      ]
+      ],
+      "kunci_jawaban": "C"
     },
     {
       "id_soal": 3,
@@ -34,7 +36,8 @@
         "B. Menghitung",
         "C. Besaran",
         "D. Satuan turunan"
-      ]
+      ],
+      "kunci_jawaban": "A"
     },
     {
       "id_soal": 4,
@@ -44,7 +47,8 @@
         "B. Satuan tak baku",
         "C. Satuan pokok",
         "D. Satuan turunan"
-      ]
+      ],
+      "kunci_jawaban": "A"
     },
     {
       "id_soal": 5,
@@ -54,7 +58,63 @@
         "B. 5.042 cm<sup>3</sup>",
         "C. 5.240 cm<sup>3</sup>",
         "D. 5.204 cm<sup>3</sup>"
-      ]
+      ],
+      "kunci_jawaban": "A"
+    },
+    {
+      "id_soal": 6,
+      "teks_pertanyaan": "Sebuah tabung memiliki jari-jari 15 cm dan tinggi 35 cm. Berapa volume tabung tersebut?",
+      "pilihan_jawaban": [
+        "A. 11.250 cm<sup>3</sup>",
+        "B. 16.500 cm<sup>3</sup>",
+        "C. 24.750 cm<sup>3</sup>",
+        "D. 49.500 cm<sup>3</sup>"
+      ],
+      "kunci_jawaban": "C"
+    },
+    {
+      "id_soal": 7,
+      "teks_pertanyaan": "Alat yang digunakan untuk mengukur suhu suatu benda secara akurat disebut...",
+      "pilihan_jawaban": [
+        "A. Barometer",
+        "B. Termometer",
+        "C. Higrometer",
+        "D. Anemometer"
+      ],
+      "kunci_jawaban": "B"
+    },
+    {
+      "id_soal": 8,
+      "teks_pertanyaan": "Alat ukur yang digunakan untuk mengukur waktu secara akurat adalah...",
+      "pilihan_jawaban": [
+        "A. Stopwatch",
+        "B. Jangka Sorong",
+        "C. Neraca",
+        "D. Termometer"
+      ],
+      "kunci_jawaban": "A"
+    },
+    {
+      "id_soal": 9,
+      "teks_pertanyaan": "Berapakah berat benda pada neraca berikut...<br><img src='images_IPA_7/9.png' style='max-width: 100%; height: auto;'>",
+      "pilihan_jawaban": [
+        "A. 1.550 g",
+        "B. 1.550 kg",
+        "C. 1.500 g",
+        "D. 1.5 kg"
+      ],
+      "kunci_jawaban": "A"
+    },
+    {
+      "id_soal": 10,
+      "teks_pertanyaan": "Perhatikan hasil pengukuran pensil berikut?<br><img src='images_IPA_7/10.png' style='max-width: 100%; height: auto;'><br>Berapa panjang pensil dari hasil pengukuran diatas...",
+      "pilihan_jawaban": [
+        "A. 3,5 cm",
+        "B. 0,35 cm",
+        "C. 35 cm",
+        "D. 35 mm"
+      ],
+      "kunci_jawaban": "A"
     }
   ]
 }
