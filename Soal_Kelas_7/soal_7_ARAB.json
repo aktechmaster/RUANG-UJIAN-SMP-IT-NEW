@@ -1,1 +1,66 @@
-
+{
+  "metadata": {
+    "mata_pelajaran": "Bahasa Arab",
+    "jenis_ujian": "Latihan Soal Kelas IX",
+    "jumlah_soal": 5
+  },
+  "bank_soal": [
+    {
+      "id_soal": 1,
+      "teks_pertanyaan": "هَذَا جَدِّي إِسْمُهُ خَالِد هُوَ بَائِعٌ . هُوَ .... البضائع في السوق<br>Kata yang tepat untuk melengkapi kalimat di atas adalah ...",
+      "pilihan_jawaban": [
+        "أ. يُعالج",
+        "ب. يَبِيعُ",
+        "ج. يَلْعَبُ",
+        "د. يُدَرِّسُ"
+      ]
+    },
+    {
+      "id_soal": 2,
+      "teks_pertanyaan": "الطَّالِبُ يَتَعَلَّمُ الدَّرْسَ فِي الفَصْلِ<br>Terjemah yang tepat untuk kalimat diatas adalah",
+      "pilihan_jawaban": [
+        "أ. Dokter mengobati pasien di rumah sakit",
+        "ب. Polisi mengatur lalu lintas di jalan",
+        "ج. Petani menanam padi di sawah",
+        "د. Siswa belajar pelajaran di kelas"
+      ]
+    },
+    {
+      "id_soal": 3,
+      "teks_pertanyaan": "الجُملَةُ الصَّحِيحَة مِن هَذِهِ الجُمَل هِيَ<br>Kalimat yang benar adalah ...",
+      "pilihan_jawaban": [
+        "أ. المُدَرِّسُ يَزْرَعُ النَّبَاتَات",
+        "ب. الطَّبِيبُ يُدَرِّسُ التَّلَامِيذُ",
+        "ج. الْلَاعِبُ يُعَالِجُ المَرْضَى",
+        "د. البَائِعُ يَبِيعُ البَضَائِعَ"
+      ]
+    },
+    {
+      "id_soal": 4,
+      "teks_pertanyaan": "الجُمْلَةُ الصَّحِيحَة مِنْ هَذِهِ الجُمَل .....<br>Kalimat yang benar adalah ...",
+      "pilihan_jawaban": [
+        "أ. نَحْنُ لَنْ نَلْعَبَ كُرَّةَ السَّلَة فِ المُصَلَّى",
+        "ب. نَحْنُ لَنْ أَلْعَبَ كُرَّةَ السَّلَة فِي المُصَلَّى",
+        "ج. نَحْنُ لَنْ تَلْعَبَ كُرَّةَ السَّلَةَ فِي المُصَلَّى",
+        "د. نَحْنُ لَنْ يَلْعَبَ كُرَّةَ السَّلَةَ فِي المُصَلَّى"
+      ]
+    },
+    {
+      "id_soal": 5,
+      "teks_pertanyaan": "Ibuku seorang guru, dia mengajar murid-murid di sekolah.<br>Terjemahan yang benar adalah ...",
+      "pilihan_jawaban": [
+        "أ. أبي يُعَالِجُ المَرْضَى فِ المُسْتَشْفَى",
+        "ب. أُمِّي مُدَرِّسَةٌ هِيَ تُعَلَّمُ التَّلَامِيذَ فِي المَدْرَسَةِ",
+        "ج. أُمِّي فَلَاحَةٌ هِيَ تَزْرَعُ الرُّزْ فِي المَزْرَعَة",
+        "د. أَبِي مُهَنْدِسٌ هُوَ يَبْنِي المَبَنِي فِي المَدِينَة"
+      ]
+    }
+  ],
+  "kunci_jawaban_rahasia": {
+    "1": "B",
+    "2": "D",
+    "3": "D",
+    "4": "A",
+    "5": "B"
+  }
+}
