@@ -1,108 +1,187 @@
 {
   "metadata": {
-    "mata_pelajaran": "IPA",
-    "jenis_ujian": "Penilaian Harian",
-    "jumlah_soal": 5,
-    "durasi_menit": 15
+    "mata_pelajaran": "TIK",
+    "jenis_ujian": "Penilaian Harian Bab 5 & 6",
+    "jumlah_soal": 16
   },
-  "bank_soal": ["pilihan_ganda": [
+  "bank_soal": [
     {
-      "nomor": 1,
-      "soal": "Perhatikan gambar berikut untuk menjawab soal nomor 1-3 dan soal esai nomor 1-3.\nPerhatikan fungsi berikut:\n(1) MAX(A2:D5)\n(2) QUARTILE(A2:D2, 0)\n(3) MIN(A2:D5)\n(4) QUARTILE(A2:D5, 4)\nFungsi yang akan menghasilkan hasil yang sama seperti pada gambar adalah fungsi nomor...",
-      "pilihan": {
-        "A": "(1) dan (2)",
-        "B": "(1) dan (4)",
-        "C": "(2) dan (3)",
-        "D": "(2) dan (4)"
-      }
+      "id_soal": 1,
+      "teks_pertanyaan": "Perhatikan gambar berikut untuk menjawab soal nomor 1-3 dan soal esai nomor 1-3.<br><br>Nilai Ujian 16 Siswa Kelas VIII<br>A: 9 | 6 | 2 | 5<br>B: 9 | 8 | 7 | 9<br>C: 7 | 4 | 6 | 8<br>D: 5 | 5 | 8 | 7<br><br>Perhatikan fungsi berikut.<br>(1) MAX(A2:D5)<br>(2) QUARTILE(A2:D2, 0)<br>(3) MIN(A2:D5)<br>(4) QUARTILE(A2:D5, 4)<br><br>Fungsi yang akan menghasilkan hasil yang sama seperti pada gambar adalah fungsi nomor",
+      "pilihan_jawaban": [
+        "A. (1) dan (2)",
+        "B. (1) dan (4)",
+        "C. (2) dan (3)",
+        "D. (2) dan (4)"
+      ]
     },
     {
-      "nomor": 2,
-      "soal": "Sepuluh tahun lagi orang tua kamu akan pensiun dan ingin memiliki modal untuk memulai usaha peternakan ayam sebesar Rp50.000.000,00. Saat ini mereka sudah memiliki uang untuk ditabung di bank sebesar Rp10.000.000,00. Sisanya dia ingin...",
-      "pilihan": {
-        "A": "Pv",
-        "B": "Pmt",
-        "C": "Fv",
-        "D": "Semua salah"
-      }
+      "id_soal": 2,
+      "teks_pertanyaan": "Sepuluh tahun lagi orang tua kamu akan pensiun dan ingin memiliki modal untuk memulai usaha peternakan ayam sebesar Rp50.000.000,00. Saat ini mereka sudah memiliki uang untuk ditabung di bank sebesar Rp10.000.000,00. Sisanya dia ingin...",
+      "pilihan_jawaban": [
+        "a. Pv",
+        "b. Pmt",
+        "c. Fv",
+        "d. Semua salah"
+      ]
     },
     {
-      "nomor": 3,
-      "soal": "Menabung setiap bulannya. Untuk menghitung jumlah nilai uang yang harus ditabung setiap bulan dapat dilakukan dengan menggunakan fungsi ....",
-      "pilihan": {
-        "A": "PV",
-        "B": "PMT",
-        "C": "FV",
-        "D": "salah semua"
-      }
+      "id_soal": 3,
+      "teks_pertanyaan": "Menabung setiap bulannya. Untuk menghitung jumlah nilai uang yang harus ditabung setiap bulan dapat dilakukan dengan menggunakan fungsi ....",
+      "pilihan_jawaban": [
+        "A. PV",
+        "B. PMT",
+        "C. FV",
+        "D. salah semua"
+      ]
     },
     {
-      "nomor": 4,
-      "soal": "Jika saat ini kamu ingin menyimpan uang sebesar Rp100.000.000,00. Kamu ingin menghitung berapa nilai uang kamu 20 tahun lagi jika bunga bank 6%. Fungsi yang dapat kamu gunakan adalah...",
-      "pilihan": {
-        "A": "PV",
-        "B": "PMT",
-        "C": "FV",
-        "D": "semua salah"
-      }
+      "id_soal": 4,
+      "teks_pertanyaan": "Jika saat ini kamu ingin menyimpan uang sebesar Rp100.000.000,00. Kamu ingin menghitung berapa nilai uang kamu 20 tahun lagi jika bunga bank 6%. Fungsi yang dapat kamu gunakan adalah",
+      "pilihan_jawaban": [
+        "A. PV",
+        "B. PMT",
+        "C. FV",
+        "D. semua salah"
+      ]
     },
     {
-      "nomor": 5,
-      "soal": "Berdasarkan data pada gambar, jika kita menambahkan fungsi IF(A2>= 9, \"A\", IF(A2> 7, \"B\", \"F\")) di sel E2, nilai yang akan dihasilkan fungsi tersebut adalah...",
-      "pilihan": {
-        "A": "A",
-        "B": "B",
-        "C": "F",
-        "D": "salah semua"
-      }
+      "id_soal": 5,
+      "teks_pertanyaan": "Berdasarkan data pada gambar, jika kita menambahkan fungsi IF(A2>= 9, \"A\", IF(A2> 7, \"B\", \"F\")) di sel E2, nilai yang akan dihasilkan fungsi tersebut adalah",
+      "pilihan_jawaban": [
+        "A. A",
+        "B. B",
+        "C. F",
+        "D. salah semua"
+      ]
     },
     {
-      "nomor": 6,
-      "soal": "Jenis kabel yang paling tahan terhadap gangguan sinyal elektromagnetik adalah...",
-      "pilihan": {
-        "A": "STP",
-        "B": "UTP",
-        "C": "COAXIAL",
-        "D": "Fiber optic"
-      }
+      "id_soal": 6,
+      "teks_pertanyaan": "Jenis kabel yang paling tahan terhadap gangguan sinyal elektromagnetik adalah",
+      "pilihan_jawaban": [
+        "a. STP",
+        "b. UTP",
+        "c. COAXIAL",
+        "d. Fiber optic"
+      ]
     },
     {
-      "nomor": 7,
-      "soal": "Komponen yang berfungsi menghubungkan komputer-komputer dalam jaringan lokal tanpa memperkuat sinyal adalah...",
-      "pilihan": {
-        "A": "Hub aktif",
-        "B": "Hub pasif",
-        "C": "Repeater",
-        "D": "Switch"
-      }
+      "id_soal": 7,
+      "teks_pertanyaan": "Komponen yang berfungsi menghubungkan komputer-komputer dalam jaringan lokal tanpa memperkuat sinyal adalah...",
+      "pilihan_jawaban": [
+        "a. Hub aktif",
+        "b. Hub pasif",
+        "c. Repeater",
+        "d. Switch"
+      ]
     },
     {
-      "nomor": 8,
-      "soal": "Alat yang berfungsi untuk mencegah lalu lintas data yang tidak perlu masuk ke jaringan disebut?",
-      "pilihan": {
-        "A": "Firewall",
-        "B": "Bridge",
-        "C": "Router",
-        "D": "Hub"
-      }
+      "id_soal": 8,
+      "teks_pertanyaan": "Alat yang berfungsi untuk mencegah lalu lintas data yang tidak perlu masuk ke jaringan disebut?",
+      "pilihan_jawaban": [
+        "a. Firewall",
+        "b. Bridge",
+        "c. Router",
+        "d. Hub"
+      ]
     },
     {
-      "nomor": 9,
-      "soal": "Protokol yang bertanggung jawab dalam mendeteksi alamat perangkat keras pada jaringan lokal adalah...",
-      "pilihan": {
-        "A": "IP",
-        "B": "TCP",
-        "C": "ARP",
-        "D": "UDP"
-      }
+      "id_soal": 9,
+      "teks_pertanyaan": "Protokol yang bertanggung jawab dalam mendeteksi alamat perangkat keras pada jaringan lokal adalah",
+      "pilihan_jawaban": [
+        "a. IP",
+        "b. TCP",
+        "c. ARP",
+        "d. UDP"
+      ]
     },
     {
-      "nomor": 10,
-      "soal": "Jenis jaringan yang menggunakan sinyal radio untuk pengiriman data disebut...",
-      "pilihan": {
-        "A": "jaringan nirkabel",
-        "B": "jaringan kabel",
-        "C": "LAN",
-        "D": "WAN"
-      }
+      "id_soal": 10,
+      "teks_pertanyaan": "Jenis jaringan yang menggunakan sinyal radio untuk pengiriman data disebut",
+      "pilihan_jawaban": [
+        "a. jaringan nirkabel",
+        "b. jaringan kabel",
+        "c. LAN",
+        "d. WAN"
+      ]
+    },
+    {
+      "id_soal": 11,
+      "teks_pertanyaan": "Layer yang memastikan komunikasi data antara dua komputer berhasil adalah",
+      "pilihan_jawaban": [
+        "a. network layer",
+        "b. internet layer",
+        "c. application layer",
+        "d. transport layer"
+      ]
+    },
+    {
+      "id_soal": 12,
+      "teks_pertanyaan": "Kabel yang memerlukan konektor RJ-45 untuk menghubungkannya adalah",
+      "pilihan_jawaban": [
+        "a. single-mode fiber",
+        "b. fiber optic",
+        "c. coaxial",
+        "d. UTP"
+      ]
+    },
+    {
+      "id_soal": 13,
+      "teks_pertanyaan": "Pelaku mengirimkan email ke pengguna seolah-olah berasal dari lembaga resmi tertentu, dan mengecoh korban agar memberikan data-data penting di situs palsu. Tindakan tersebut dikenal dengan istilah",
+      "pilihan_jawaban": [
+        "a. email spoofing",
+        "b. pharming",
+        "c. spoofing",
+        "d. phishing"
+      ]
+    },
+    {
+      "id_soal": 14,
+      "teks_pertanyaan": "Penyusup yang mengintip aktivitas korban dengan memantau layar monitor disebut",
+      "pilihan_jawaban": [
+        "a. spoofing",
+        "b. snooping",
+        "c. pharming",
+        "d. spyware"
+      ]
+    },
+    {
+      "id_soal": 15,
+      "teks_pertanyaan": "Program yang menampilkan iklan otomatis pada komputer korban disebut...",
+      "pilihan_jawaban": [
+        "a. antivirus",
+        "b. malware",
+        "c. spyware",
+        "d. adware"
+      ]
+    },
+    {
+      "id_soal": 16,
+      "teks_pertanyaan": "Tindakan melakukan intersepsi secara real-time yang tidak diotorisasi terhadap komunikasi pribadi disebut",
+      "pilihan_jawaban": [
+        "a. eavesdropping",
+        "b. pharming",
+        "c. spoofing",
+        "d. spyware"
+      ]
     }
+  ],
+  "kunci_jawaban_rahasia": {
+    "1": "B",
+    "2": "B",
+    "3": "B",
+    "4": "C",
+    "5": "A",
+    "6": "D",
+    "7": "B",
+    "8": "A",
+    "9": "C",
+    "10": "A",
+    "11": "D",
+    "12": "D",
+    "13": "D",
+    "14": "B",
+    "15": "D",
+    "16": "A"
+  }
+}
