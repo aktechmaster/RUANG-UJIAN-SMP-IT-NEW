@@ -2,13 +2,15 @@ let bankSoalData = null;
 let timerInterval = null;
 
 document.addEventListener("DOMContentLoaded", async function() {
-    // 1. Inisialisasi Fitur Pengawasan
-    Proctor.init();
+    // 1. Inisialisasi Fitur Pengawasan (Diperbaiki: Aman jika proctor.js tidak ada)
+    if (typeof Proctor !== 'undefined' && typeof Proctor.init === 'function') {
+        Proctor.init();
+    }
 
     // 2. Ambil Data Session
     let kelasSiswa = sessionStorage.getItem('cbt_kelas');
     let mapelUjian = sessionStorage.getItem('cbt_mapel');
-    let namaSiswa = sessionStorage.getItem('cbt_siswa') || "Siswa Contoh";
+    let namaSiswa = sessionStorage.getItem('cbt_siswa') || "Siswa Ujian";
     let emailSiswa = sessionStorage.getItem('cbt_email') || "Tidak ada email";
 
     if (!kelasSiswa || !mapelUjian) {
@@ -31,24 +33,39 @@ document.addEventListener("DOMContentLoaded", async function() {
         sessionStorage.setItem('exam_start_time', Date.now());
     }
 
-    document.getElementById('infoEmail').innerText = emailSiswa;
+    const elemEmail = document.getElementById('infoEmail');
+    if (elemEmail) elemEmail.innerText = emailSiswa;
 
     const tingkatKelas = kelasSiswa.charAt(0);
 
-    // 3. Load Soal dari JSON
+    // 3. Load Soal dari Server/JSON
     try {
         const data = await API.fetchSoal(tingkatKelas, mapelUjian);
         bankSoalData = data;
 
-        document.getElementById('judulMapel').innerText = "Sumatif Tengah Semester Ganjil | " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
-        document.getElementById('infoNama').innerText = namaSiswa;
-        document.getElementById('infoKelas').innerText = kelasSiswa;
+        // Ekstraksi bank_soal secara fleksibel
+        const daftarSoal = data?.bank_soal || data?.soal || data?.data || (Array.isArray(data) ? data : []);
+
+        if (!daftarSoal || daftarSoal.length === 0) {
+            throw new Error(`Berkas soal untuk kelas '${tingkatKelas}' mapel '${mapelUjian}' tidak ditemukan atau kosong.`);
+        }
+
+        const elemJudul = document.getElementById('judulMapel');
+        if (elemJudul) {
+            elemJudul.innerText = "Sumatif Tengah Semester Ganjil | " + (data.metadata ? data.metadata.mata_pelajaran : mapelUjian);
+        }
+
+        const elemNama = document.getElementById('infoNama');
+        if (elemNama) elemNama.innerText = namaSiswa;
+
+        const elemKelas = document.getElementById('infoKelas');
+        if (elemKelas) elemKelas.innerText = kelasSiswa;
 
         // Inisialisasi Timer
         initTimer(data, mapelUjian);
 
         // Render Soal ke DOM
-        renderSoal(data.bank_soal);
+        renderSoal(daftarSoal);
 
         // Render Formula MathJax jika ada
         setTimeout(() => {
@@ -61,7 +78,15 @@ document.addEventListener("DOMContentLoaded", async function() {
         initAutosave();
 
     } catch (error) {
-        document.getElementById('lembar-soal').innerHTML = `<p style='color:red;'><b>Gagal memuat soal! Pastikan berkas soal sudah ada di repositori Anda.</b></p>`;
+        const lembarSoal = document.getElementById('lembar-soal');
+        if (lembarSoal) {
+            lembarSoal.innerHTML = `
+                <div style='background:#fee2e2; border:1px solid #f87171; color:#991b1b; padding:20px; border-radius:8px; margin:20px 0;'>
+                    <h3 style="margin-top:0;">⚠️ Gagal Memuat Soal Ujian</h3>
+                    <p><b>Detail Error:</b> ${error.message}</p>
+                    <p>Silakan pastikan berkas JSON soal sudah ada di repositori GitHub Anda untuk tingkat kelas <b>${tingkatKelas}</b> dan mapel <b>${mapelUjian}</b>.</p>
+                </div>`;
+        }
         console.error("Error memuat soal:", error);
     }
 });
@@ -70,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 function initTimer(data, mapelUjian) {
     let durasiMenit = (data.metadata && data.metadata.durasi_menit) 
                       ? data.metadata.durasi_menit 
-                      : (CONFIG.DURASI_MAPEL[mapelUjian] || 120);
+                      : (typeof CONFIG !== 'undefined' && CONFIG.DURASI_MAPEL && CONFIG.DURASI_MAPEL[mapelUjian] ? CONFIG.DURASI_MAPEL[mapelUjian] : 120);
 
     if (!sessionStorage.getItem('exam_time_left')) {
         sessionStorage.setItem('exam_time_left', durasiMenit * 60);
@@ -93,10 +118,13 @@ function initTimer(data, mapelUjian) {
             let hours = Math.floor(timeLeft / 3600);
             let minutes = Math.floor((timeLeft % 3600) / 60);
             let seconds = timeLeft % 60;
-            document.getElementById('timer-display').innerText = 
-                (hours < 10 ? "0" : "") + hours + ":" +
-                (minutes < 10 ? "0" : "") + minutes + ":" +
-                (seconds < 10 ? "0" : "") + seconds;
+            const timerDisplay = document.getElementById('timer-display');
+            if (timerDisplay) {
+                timerDisplay.innerText = 
+                    (hours < 10 ? "0" : "") + hours + ":" +
+                    (minutes < 10 ? "0" : "") + minutes + ":" +
+                    (seconds < 10 ? "0" : "") + seconds;
+            }
         }
     }, 1000);
 }
@@ -107,7 +135,8 @@ function renderSoal(daftarSoal) {
     daftarSoal.forEach((soal, index) => {
         htmlSoal += `<div class="soal-box">`;
         
-        let bagianTeks = soal.teks_pertanyaan.split('\n\n');
+        let teksPertanyaan = soal.teks_pertanyaan || soal.pertanyaan || "";
+        let bagianTeks = teksPertanyaan.split('\n\n');
         let teksPertanyaanBersih = "";
 
         if (bagianTeks.length > 1) {
@@ -123,7 +152,7 @@ function renderSoal(daftarSoal) {
             htmlSoal += `<div class="bacaan ${kelasBacaan}">${bacaan.trim()}</div>`;
             teksPertanyaanBersih = bagianTeks[1];
         } else {
-            teksPertanyaanBersih = soal.teks_pertanyaan;
+            teksPertanyaanBersih = teksPertanyaan;
         }
 
         teksPertanyaanBersih = teksPertanyaanBersih.replace(/^\d+\.\s*/, '');
@@ -139,7 +168,10 @@ function renderSoal(daftarSoal) {
         
         htmlSoal += `<div class="opsi-container">`;
         
-        soal.pilihan_jawaban.forEach((opsi, i) => {
+        const pilihanJawaban = soal.pilihan_jawaban || soal.opsi || [];
+        const idSoal = soal.id_soal || (index + 1);
+
+        pilihanJawaban.forEach((opsi, i) => {
             let nilaiOpsi = String.fromCharCode(65 + i);
             
             const adaArabOpsi = /[\u0600-\u06FF]/.test(opsi);
@@ -148,7 +180,7 @@ function renderSoal(daftarSoal) {
             htmlSoal += `
                 <div class="opsi">
                     <label>
-                        <input type="radio" name="soal_${soal.id_soal}" value="${nilaiOpsi}"> 
+                        <input type="radio" name="soal_${idSoal}" value="${nilaiOpsi}"> 
                         <span class="${kelasOpsi}">${opsi}</span>
                     </label>
                 </div>`;
@@ -156,7 +188,10 @@ function renderSoal(daftarSoal) {
         htmlSoal += `</div></div>`;
     });
 
-    document.getElementById('lembar-soal').innerHTML = htmlSoal;
+    const elemLembarSoal = document.getElementById('lembar-soal');
+    if (elemLembarSoal) {
+        elemLembarSoal.innerHTML = htmlSoal;
+    }
 }
 
 // AUTOSAVE JAWABAN
@@ -177,10 +212,12 @@ function initAutosave() {
 function sebelumSubmit() {
     if (!bankSoalData) return;
 
+    const daftarSoal = bankSoalData?.bank_soal || bankSoalData?.soal || bankSoalData?.data || (Array.isArray(bankSoalData) ? bankSoalData : []);
     let belumTerjawab = [];
     
-    bankSoalData.bank_soal.forEach((soal, index) => {
-        let opsiDipilih = document.querySelector(`input[name="soal_${soal.id_soal}"]:checked`);
+    daftarSoal.forEach((soal, index) => {
+        const idSoal = soal.id_soal || (index + 1);
+        let opsiDipilih = document.querySelector(`input[name="soal_${idSoal}"]:checked`);
         if (!opsiDipilih) {
             belumTerjawab.push(index + 1);
         }
@@ -199,22 +236,24 @@ function sebelumSubmit() {
 function selesaiUjian() {
     if (!bankSoalData) return;
 
-    let totalSoal = bankSoalData.bank_soal.length;
+    const daftarSoal = bankSoalData?.bank_soal || bankSoalData?.soal || bankSoalData?.data || (Array.isArray(bankSoalData) ? bankSoalData : []);
+    let totalSoal = daftarSoal.length;
     let jumlahBenar = 0;
     let jumlahSalah = 0;
 
-    bankSoalData.bank_soal.forEach((soal) => {
-        let opsiDipilih = document.querySelector(`input[name="soal_${soal.id_soal}"]:checked`);
-        let kunciJawaban = bankSoalData.kunci_jawaban_rahasia ? bankSoalData.kunci_jawaban_rahasia[soal.id_soal] : undefined;
+    daftarSoal.forEach((soal, index) => {
+        const idSoal = soal.id_soal || (index + 1);
+        let opsiDipilih = document.querySelector(`input[name="soal_${idSoal}"]:checked`);
+        let kunciJawaban = bankSoalData.kunci_jawaban_rahasia ? bankSoalData.kunci_jawaban_rahasia[idSoal] : undefined;
 
-        if (opsiDipilih && String(opsiDipilih.value).toUpperCase() === String(kunciJawaban).toUpperCase()) {
+        if (opsiDipilih && kunciJawaban && String(opsiDipilih.value).toUpperCase() === String(kunciJawaban).toUpperCase()) {
             jumlahBenar++;
         } else {
             jumlahSalah++;
         }
     });
 
-    let skorAkhir = ((jumlahBenar / totalSoal) * 100).toFixed(2);
+    let skorAkhir = totalSoal > 0 ? ((jumlahBenar / totalSoal) * 100).toFixed(2) : "0.00";
     let rekapJawaban = kumpulkanJawaban();
 
     simpanKeSpreadsheet(
@@ -267,10 +306,11 @@ async function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah, array
 
     try {
         const res = await API.submitJawaban(dataSiswa);
-        if (res.status === "success") {
-            document.getElementById('popupModal').style.display = 'flex';
+        if (res && res.status === "success") {
+            const popupModal = document.getElementById('popupModal');
+            if (popupModal) popupModal.style.display = 'flex';
         } else {
-            throw new Error(res.message || "Database menolak menyimpan data.");
+            throw new Error((res && res.message) || "Database menolak menyimpan data.");
         }
     } catch (err) {
         alert("❌ GAGAL MENGIRIM JAWABAN!\n\nPenyebab: " + err.message + "\n\nJawaban Anda belum terkirim. Silakan periksa koneksi internet lalu klik tombol 'Kumpulkan Jawaban' sekali lagi.");
@@ -282,36 +322,59 @@ async function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah, array
     }
 }
 
-// Custom Modal Handler
+// Custom Modal Handler (Diperbaiki: Aman jika elemen HTML modal tidak tersedia)
 window.alert = function(message) {
-    document.getElementById('customAlertTitle').innerText = 'Informasi';
-    document.getElementById('customAlertMessage').innerText = message;
-    document.getElementById('customAlertBtnCancel').style.display = 'none';
-    document.getElementById('customAlertBtnOk').innerText = 'OK';
-    document.getElementById('customAlertBtnOk').onclick = function() {
-        tutupCustomAlert();
-    };
-    document.getElementById('customAlertModal').style.display = 'flex';
+    const title = document.getElementById('customAlertTitle');
+    const msg = document.getElementById('customAlertMessage');
+    const btnCancel = document.getElementById('customAlertBtnCancel');
+    const btnOk = document.getElementById('customAlertBtnOk');
+    const modal = document.getElementById('customAlertModal');
+
+    if (title && msg && modal) {
+        title.innerText = 'Informasi';
+        msg.innerText = message;
+        if (btnCancel) btnCancel.style.display = 'none';
+        if (btnOk) {
+            btnOk.innerText = 'OK';
+            btnOk.onclick = function() { tutupCustomAlert(); };
+        }
+        modal.style.display = 'flex';
+    } else {
+        window.alert(message);
+    }
 };
 
 window.confirm = function(message) {
-    document.getElementById('customAlertTitle').innerText = 'Konfirmasi';
-    document.getElementById('customAlertMessage').innerText = message;
-    document.getElementById('customAlertBtnCancel').style.display = 'inline-block';
-    document.getElementById('customAlertBtnOk').innerText = 'Ya';
-    document.getElementById('customAlertBtnOk').onclick = function() {
-        tutupCustomAlert();
-        selesaiUjian();
-    };
-    document.getElementById('customAlertBtnCancel').onclick = function() {
-        tutupCustomAlert();
-    };
-    document.getElementById('customAlertModal').style.display = 'flex';
-    return false;
+    const title = document.getElementById('customAlertTitle');
+    const msg = document.getElementById('customAlertMessage');
+    const btnCancel = document.getElementById('customAlertBtnCancel');
+    const btnOk = document.getElementById('customAlertBtnOk');
+    const modal = document.getElementById('customAlertModal');
+
+    if (title && msg && modal) {
+        title.innerText = 'Konfirmasi';
+        msg.innerText = message;
+        if (btnCancel) btnCancel.style.display = 'inline-block';
+        if (btnOk) {
+            btnOk.innerText = 'Ya';
+            btnOk.onclick = function() {
+                tutupCustomAlert();
+                selesaiUjian();
+            };
+        }
+        if (btnCancel) {
+            btnCancel.onclick = function() { tutupCustomAlert(); };
+        }
+        modal.style.display = 'flex';
+        return false;
+    } else {
+        return window.confirm(message);
+    }
 };
 
 function tutupCustomAlert() {
-    document.getElementById('customAlertModal').style.display = 'none';
+    const modal = document.getElementById('customAlertModal');
+    if (modal) modal.style.display = 'none';
 }
 
 function keluarKeLogin() {
