@@ -1,8 +1,21 @@
 const API = {
+    // Ambil URL dasar untuk data/spreadsheet
+    get spreadsheetUrl() {
+        if (typeof CONFIG === 'undefined') return '';
+        return CONFIG.SPREADSHEET_API_URL || CONFIG.GAS_URL || '';
+    },
+
+    // Ambil URL khusus pengiriman jawaban
+    get submitUrl() {
+        if (typeof CONFIG === 'undefined') return '';
+        return CONFIG.SUBMIT_API_URL || CONFIG.GAS_URL || '';
+    },
+
     // 1. AMBIL DATA AWAL (KELAS & MAPEL) DARI GOOGLE APPS SCRIPT
     async getInitialData() {
         try {
-            const response = await fetch(`${CONFIG.GAS_URL}?action=getInitialData`);
+            const url = `${this.spreadsheetUrl}?action=getInitialData`;
+            const response = await fetch(url);
             if (!response.ok) throw new Error("Gagal terhubung ke server Google Sheets");
             return await response.json();
         } catch (error) {
@@ -14,7 +27,8 @@ const API = {
     // 2. AMBIL DAFTAR SISWA BERDASARKAN KELAS
     async getSiswaByKelas(kelas) {
         try {
-            const response = await fetch(`${CONFIG.GAS_URL}?action=getSiswa&kelas=${encodeURIComponent(kelas)}`);
+            const url = `${this.spreadsheetUrl}?action=getSiswa&kelas=${encodeURIComponent(kelas)}`;
+            const response = await fetch(url);
             if (!response.ok) throw new Error("Gagal mengambil data siswa");
             return await response.json();
         } catch (error) {
@@ -26,7 +40,8 @@ const API = {
     // 3. AMBIL TOKEN BERDASARKAN MAPEL
     async getTokenByMapel(mapel) {
         try {
-            const response = await fetch(`${CONFIG.GAS_URL}?action=getToken&mapel=${encodeURIComponent(mapel)}`);
+            const url = `${this.spreadsheetUrl}?action=getToken&mapel=${encodeURIComponent(mapel)}`;
+            const response = await fetch(url);
             if (!response.ok) throw new Error("Gagal mengambil data token");
             return await response.json();
         } catch (error) {
@@ -52,10 +67,15 @@ const API = {
         }
     },
 
-    // 5. KIRIM JAWABAN SISWA KE GOOGLE SHEETS (PERBAIKAN ERROR 405)
+    // 5. KIRIM JAWABAN SISWA KE GOOGLE SHEETS
     async submitJawaban(dataSiswa) {
         try {
-            const response = await fetch(CONFIG.GAS_URL, {
+            const targetUrl = this.submitUrl;
+            if (!targetUrl) {
+                throw new Error("URL Pengiriman Jawaban tidak ditemukan di CONFIG.");
+            }
+
+            const response = await fetch(targetUrl, {
                 method: 'POST',
                 redirect: 'follow',
                 headers: {
