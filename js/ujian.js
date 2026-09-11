@@ -1,8 +1,12 @@
 let bankSoalData = null;
 let timerInterval = null;
 
+// Backup alert dan confirm asli untuk menghindari Infinite Loop
+const nativeAlert = window.alert;
+const nativeConfirm = window.confirm;
+
 document.addEventListener("DOMContentLoaded", async function() {
-    // 1. Inisialisasi Fitur Pengawasan (Diperbaiki: Aman jika proctor.js tidak ada)
+    // 1. Inisialisasi Fitur Pengawasan
     if (typeof Proctor !== 'undefined' && typeof Proctor.init === 'function') {
         Proctor.init();
     }
@@ -18,13 +22,13 @@ document.addEventListener("DOMContentLoaded", async function() {
         mapelUjian = "MTK";
     }
 
-    // Deteksi Pergantian Siswa
+    // Deteksi Pergantian Siswa / Mapel
     let siswaTerakhir = sessionStorage.getItem('cbt_siswa_aktif');
     let mapelTerakhir = sessionStorage.getItem('cbt_mapel_aktif');
 
     if (siswaTerakhir !== namaSiswa || mapelTerakhir !== mapelUjian) {
         Object.keys(sessionStorage).forEach(key => {
-            if (key.startsWith('soal_') || key === 'exam_time_left' || key === 'exam_start_time') {
+            if (key.startsWith('soal_') || key === 'exam_end_time' || key === 'exam_start_time') {
                 sessionStorage.removeItem(key);
             }
         });
@@ -61,10 +65,8 @@ document.addEventListener("DOMContentLoaded", async function() {
         const elemKelas = document.getElementById('infoKelas');
         if (elemKelas) elemKelas.innerText = kelasSiswa;
 
-        // Inisialisasi Timer
+        // Inisialisasi Timer & Render
         initTimer(data, mapelUjian);
-
-        // Render Soal ke DOM
         renderSoal(daftarSoal);
 
         // Render Formula MathJax jika ada
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             if (typeof MathJax !== 'undefined' && typeof MathJax.typesetPromise === 'function') {
                 MathJax.typesetPromise();
             }
-        }, 1000);
+        }, 500);
 
         // Pasang Autosave Jawaban
         initAutosave();
@@ -84,40 +86,45 @@ document.addEventListener("DOMContentLoaded", async function() {
                 <div style='background:#fee2e2; border:1px solid #f87171; color:#991b1b; padding:20px; border-radius:8px; margin:20px 0;'>
                     <h3 style="margin-top:0;">⚠️ Gagal Memuat Soal Ujian</h3>
                     <p><b>Detail Error:</b> ${error.message}</p>
-                    <p>Silakan pastikan berkas JSON soal sudah ada di repositori GitHub Anda untuk tingkat kelas <b>${tingkatKelas}</b> dan mapel <b>${mapelUjian}</b>.</p>
+                    <p>Silakan pastikan berkas JSON soal sudah ada di repositori untuk tingkat kelas <b>${tingkatKelas}</b> dan mapel <b>${mapelUjian}</b>.</p>
                 </div>`;
         }
         console.error("Error memuat soal:", error);
     }
 });
 
-// LOGIKA TIMER
+// LOGIKA TIMER (Berbasis Timestamp Akurat)
 function initTimer(data, mapelUjian) {
     let durasiMenit = (data.metadata && data.metadata.durasi_menit) 
                       ? data.metadata.durasi_menit 
                       : (typeof CONFIG !== 'undefined' && CONFIG.DURASI_MAPEL && CONFIG.DURASI_MAPEL[mapelUjian] ? CONFIG.DURASI_MAPEL[mapelUjian] : 120);
 
-    if (!sessionStorage.getItem('exam_time_left')) {
-        sessionStorage.setItem('exam_time_left', durasiMenit * 60);
+    let targetEndTime = sessionStorage.getItem('exam_end_time');
+    if (!targetEndTime) {
+        targetEndTime = Date.now() + (durasiMenit * 60 * 1000);
+        sessionStorage.setItem('exam_end_time', targetEndTime);
+    } else {
+        targetEndTime = parseInt(targetEndTime, 10);
     }
 
-    let timeLeft = parseInt(sessionStorage.getItem('exam_time_left'));
+    if (timerInterval) clearInterval(timerInterval);
 
-    timerInterval = setInterval(() => {
+    function updateTimerDisplay() {
+        let now = Date.now();
+        let timeLeft = Math.max(0, Math.floor((targetEndTime - now) / 1000));
+
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
-            let jedaAcak = Math.floor(Math.random() * 4000); 
-            
+            let jedaAcak = Math.floor(Math.random() * 3000); 
             setTimeout(() => {
                 alert("Waktu habis! Ujian akan dikumpulkan.");
                 selesaiUjian();
             }, jedaAcak);
         } else {
-            timeLeft--;
-            sessionStorage.setItem('exam_time_left', timeLeft);
             let hours = Math.floor(timeLeft / 3600);
             let minutes = Math.floor((timeLeft % 3600) / 60);
             let seconds = timeLeft % 60;
+
             const timerDisplay = document.getElementById('timer-display');
             if (timerDisplay) {
                 timerDisplay.innerText = 
@@ -126,7 +133,10 @@ function initTimer(data, mapelUjian) {
                     (seconds < 10 ? "0" : "") + seconds;
             }
         }
-    }, 1000);
+    }
+
+    updateTimerDisplay();
+    timerInterval = setInterval(updateTimerDisplay, 1000);
 }
 
 // RENDER SOAL
@@ -228,9 +238,9 @@ function sebelumSubmit() {
         return;
     }
 
-    if (confirm("Apakah Anda yakin ingin mengumpulkan jawaban?")) {
+    showCustomConfirm("Apakah Anda yakin ingin mengumpulkan jawaban?", function() {
         selesaiUjian();
-    }
+    });
 }
 
 function selesaiUjian() {
@@ -322,7 +332,7 @@ async function simpanKeSpreadsheet(nama, kelas, mapel, skor, benar, salah, array
     }
 }
 
-// Custom Modal Handler (Diperbaiki: Aman jika elemen HTML modal tidak tersedia)
+// Handler Alert Kustom
 window.alert = function(message) {
     const title = document.getElementById('customAlertTitle');
     const msg = document.getElementById('customAlertMessage');
@@ -340,11 +350,12 @@ window.alert = function(message) {
         }
         modal.style.display = 'flex';
     } else {
-        window.alert(message);
+        nativeAlert(message);
     }
 };
 
-window.confirm = function(message) {
+// Custom Confirm Helper (Khusus untuk panggilan async modal)
+function showCustomConfirm(message, onConfirmCallback) {
     const title = document.getElementById('customAlertTitle');
     const msg = document.getElementById('customAlertMessage');
     const btnCancel = document.getElementById('customAlertBtnCancel');
@@ -359,18 +370,19 @@ window.confirm = function(message) {
             btnOk.innerText = 'Ya';
             btnOk.onclick = function() {
                 tutupCustomAlert();
-                selesaiUjian();
+                if (typeof onConfirmCallback === 'function') onConfirmCallback();
             };
         }
         if (btnCancel) {
             btnCancel.onclick = function() { tutupCustomAlert(); };
         }
         modal.style.display = 'flex';
-        return false;
     } else {
-        return window.confirm(message);
+        if (nativeConfirm(message)) {
+            if (typeof onConfirmCallback === 'function') onConfirmCallback();
+        }
     }
-};
+}
 
 function tutupCustomAlert() {
     const modal = document.getElementById('customAlertModal');
