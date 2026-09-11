@@ -29,12 +29,12 @@ const UI = {
         window.alert = (message) => this.showAlert(message);
     },
 
-    // Fungsi penghubung agar kompatibel dengan panggilan app.js
+    // Fungsi penghubung kompatibilitas app.js
     populateKelas(kelasList, onSelectCallback) {
         this.renderKelasOptions(kelasList, onSelectCallback);
     },
 
-    // Fungsi penghubung agar kompatibel dengan panggilan app.js
+    // Fungsi penghubung kompatibilitas app.js
     populateMapel(mapelList) {
         this.renderMapelOptions(mapelList);
     },
@@ -87,25 +87,65 @@ const UI = {
     },
 
     updateSiswaDatalist(siswaList) {
+        const inputSiswa = this.elements.siswaSelect;
         let datalist = document.getElementById('listSiswa');
+
+        // 1. Buat datalist di HTML jika belum ada
         if (!datalist) {
             datalist = document.createElement('datalist');
             datalist.id = 'listSiswa';
             document.body.appendChild(datalist);
-            if (this.elements.siswaSelect) this.elements.siswaSelect.setAttribute('list', 'listSiswa');
         }
+
+        // 2. Hubungkan input ke datalist
+        if (inputSiswa) {
+            inputSiswa.setAttribute('list', 'listSiswa');
+        }
+
         datalist.innerHTML = '';
-        if (this.elements.siswaSelect) {
-            if (siswaList && siswaList.length > 0) {
-                siswaList.forEach(siswa => {
-                    const option = document.createElement('option');
-                    option.value = siswa;
-                    datalist.appendChild(option);
-                });
-                this.elements.siswaSelect.placeholder = "Ketik nama lengkap siswa...";
-                this.elements.siswaSelect.disabled = false;
-            } else {
-                this.elements.siswaSelect.placeholder = "Data siswa kosong / tidak ditemukan";
+
+        // 3. Ekstraksi fleksibel berbagai format JSON Google Sheets
+        let rawArray = [];
+        if (Array.isArray(siswaList)) {
+            rawArray = siswaList;
+        } else if (siswaList && typeof siswaList === 'object') {
+            rawArray = siswaList.data || siswaList.siswa || siswaList.result || [];
+        }
+
+        const cleanList = [];
+        rawArray.forEach(item => {
+            if (!item) return;
+            
+            let nama = '';
+            if (typeof item === 'string') {
+                nama = item;
+            } else if (Array.isArray(item)) {
+                nama = item[0]; // Jika format 2D Array [[nama], [nama]]
+            } else if (typeof item === 'object') {
+                nama = item.nama || item.Nama || item.nama_siswa || item['Nama Siswa'] || Object.values(item)[0];
+            }
+
+            // Abaikan judul kolom header ("Nama" / "Nama Siswa")
+            if (nama && typeof nama === 'string' && nama.toLowerCase() !== 'nama' && nama.toLowerCase() !== 'nama siswa') {
+                cleanList.push(nama.trim());
+            }
+        });
+
+        // 4. Masukkan nama siswa ke dalam <datalist>
+        if (cleanList.length > 0) {
+            cleanList.forEach(nama => {
+                const option = document.createElement('option');
+                option.value = nama;
+                datalist.appendChild(option);
+            });
+
+            if (inputSiswa) {
+                inputSiswa.placeholder = "Ketik nama / pilih dari daftar...";
+                inputSiswa.disabled = false;
+            }
+        } else {
+            if (inputSiswa) {
+                inputSiswa.placeholder = "Data siswa kosong / tidak ditemukan";
             }
         }
     },
