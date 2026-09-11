@@ -2,30 +2,32 @@ const Proctor = {
     tabSwitchCount: 0,
 
     init() {
-        if (!CONFIG.PROCTOR) return;
+        if (typeof CONFIG === 'undefined' || !CONFIG.PROCTOR) return;
 
-        if (CONFIG.PROCTOR.ENABLE_DISABLE_RIGHT_CLICK) {
-            this.disableRightClick();
-        }
+        // Load hitungan lama dari sessionStorage
+        this.tabSwitchCount = parseInt(sessionStorage.getItem('cbt_tab_switches')) || 0;
+        this.updateDisplay(); // Tampilkan hitungan awal di layar
 
-        if (CONFIG.PROCTOR.ENABLE_DISABLE_DEVTOOLS_KEYS) {
-            this.disableDevToolsKeys();
-        }
+        if (CONFIG.PROCTOR.ENABLE_DISABLE_RIGHT_CLICK) this.disableRightClick();
+        if (CONFIG.PROCTOR.ENABLE_DISABLE_DEVTOOLS_KEYS) this.disableDevToolsKeys();
+        if (CONFIG.PROCTOR.ENABLE_ANTI_TAB_SWITCH) this.initTabSwitchMonitoring();
+    },
 
-        if (CONFIG.PROCTOR.ENABLE_ANTI_TAB_SWITCH) {
-            this.initTabSwitchMonitoring();
+    // Fungsi memperbarui teks pelanggaran di layar
+    updateDisplay() {
+        const elem = document.getElementById('infoPelanggaran');
+        if (elem) {
+            elem.innerText = `Pelanggaran: ${this.tabSwitchCount} kali`;
         }
     },
 
-    // Mematikan Klik Kanan
     disableRightClick() {
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault();
-            UI.showAlert("Peringatan Proctor:\nKlik kanan dilarang selama berada di sistem ujian!");
+            this.tampilkanAlert("Peringatan Proctor:\nKlik kanan dilarang selama berada di sistem ujian!");
         });
     },
 
-    // Mematikan Tombol Inspeksi Elemen (F12, Ctrl+Shift+I/J/C, Ctrl+U)
     disableDevToolsKeys() {
         document.addEventListener('keydown', (e) => {
             const isF12 = e.key === 'F12';
@@ -34,25 +36,36 @@ const Proctor = {
 
             if (isF12 || isInspectShortcut || isViewSource) {
                 e.preventDefault();
-                UI.showAlert("Peringatan Proctor:\nAkses Developer Tools / Inspeksi Elemen dilarang!");
+                this.tampilkanAlert("Peringatan Proctor:\nAkses Developer Tools / Inspeksi Elemen dilarang!");
             }
         });
     },
 
-    // Deteksi Pindah Tab / Buka Aplikasi Lain
     initTabSwitchMonitoring() {
         document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
+            if (!document.hidden) {
                 this.tabSwitchCount++;
                 sessionStorage.setItem('cbt_tab_switches', this.tabSwitchCount);
+                
+                // Update tampilan angka di layar
+                this.updateDisplay();
 
-                const max = CONFIG.PROCTOR.MAX_TAB_SWITCH_WARNINGS || 3;
+                const max = (CONFIG.PROCTOR && CONFIG.PROCTOR.MAX_TAB_SWITCH_WARNINGS) || 3;
+                
                 if (this.tabSwitchCount >= max) {
-                    UI.showAlert(`PERINGATAN KERAS PROCTOR!\nAnda telah meninggalkan halaman ujian sebanyak ${this.tabSwitchCount} kali.\nTindakan ini dicatat sebagai pelanggaran!`);
+                    this.tampilkanAlert(`PERINGATAN KERAS PROCTOR!\nAnda telah meninggalkan halaman ujian sebanyak ${this.tabSwitchCount} kali.\nTindakan ini dicatat sebagai pelanggaran!`);
                 } else {
-                    UI.showAlert(`PERINGATAN PROCTOR (${this.tabSwitchCount}/${max}):\nDilarang berpindah tab atau membuka aplikasi lain!`);
+                    this.tampilkanAlert(`PERINGATAN PROCTOR (${this.tabSwitchCount}/${max}):\nDilarang berpindah tab atau membuka aplikasi lain!`);
                 }
             }
         });
+    },
+
+    tampilkanAlert(pesan) {
+        if (typeof UI !== 'undefined' && typeof UI.showAlert === 'function') {
+            UI.showAlert(pesan);
+        } else {
+            alert(pesan);
+        }
     }
 };
