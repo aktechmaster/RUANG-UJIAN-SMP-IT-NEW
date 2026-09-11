@@ -71,7 +71,7 @@ async function handleFormSubmit(e) {
     const siswa = UI.elements.siswaSelect?.value;
     const mapel = sessionStorage.getItem('cbt_mapel') || UI.elements.mapelSelect?.value;
     const email = UI.elements.emailInput?.value;
-    const token = UI.elements.tokenInput?.value;
+    const tokenInput = UI.elements.tokenInput?.value;
 
     // Validasi Kelengkapan Isian
     if (!kelas) {
@@ -90,7 +90,7 @@ async function handleFormSubmit(e) {
         alert("Silakan isi alamat Email Anda!");
         return;
     }
-    if (!token || token.trim() === "") {
+    if (!tokenInput || tokenInput.trim() === "") {
         alert("Silakan masukkan Token / Password Ujian!");
         return;
     }
@@ -100,9 +100,29 @@ async function handleFormSubmit(e) {
         UI.setSubmitButtonState(true, "Memvalidasi Token...");
 
         const tokenData = await API.getTokenByMapel(mapel);
-        const tokenResmi = tokenData && tokenData.token ? String(tokenData.token).trim() : "";
+        console.log("Data Token dari Server:", tokenData);
 
-        if (token.trim() === tokenResmi || token.trim().toUpperCase() === tokenResmi.toUpperCase()) {
+        // Ekstraksi token secara fleksibel dari berbagai kemungkinan format respons GAS
+        let tokenResmi = "";
+
+        if (typeof tokenData === 'string') {
+            tokenResmi = tokenData;
+        } else if (Array.isArray(tokenData)) {
+            const item = tokenData[0];
+            if (typeof item === 'string') {
+                tokenResmi = item;
+            } else if (typeof item === 'object' && item !== null) {
+                tokenResmi = item.token || item.Token || item.password || item.Password || Object.values(item)[0] || "";
+            }
+        } else if (typeof tokenData === 'object' && tokenData !== null) {
+            tokenResmi = tokenData.token || tokenData.Token || tokenData.password || tokenData.Password || tokenData.data || tokenData.result || "";
+        }
+
+        tokenResmi = String(tokenResmi).trim();
+        const userToken = String(tokenInput).trim();
+
+        // Pencocokan token (case-insensitive)
+        if (tokenResmi !== "" && userToken.toLowerCase() === tokenResmi.toLowerCase()) {
             // Simpan ke Session Storage
             sessionStorage.setItem('cbt_kelas', kelas);
             sessionStorage.setItem('cbt_siswa', siswa.trim());
@@ -113,7 +133,8 @@ async function handleFormSubmit(e) {
             window.location.href = 'ujian.html';
         } else {
             UI.setSubmitButtonState(false, "Masuk Ujian");
-            alert("❌ TOKEN / PASSWORD UJIAN SALAH!\nSilakan tanyakan token yang benar kepada pengawas.");
+            console.warn(`Token tidak cocok. Input User: "${userToken}", Token Server: "${tokenResmi}"`);
+            alert(`❌ TOKEN / PASSWORD UJIAN SALAH!\n\nSilakan tanyakan token yang benar kepada pengawas.`);
         }
     } catch (error) {
         console.error("Error verifikasi token:", error);
