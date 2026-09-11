@@ -1,4 +1,5 @@
 const CONFIG = {
+    GAS_URL: "https://script.google.com/macros/s/AKfycbxF3g7LSwr61mNuVqOApDXnmjZsY5putWlumzL_GnJJN8hOPqhTk0MR9aPRnmbFJX1x/exec",
     SPREADSHEET_API_URL: "https://script.google.com/macros/s/AKfycbxF3g7LSwr61mNuVqOApDXnmjZsY5putWlumzL_GnJJN8hOPqhTk0MR9aPRnmbFJX1x/exec",
     SUBMIT_API_URL: "https://script.google.com/macros/s/AKfycbym_6liYh9AXBoHuDr_kuvuJzyxb1JNfYQezHGTlUOQVmJxU23qzkhVLOt7o3WCT1tM/exec",
     DURASI_MAPEL: {
