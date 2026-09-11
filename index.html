@@ -23,10 +23,11 @@
             </div>
 
             <div class="input-group">
-                <label for="pilihSiswa">Nama Siswa</label>
-                <input type="text" id="pilihSiswa" placeholder="Ketik nama lengkap siswa..." autocomplete="off" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
-                <div id="loadingSiswa" class="loader">Memuat data siswa dari server...</div>
-            </div>
+    <label for="pilihSiswa">Nama Siswa</label>
+    <input type="text" id="pilihSiswa" list="listSiswa" placeholder="Ketik nama lengkap siswa..." autocomplete="off" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
+    <datalist id="listSiswa"></datalist>
+    <div id="loadingSiswa" class="loader">Memuat data siswa dari server...</div>
+</div>
 
             <div class="input-group">
                 <label for="pilihMapel">Pilih Mata Pelajaran</label>
