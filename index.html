@@ -6,236 +6,7 @@
     <title>Ruang Ujian CBT - SMP IT Al-Kautsar</title>
     <link rel="icon" href="smpit.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-    /* CSS RESET & VARIABLES */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-        /* Warna dasar latar belakang */
-        background-color: #FFFFFF; 
-        
-        /* Menggunakan file Hexagon.svg sebagai latar belakang */
-        background-image: url("Hexagon.svg");
-        background-repeat: repeat; /* Mengulang pola agar menutupi seluruh halaman */
-        background-size: 500px auto; /* Ukuran pola, sesuaikan jika perlu */
-        background-position: center center;
-        background-attachment: fixed; /* Agar pola tidak bergeser saat halaman digulir */
-        opacity: 0.95; /* Opsional: sedikit redup agar tidak mengganggu tulisan */
-
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        padding: 20px;
-    }
-
-    /* Opsional: Jika ingin membuat latar belakang lebih samar */
-    body::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.7); /* Lapisan putih transparan */
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    /* Pastikan konten tetap terlihat di atas latar belakang */
-    .konten {
-        position: relative;
-        z-index: 1;
-    }
-
-    /* GLASSMORPHISM CONTAINER (Disesuaikan untuk Background Terang) */
-    .login-container {
-        background: rgba(255, 255, 255, 0.6); /* Lebih putih transparan */
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 25px;
-        padding: 40px;
-        width: 100%;
-        max-width: 450px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); /* Bayangan lebih lembut */
-        text-align: center;
-        z-index: 1;
-    }
-
-    /* LOGO & TYPOGRAPHY */
-    .logo {
-        width: 100px;
-        height: auto;
-        margin-bottom: 20px;
-        /* Filter bayangan lembut untuk logo */
-        filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
-    }
-
-    h1 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 35px;
-        line-height: 1.5;
-        /* 3. WARNA TEKS GELAP (Untuk kontras) */
-        color: #1e293b; 
-    }
-
-    /* FORM ELEMENTS */
-    .input-group {
-        margin-bottom: 22px;
-        text-align: left;
-    }
-
-    label {
-        display: block;
-        font-size: 0.88rem;
-        margin-bottom: 8px;
-        /* Warna label abu-abu gelap */
-        color: #475569; 
-        font-weight: 500;
-    }
-
-    /* Styles seragam untuk Select, Input Password, dan Input Email */
-    select, input[type="password"], input[type="email"], input[type="text"] {
-        width: 100%;
-        padding: 13px 18px;
-        /* Background input yang selaras dengan tombol opsi */
-        background: #f8fafc; 
-        border: 1px solid #cbd5e1;
-        border-radius: 12px;
-        /* Warna teks input gelap */
-        color: #1e293b; 
-        font-size: 0.95rem;
-        outline: none;
-        transition: all 0.3s ease;
-    }
-
-    /* Penyesuaian khusus pada kolom nama agar serasi dan memiliki ikon pencarian */
-    input#pilihSiswa {
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3e%3c/path%3e%3ccircle cx='12' cy='7' r='4'%3e%3c/circle%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: right 18px center;
-        background-size: 18px;
-        padding-right: 48px;
-    }
-
-    /* Khusus Dropdown (panah custom warna gelap) */
-    select {
-        appearance: none; 
-        /* Panah dropdown warna abu-abu gelap %23475569 */
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: right 18px center;
-        background-size: 16px;
-        cursor: pointer;
-    }
-
-    select option {
-        background: #ffffff;
-        color: #1e293b;
-    }
-
-    select:disabled {
-        background: #f1f5f9;
-        color: #94a3b8;
-        cursor: not-allowed;
-        border-color: #e2e8f0;
-    }
-
-    /* Placeholder untuk Password & Email */
-    input[type="password"]::placeholder, input[type="email"]::placeholder, input[type="text"]::placeholder {
-        color: #94a3b8;
-    }
-
-    /* Efek Fokus (Border membiru lembut dan latar berubah menjadi putih) */
-    select:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="text"]:focus {
-        background: #ffffff;
-        border-color: #38bdf8;
-        box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
-    }
-
-    /* BUTTON (Gradient tetap dipertahankan agar futuristik) */
-    .btn-submit {
-        width: 100%;
-        padding: 15px;
-        background: linear-gradient(135deg, #38bdf8, #8b5cf6);
-        border: none;
-        border-radius: 12px;
-        color: white;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 10px;
-        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
-    }
-
-    .btn-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
-    }
-
-    .btn-submit:disabled {
-        background: #94a3b8;
-        cursor: not-allowed;
-        box-shadow: none;
-        transform: none;
-    }
-
-    /* TAMBAHAN: TOMBOL PILIHAN (BUTTON OPSI) */
-    .btn-opsi {
-        padding: 10px 14px;
-        background-color: #f8fafc;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        font-family: inherit;
-        color: #334155;
-        transition: all 0.2s ease;
-    }
-
-    .btn-opsi:hover {
-        background-color: #f1f5f9;
-        border-color: #94a3b8;
-    }
-
-    .btn-opsi.selected {
-        background: linear-gradient(135deg, #38bdf8, #8b5cf6);
-        color: #ffffff;
-        border: none;
-        font-weight: 600;
-        box-shadow: 0 4px 10px rgba(56, 189, 248, 0.2);
-    }
-
-    /* FOOTER */
-    .footer-credit {
-        margin-top: 35px;
-        font-size: 0.78rem;
-        /* Warna teks footer abu-abu */
-        color: #64748b; 
-        line-height: 1.7;
-    }
-    
-    .footer-credit span {
-        font-weight: 600;
-        color: #0284c7; /* Biru laut sedikit lebih gelap agar terbaca */
-    }
-
-    /* LOADER */
-    .loader {
-        display: none;
-        font-size: 0.8rem;
-        color: #0284c7;
-        margin-top: 6px;
-        font-weight: 500;
-    }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -247,21 +18,19 @@
         <form id="loginForm">
             <div class="input-group">
                 <label for="pilihKelas">Pilih Kelas</label>
-                <div id="kelasContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
-                </div>
+                <div id="kelasContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;"></div>
                 <input type="hidden" id="pilihKelas" required>
             </div>
 
             <div class="input-group">
-    <label for="pilihSiswa">Nama Siswa</label>
-    <input type="text" id="pilihSiswa" placeholder="Ketik nama lengkap siswa..." autocomplete="off" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
-    <div id="loadingSiswa" class="loader" style="display: none;">Memuat data siswa dari server...</div>
-</div>
+                <label for="pilihSiswa">Nama Siswa</label>
+                <input type="text" id="pilihSiswa" placeholder="Ketik nama lengkap siswa..." autocomplete="off" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
+                <div id="loadingSiswa" class="loader">Memuat data siswa dari server...</div>
+            </div>
 
             <div class="input-group">
                 <label for="pilihMapel">Pilih Mata Pelajaran</label>
-                <div id="mapelContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
-                </div>
+                <div id="mapelContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;"></div>
                 <input type="hidden" id="pilihMapel" required>
             </div>
 
@@ -271,12 +40,12 @@
             </div>
             
             <div class="input-group">
-    <label for="tokenUjian">Token / Password Ujian</label>
-    <div style="position: relative;">
-        <input type="password" id="tokenUjian" placeholder="Masukkan token yang diberikan pengawas" required style="padding-right: 45px;">
-        <span id="toggleToken" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">👁️</span>
-    </div>
-</div>
+                <label for="tokenUjian">Token / Password Ujian</label>
+                <div style="position: relative;">
+                    <input type="password" id="tokenUjian" placeholder="Masukkan token yang diberikan pengawas" required style="padding-right: 45px;">
+                    <span id="toggleToken" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; user-select: none;">👁️</span>
+                </div>
+            </div>
 
             <button type="submit" class="btn-submit" id="btnSubmit" disabled>Memuat Sistem...</button>
         </form>
@@ -287,211 +56,7 @@
         </div>
     </div>
 
-    <script>
-        // Mendapatkan elemen input atau container yang dibutuhkan
-        const kelasSelect = document.getElementById('pilihKelas'); // Input hidden kelas
-        const siswaSelect = document.getElementById('pilihSiswa'); // Input teks siswa
-        const mapelSelect = document.getElementById('pilihMapel'); // Input hidden mapel
-        const loadingText = document.getElementById('loadingSiswa');
-        const form = document.getElementById('loginForm');
-        const submitBtn = document.getElementById('btnSubmit');
-
-        // =========================================================
-        // TAMBAHKAN KODE INI DI SINI
-        // =========================================================
-        const tokenInput = document.getElementById('tokenUjian');
-        const toggleToken = document.getElementById('toggleToken');
-
-        toggleToken.addEventListener('click', function () {
-            const isPassword = tokenInput.getAttribute('type') === 'password';
-            tokenInput.setAttribute('type', isPassword ? 'text' : 'password');
-            this.textContent = isPassword ? '🙈' : '👁️';
-        });
-        // =========================================================
-
-        const kelasContainer = document.getElementById('kelasContainer');
-        const mapelContainer = document.getElementById('mapelContainer');
-
-        // =========================================================
-        // LINK URL WEB APP GOOGLE SCRIPT ANDA
-        // =========================================================
-        const SPREADSHEET_API_URL = "https://script.google.com/macros/s/AKfycbxF3g7LSwr61mNuVqOApDXnmjZsY5putWlumzL_GnJJN8hOPqhTk0MR9aPRnmbFJX1x/exec";
-
-        // ========================================================
-        // 1. KETIKA HALAMAN DIBUKA (AMBIL DATA KELAS & MAPEL)
-        // ========================================================
-        document.addEventListener("DOMContentLoaded", async function() {
-            try {
-                // Memanggil API Google Apps Script
-                const response = await fetch(`${SPREADSHEET_API_URL}?action=getInitialData`);
-                const data = await response.json();
-
-                // Memasukkan data Kelas ke dalam container sebagai tombol
-                kelasContainer.innerHTML = '';
-                if (data.kelas && data.kelas.length > 0) {
-                    data.kelas.forEach(kelas => {
-                        const btn = document.createElement('button');
-                        btn.type = 'button';
-                        btn.className = 'btn-opsi';
-                        btn.textContent = kelas;
-                        
-                        // Event tombol kelas ketika diklik
-                        btn.onclick = function() {
-                            document.querySelectorAll('#kelasContainer .btn-opsi').forEach(b => b.classList.remove('selected'));
-                            this.classList.add('selected');
-                            
-                            kelasSelect.value = kelas;
-                            sessionStorage.setItem('cbt_kelas', kelas);
-                            
-                            // Muat siswa secara otomatis setelah kelas dipilih
-                            muatDaftarSiswa(kelas);
-                        };
-                        kelasContainer.appendChild(btn);
-                    });
-                }
-
-                // Memasukkan data Mapel ke dalam container sebagai tombol
-                mapelContainer.innerHTML = '';
-                if (data.mapel && data.mapel.length > 0) {
-                    data.mapel.forEach(mapel => {
-                        const btn = document.createElement('button');
-                        btn.type = 'button';
-                        btn.className = 'btn-opsi';
-                        btn.textContent = mapel;
-
-                        // Event tombol mapel ketika diklik
-                        btn.onclick = function() {
-                            document.querySelectorAll('#mapelContainer .btn-opsi').forEach(b => b.classList.remove('selected'));
-                            this.classList.add('selected');
-                            
-                            mapelSelect.value = mapel;
-                            sessionStorage.setItem('cbt_mapel', mapel);
-                        };
-                        mapelContainer.appendChild(btn);
-                    });
-                }
-
-                // Mengaktifkan kembali tombol Lanjutkan
-                submitBtn.textContent = "Lanjutkan Ujian";
-                submitBtn.disabled = false;
-
-            } catch (error) {
-                console.error("Gagal mengambil data awal:", error);
-                kelasContainer.innerHTML = '<span style="color:red; font-size:0.85rem;">Gagal memuat data kelas</span>';
-                mapelContainer.innerHTML = '<span style="color:red; font-size:0.85rem;">Gagal memuat data mapel</span>';
-                submitBtn.textContent = "Error Jaringan";
-            }
-        });
-
-        // ========================================================
-        // 2. FUNGSI KETIKA KELAS DIPILIH (AMBIL NAMA SISWA)
-        // ========================================================
-        async function muatDaftarSiswa(selectedKelas) {
-            // Tampilkan animasi loading pada input teks siswa
-            siswaSelect.value = '';
-            siswaSelect.placeholder = "Memuat data siswa dari server...";
-            siswaSelect.disabled = true;
-            loadingText.style.display = 'block';
-
-            try {
-                // Memanggil API Google Apps Script untuk mengambil data siswa
-                const response = await fetch(`${SPREADSHEET_API_URL}?action=getSiswa&kelas=${encodeURIComponent(selectedKelas)}`);
-                const data = await response.json();
-                const daftarSiswa = data.siswa;
-
-                // Memasukkan data siswa ke datalist agar mudah diketik atau dipilih oleh siswa
-                if (daftarSiswa && daftarSiswa.length > 0) {
-                    let datalist = document.getElementById('listSiswa');
-                    if (!datalist) {
-                        datalist = document.createElement('datalist');
-                        datalist.id = 'listSiswa';
-                        document.body.appendChild(datalist);
-                        siswaSelect.setAttribute('list', 'listSiswa');
-                    }
-                    datalist.innerHTML = '';
-                    daftarSiswa.forEach(siswa => {
-                        const option = document.createElement('option');
-                        option.value = siswa;
-                        datalist.appendChild(option);
-                    });
-
-                    siswaSelect.placeholder = "Ketik nama lengkap siswa...";
-                    siswaSelect.disabled = false;
-                } else {
-                    siswaSelect.placeholder = "Data siswa kosong / tidak ditemukan";
-                }
-            } catch (error) {
-                console.error("Gagal mengambil data:", error);
-                siswaSelect.placeholder = "Gagal memuat data. Cek koneksi internet.";
-            } finally {
-                loadingText.style.display = 'none';
-            }
-        }
-
-        // ========================================================
-        // 3. LOGIKA TOMBOL SUBMIT & PENGECEKAN PASSWORD
-        // ========================================================
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Mencegah reload halaman
-            
-            const kelas = kelasSelect.value;
-            const siswa = siswaSelect.value;
-            const mapel = mapelSelect.value;
-            const enteredToken = document.getElementById('tokenUjian').value.trim(); 
-
-            // Validasi apakah tombol kelas & mapel telah diklik
-            if (!kelas || !mapel) {
-                alert("Harap pilih Kelas dan Mata Pelajaran terlebih dahulu sebelum melanjutkan.");
-                return;
-            }
-
-            // Ubah teks tombol saat memvalidasi ke server
-            submitBtn.textContent = "Memeriksa Token...";
-            submitBtn.disabled = true;
-
-            try {
-                // Memanggil API Google Apps Script untuk mencocokkan Token/Password
-                const response = await fetch(`${SPREADSHEET_API_URL}?action=getToken&mapel=${encodeURIComponent(mapel)}`);
-                const data = await response.json();
-                const tokenBenar = data.password;
-
-                if (tokenBenar) {
-                    // Pengecekan tidak sensitif huruf besar/kecil
-                    if (enteredToken.toLowerCase() !== tokenBenar.toString().toLowerCase()) {
-                        alert(`MAAF!\nToken/Password yang Anda masukkan SALAH untuk mata pelajaran ${mapel}. \n\nSilakan cek kembali tulisan token Anda.`);
-                        submitBtn.textContent = "Lanjutkan Ujian";
-                        submitBtn.disabled = false;
-                        return; // Batalkan proses masuk
-                    }
-                } else {
-                    alert(`Sistem Error: Token untuk mapel ${mapel} belum diatur oleh admin di Spreadsheet.`);
-                    submitBtn.textContent = "Lanjutkan Ujian";
-                    submitBtn.disabled = false;
-                    return;
-                }
-
-                // JIKA TOKEN BENAR, SIMPAN DATA DAN MASUK KE UJIAN
-                const emailInput = document.getElementById('emailSiswa').value;
-                
-                sessionStorage.setItem('cbt_kelas', kelas);
-                sessionStorage.setItem('cbt_siswa', siswa);
-                sessionStorage.setItem('cbt_mapel', mapel);
-                sessionStorage.setItem('cbt_email', emailInput); // Menyimpan data email ke session
-
-                alert(`Login Berhasil!\n\nSelamat Mengerjakan:\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nBerdoalah sebelum memulai ujian!`);
-                
-                // Arahkan ke halaman ujian
-                window.location.href = "ujian.html"; 
-
-            } catch (error) {
-                console.error("Error validasi token:", error);
-                alert("Terjadi kesalahan saat memvalidasi token. Pastikan link URL sudah benar dan koneksi internet lancar.");
-                submitBtn.textContent = "Lanjutkan Ujian";
-                submitBtn.disabled = false;
-            }
-        });
-    </script>
-
+    <!-- Modal Alert Custom -->
     <div id="exambroAlertModal" style="display: none; position: fixed; z-index: 999999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); justify-content: center; align-items: center;">
         <div style="background: #ffffff; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.3);">
             <h3 style="color: #0284c7; margin-bottom: 15px; font-weight: 600;">Notifikasi</h3>
@@ -500,15 +65,6 @@
         </div>
     </div>
 
-    <script>
-        window.alert = function(message) {
-            document.getElementById('exambroAlertMessage').innerText = message;
-            document.getElementById('exambroAlertModal').style.display = 'flex';
-        };
-
-        function tutupExambroAlert() {
-            document.getElementById('exambroAlertModal').style.display = 'none';
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
